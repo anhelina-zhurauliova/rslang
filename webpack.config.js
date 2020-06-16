@@ -30,7 +30,7 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: "./src/assets/img",
-        to: "./src/assets/img",
+        to: "./assets/img",
       },
     ]),
   ],
