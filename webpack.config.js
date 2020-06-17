@@ -19,7 +19,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
       template: './src/index.pug',
-      minify: fix,
+      minify: false,
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
