@@ -1,39 +1,39 @@
-.container.col-sm-3
+.container.col-sm-4
   ul.nav.nav-tabs
-    li.active
+    li.ml-auto.mr-5.active
       a(data-toggle='tab' href='#login') LOG IN
-    li
+    li.mr-auto.ml-5
       a(data-toggle='tab' href='#signin') SIGN IN
   .tab-content
-    #login.tab-pane.fade.in.active
-      h5.mt-30 Enter your registration data to enter your personal account.
-      form.form-horizontal
+    #login.tab-pane.in.active
+      h6.mt-3.mb-3 Enter your registration data to create personal account.
+      form
         .form-group
-          label.control-label.col-sm-4(for='email') Email:
-          .col-sm-8
+          label.control-label(for='email') Email:
+          div
             input#email.form-control(type='email' placeholder='Enter email' required='')
         .form-group
-          label.control-label.col-sm-4(for='pwd') Password:
-          .col-sm-8
+          label.control-label(for='pwd') Password:
+          div
             input#pwd.form-control(type='password' placeholder='Enter password' required='')
         .form-group
-          label.control-label.col-sm-4(for='rpwd') Repeat password:
-          .col-sm-8
+          label.control-label(for='rpwd') Repeat password:
+          div
             input#rpwd.form-control(type='password' placeholder='Enter password' required='')
         .form-group
-          .col-sm-offset-7.col-sm-7
-            button.btn.btn-default(type='submit') LOG IN
-    #signin.tab-pane.fade
-      h5 Enter your registration data to enter your personal account.
-      form.form-horizontal
+          .col-sm-offset-1
+            button#log.btn.btn-block(type='submit') LOG IN
+    #signin.tab-pane
+      h6.mt-3.mb-3 Enter registration data to enter your personal account.
+      form
         .form-group
-          label.control-label.col-sm-4(for='emails') Email:
-          .col-sm-8
+          label.control-label(for='emails') Email:
+          div
             input#emails.form-control(type='email' placeholder='Enter email' required='')
         .form-group
-          label.control-label.col-sm-4(for='pwds') Password:
-          .col-sm-8
+          label.control-label(for='pwds') Password:
+          div
             input#pwds.form-control(type='password' placeholder='Enter password' required='')
         .form-group
-          .col-sm-offset-7.col-sm-3
-            button.btn.btn-default(type='submit') SIG IN
+          .col-sm-offset-1
+            button#sign.btn.btn-block(type='submit') SIGN IN
