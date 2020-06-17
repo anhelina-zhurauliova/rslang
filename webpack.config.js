@@ -1,36 +1,36 @@
-const path = require("path");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const isDev = process.env.NODE_ENV === "development";
+const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const isDev = process.env.NODE_ENV === 'development';
 const isProduction = !isDev;
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  devtool: isProduction ? "none" : "source-map",
+  devtool: isProduction ? 'none' : 'source-map',
   watch: !isProduction,
-  mode: "development",
-  entry: ["./src/index.js", "./src/sass/style.scss"],
+  mode: 'development',
+  entry: ['./src/index.js', './src/sass/style.scss'],
   output: {
-    path: path.join(__dirname, "/dist"),
-    filename: "[name].[contenthash].js",
+    path: path.join(__dirname, '/dist'),
+    filename: '[name].[contenthash].js',
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
-      template: "./src/index.pug",
+      template: './src/index.pug',
       minify: {
         collapseWhitespace: isProduction,
       },
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: "style.css",
+      filename: 'style.css',
     }),
     new CopyWebpackPlugin([
       {
-        from: "./src/assets/img",
-        to: "./assets/img",
+        from: './src/assets/img',
+        to: './assets/img',
       },
     ]),
   ],
@@ -38,17 +38,17 @@ module.exports = {
     rules: [
       {
         test: /\.pug$/,
-        use: ["pug-loader"],
+        use: ['pug-loader'],
       },
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(jpg|png|svg|gif)$/,
         use: [
           {
-            loader: "file-loader",
+            loader: 'file-loader',
           },
         ],
       },
@@ -56,7 +56,7 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
         },
       },
     ],
