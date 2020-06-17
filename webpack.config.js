@@ -19,9 +19,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
       template: './src/index.pug',
-      minify: {
-        collapseWhitespace: isProduction,
-      },
+      minify: false,
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
