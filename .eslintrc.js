@@ -4,7 +4,7 @@ module.exports = {
     browser: true,
     node: true,
   },
-  extends: ['airbnb-base', 'plugin:jest/recommended', 'jest-enzyme', 'prettier'],
+  extends: ['airbnb-base', 'prettier'],
   plugins: ['babel', 'import', 'jsx-a11y', 'react', 'prettier'],
   parser: 'babel-eslint',
   parserOptions: {
@@ -37,11 +37,6 @@ module.exports = {
     'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
 
     'prefer-destructuring': 'off',
-
-    'react/no-find-dom-node': 'off',
-    'react/no-did-mount-set-state': 'off',
-    'react/no-unused-prop-types': 'off',
-    'react/jsx-one-expression-per-line': 'off',
 
     'jsx-a11y/anchor-is-valid': ['error', { components: ['Link'], specialLink: ['to'] }],
     'jsx-a11y/label-has-for': [
