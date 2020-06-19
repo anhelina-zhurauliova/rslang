@@ -1,5 +1,6 @@
-import React from "react";
+import React from 'react';
 
-export const Header = () =>
+export const Header = () => (
   // write your code here
-  "1";
+  <h2>Your code goes here instead of h2</h2>
+);

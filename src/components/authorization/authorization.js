@@ -1,5 +1,6 @@
-import React from "react";
+import React from 'react';
 
-export const Authorization = () =>
+export const Authorization = () => (
   // write your code here
-  "1";
+  <h2>Your code goes here instead of h2</h2>
+);
