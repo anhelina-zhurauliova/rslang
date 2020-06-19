@@ -7,19 +7,20 @@
   .tab-content
     #login.tab-pane.in.active
       h6.mt-3.mb-3 Enter your registration data to create personal account.
-      form
+      #usermess.mb-3
+      form(name="login")
         .form-group
           label.control-label(for='email') Email:
           div
-            input#email.form-control(type='email' placeholder='Enter email' required='')
+            input#email.form-control(name="username" type='email' placeholder='Enter email' required='')
         .form-group
           label.control-label(for='pwd') Password:
           div
-            input#pwd.form-control(type='password' placeholder='Enter password' required='')
+            input#pwd.form-control(name='password' type='password' placeholder='Enter password' required='')
         .form-group
           label.control-label(for='rpwd') Repeat password:
           div
-            input#rpwd.form-control(type='password' placeholder='Enter password' required='')
+            input#rpwd.form-control(name='rpassword' type='password' placeholder='Enter password' required='')
         .form-group
           .col-sm-offset-1
             button#log.btn.btn-block(type='submit') LOG IN
