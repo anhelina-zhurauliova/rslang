@@ -4,7 +4,7 @@ module.exports = {
     browser: true,
     node: true,
   },
-  extends: ['airbnb-base', 'prettier'],
+  extends: ['airbnb', 'prettier'],
   plugins: ['babel', 'import', 'jsx-a11y', 'react', 'prettier'],
   parser: 'babel-eslint',
   parserOptions: {
@@ -23,7 +23,7 @@ module.exports = {
     'function-paren-newline': 'off',
     'no-plusplus': 'off',
     'space-before-function-paren': 0,
-    'no-unused-vars': 'off',
+    'import/prefer-default-export': 'off',
 
     'max-len': ['error', 100, 2, { ignoreUrls: true }],
     'no-console': 'error',

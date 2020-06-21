@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.scss';
-import { Header } from './components/header/header';
-import { Notification } from './components/notification/notification';
-import { Settings } from './components/settings/settings';
-import { Card } from './components/card/card';
-import { Authorization } from './components/authorization/authorization';
-import { Vocabulary } from './components/vocabulary/vocabulary';
+import { Header } from './components/header/Header';
+import { Notification } from './components/notification/Notification';
+import { Settings } from './components/settings/Settings';
+import { Card } from './components/card/Card';
+import { Authorization } from './components/authorization/Authorization';
+import { Vocabulary } from './components/vocabulary/Vocabulary';
 
 function App() {
   return (
