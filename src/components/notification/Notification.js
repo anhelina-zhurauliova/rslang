@@ -1,22 +1,23 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 
 export const Notification = () => (
-  <div class="card">
-    <div class="text-center">
-      <button class="close" type="button" aria-label="Close">
+  <div className="card">
+    <div className="text-center">
+      <button className="close" type="button" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      <div class="card-header">Well Done!</div>
-      <div class="card-body">
-        <p class="card-text">
+      <div className="card-header">Well Done!</div>
+      <div className="card-body">
+        <p className="card-text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
         </p>
-        <a class="btn btn-primary m-1" href="#">
+        <a className="btn btn-primary m-1" href="#">
           Settings
         </a>
-        <a class="btn btn-primary m-1" href="#">
+        <a className="btn btn-primary m-1" href="#">
           Continue
         </a>
       </div>
