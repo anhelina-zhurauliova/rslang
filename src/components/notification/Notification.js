@@ -4,11 +4,7 @@ export const Notification = () => {
   const [state, setState] = useState({ isVisible: false });
 
   const toggleNotification = () => {
-    if (state.isVisible === false) {
-      setState({ isVisible: true });
-    } else {
-      setState({ isVisible: false });
-    }
+    setState({ isVisible: !state.isVisible });
   };
 
   if (!state.isVisible) {
