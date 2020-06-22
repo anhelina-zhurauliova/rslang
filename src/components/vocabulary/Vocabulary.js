@@ -3,6 +3,8 @@
 /* eslint-disable react/no-danger-with-children */
 import React, { useState, useEffect } from 'react';
 import requestURL from '../../shared/constants';
+import { ReactComponent as Megaphone } from '../../assets/svg/megaphone.svg';
+import './vocabulary.scss';
 
 const defaultQuery = 'words';
 
@@ -48,13 +50,14 @@ export const Vocabulary = () => {
         return (
           <li key={word.id} className="list-group-item d-flex align-items-center">
             <button className="btn" type="button" onClick={e => playWord(e)}>
-              <img
+              <Megaphone className="group__list-megaphone" />
+              {/* <img
                 className="mr-3"
                 height="30"
                 id={word.id}
                 src="./assets/img/megaphone.svg"
                 alt="Speak it"
-              />
+              /> */}
             </button>
             <div className="words-container">
               <h5 className="text-primary mb-0">{word.word}</h5>
