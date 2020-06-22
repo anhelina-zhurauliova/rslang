@@ -3,25 +3,26 @@ import React, { useState } from 'react';
 export const Notification = () => {
   const [state, setState] = useState({ isVisible: false });
 
-  const closeNotification = () => {
-    setState({ isVisible: false });
-  };
-
-  const showNotification = () => {
-    setState({ isVisible: true });
+  const toggleNotification = () => {
+    if (state.isVisible === false) {
+      setState({ isVisible: true });
+    } else {
+      setState({ isVisible: false });
+    }
   };
 
   if (!state.isVisible) {
     return (
-      <button type="submit" className="btn btn-primary m-1" onClick={showNotification}>
+      <button type="submit" className="btn btn-primary m-1" onClick={toggleNotification}>
         Show Notification
       </button>
     );
   }
+
   return (
     <div className="card">
       <div className="text-center">
-        <button className="close" type="button" aria-label="Close" onClick={closeNotification}>
+        <button className="close" type="button" aria-label="Close" onClick={toggleNotification}>
           <span aria-hidden="true">&times;</span>
         </button>
         <div className="card-header">Well Done!</div>
