@@ -37,6 +37,13 @@ export const Vocabulary = () => {
   }
   return (
     <ul className="list-group list-group-flush">
+      <li className="list-group-item align-items-center">
+        <h2>Выученные слова</h2>
+        <p className="text-secondary mb-0">
+          Число слов:
+          {vocabularyState.length}
+        </p>
+      </li>
       {vocabularyState.map(word => {
         return (
           <li key={word.id} className="list-group-item d-flex align-items-center">
