@@ -2,15 +2,15 @@
 /* eslint-disable react/no-danger */
 /* eslint-disable react/no-danger-with-children */
 import React, { useState, useEffect } from 'react';
+import requestURL from '../../shared/constants';
 
-const apiUrl = 'https://afternoon-falls-25894.herokuapp.com/';
 const defaultQuery = 'words';
 
 export const Vocabulary = () => {
   const [vocabularyState, setVocabularyState] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const wordsUrl = `${apiUrl}${defaultQuery}`;
+      const wordsUrl = `${requestURL}/${defaultQuery}`;
       try {
         const res = await fetch(wordsUrl);
         if (!res.ok) {
@@ -29,7 +29,7 @@ export const Vocabulary = () => {
   const playWord = e => {
     e.preventDefault();
     const link = vocabularyState.find(obj => obj.id === e.target.id).audio;
-    const audio = new Audio(`${apiUrl}${link}`);
+    const audio = new Audio(`${requestURL}/${link}`);
     audio.play();
   };
   function createMarkup(text) {
