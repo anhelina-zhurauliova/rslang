@@ -1,7 +1,5 @@
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable react/no-danger */
-/* eslint-disable react/no-danger-with-children */
 import React, { useState, useEffect } from 'react';
+import ReactHtmlParser from 'react-html-parser';
 import requestURL from '../../shared/constants';
 import { ReactComponent as Megaphone } from '../../assets/svg/megaphone.svg';
 import './vocabulary.scss';
@@ -34,9 +32,6 @@ export const Vocabulary = () => {
     const audio = new Audio(`${requestURL}/${link}`);
     audio.play();
   };
-  function createMarkup(text) {
-    return { __html: text };
-  }
   return (
     <ul className="list-group list-group-flush">
       <li className="list-group-item align-items-center">
@@ -51,18 +46,11 @@ export const Vocabulary = () => {
           <li key={word.id} className="list-group-item d-flex align-items-center">
             <button className="btn" type="button" onClick={e => playWord(e)}>
               <Megaphone className="group__list-megaphone" />
-              {/* <img
-                className="mr-3"
-                height="30"
-                id={word.id}
-                src="./assets/img/megaphone.svg"
-                alt="Speak it"
-              /> */}
             </button>
             <div className="words-container">
               <h5 className="text-primary mb-0">{word.word}</h5>
               <p>{word.wordTranslate}</p>
-              <p className="mb-o" dangerouslySetInnerHTML={createMarkup(word.textExample)}></p>
+              <p className="mb-o">{ReactHtmlParser(word.textExample)}</p>
               <p className="text-secondary mb-0">Давность: 11 часов назад | Повторений: 6</p>
             </div>
           </li>
