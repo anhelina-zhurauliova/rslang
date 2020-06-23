@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import requestURL from '../../shared/constants';
+import { requestUrl, filesUrl } from '../../shared/constants';
 import { ReactComponent as Megaphone } from '../../assets/svg/megaphone.svg';
 import './vocabulary.scss';
 
@@ -10,7 +10,7 @@ export const Vocabulary = () => {
   const [vocabularyState, setVocabularyState] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const wordsUrl = `${requestURL}/${defaultQuery}`;
+      const wordsUrl = `${requestUrl}/${defaultQuery}`;
       try {
         const res = await fetch(wordsUrl);
         if (!res.ok) {
@@ -26,10 +26,8 @@ export const Vocabulary = () => {
     }
     fetchData();
   }, []);
-  const playWord = e => {
-    e.preventDefault();
-    const link = vocabularyState.find(obj => obj.id === e.target.id).audio;
-    const audio = new Audio(`${requestURL}/${link}`);
+  const playWord = link => {
+    const audio = new Audio(`${filesUrl}/${link}`);
     audio.play();
   };
   return (
@@ -44,7 +42,13 @@ export const Vocabulary = () => {
       {vocabularyState.map(word => {
         return (
           <li key={word.id} className="list-group-item d-flex align-items-center">
-            <button className="btn" type="button" onClick={e => playWord(e)}>
+            <button
+              className="btn"
+              type="button"
+              onClick={() => {
+                playWord(word.audio);
+              }}
+            >
               <Megaphone className="group__list-megaphone" />
             </button>
             <div className="words-container">
