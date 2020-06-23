@@ -1,115 +1,135 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import { Formik, Form } from 'formik';
+import { signIn } from './loginAction';
 
 export const Authorization = () => (
   <div className="container col-sm-4">
     <ul className="nav nav-tabs">
-      <li className="ml-auto mr-5 active">
-        <a data-toggle="tab" href="#login">
-          LOG IN
-        </a>
-      </li>
-      <li className="mr-auto ml-5">
-        <a data-toggle="tab" href="#signin">
+      <li className="mr-auto ml-5 active">
+        <button type="button" className="btn btn-link">
           SIGN IN
-        </a>
+        </button>
+      </li>
+      <li className="ml-auto mr-5">
+        <button type="button" className="btn btn-link">
+          LOG IN
+        </button>
       </li>
     </ul>
-    <div className="tab-content">
-      <div className="tab-pane in active" id="login">
-        <h6 className="mt-3 mb-3">Enter your registration data to create personal account.</h6>
-        <form>
-          <div className="form-group">
-            <label className="control-label" htmlFor="email">
-              Email:
-            </label>
-            <div>
-              <input
-                className="form-control"
-                id="email"
-                type="email"
-                placeholder="Enter email"
-                required=""
-              />
+
+    <div id="signin">
+      <p className="mt-3 mb-3">Enter registration data to enter your personal account.</p>
+
+      <Formik
+        initialValues={{
+          email: '',
+          password: '',
+          form: '',
+        }}
+        validate={values => {
+          const errors = {};
+          if (!values.email) {
+            errors.email = 'required';
+          } else if (!/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(values.email)) {
+            errors.email = 'invalid email adress';
+          }
+          if (!values.password) {
+            errors.password = 'required';
+          } else if (
+            !/^(?=^.{8,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/.test(
+              values.password,
+            )
+          ) {
+            errors.password = 'invalid password';
+          }
+        }}
+        onSubmit={({ values }) => {
+          signIn({ values });
+          // add cookies
+        }}
+        render={({
+          values,
+          errors,
+          touched,
+          isSubmitting,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+        }) => (
+          <Form name="signin" onSubmit={handleSubmit}>
+            <div className="form-group has-feedback">
+              <label htmlFor="email" className="control-label">
+                Email:
+              </label>
+              <div>
+                <div className="input-group">
+                  <span className="input-group-addon">
+                    <i className="glyphicon glyphicon-envelope" />
+                  </span>
+                  <input
+                    name="email"
+                    id="email"
+                    type="text"
+                    className="form-control"
+                    autoComplete="off"
+                    placeholder="Enter your email"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="form-group">
-            <label className="control-label" htmlFor="pwd">
-              Password:
-            </label>
-            <div>
-              <input
-                className="form-control"
-                id="pwd"
-                type="password"
-                placeholder="Enter password"
-                required=""
-              />
+
+            <div
+              // className="form-group has-feedback"
+              className={
+                errors.password && touched.password
+                  ? 'form-group has-feedback has-error'
+                  : 'form-group has-feedback'
+              }
+            >
+              <label htmlFor="password" className="control-label">
+                Password:
+              </label>
+              <div>
+                <div className="input-group">
+                  <span className="input-group-addon">
+                    <i className="glyphicon glyphicon-lock" />
+                  </span>
+                  <input
+                    name="password"
+                    type="password"
+                    className="form-control"
+                    id="pwd"
+                    placeholder="Enter password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="form-group">
-            <label className="control-label" htmlFor="rpwd">
-              Repeat password:
-            </label>
-            <div>
-              <input
-                className="form-control"
-                id="rpwd"
-                type="password"
-                placeholder="Enter password"
-                required=""
-              />
+
+            <div className="form-group">
+              <div className="mt-3 mb-7 text-danger text-center" />
+              {errors.email && touched.email && <p className="input-feedback">{errors.email}</p>}
+              {errors.password && touched.password && (
+                <p className="field-error">{errors.password}</p>
+              )}
+
+              <div id="signin" className="tab-pane in active">
+                <button type="submit" id="signin" className="btn btn-block" disabled={isSubmitting}>
+                  SIGN IN
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-offset-1">
-              <button className="btn btn-block" id="log" type="submit">
-                LOG IN
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div className="tab-pane" id="signin">
-        <h6 className="mt-3 mb-3">Enter registration data to enter your personal account.</h6>
-        <form>
-          <div className="form-group">
-            <label className="control-label" htmlFor="emails">
-              Email:
-            </label>
-            <div>
-              <input
-                className="form-control"
-                id="emails"
-                type="email"
-                placeholder="Enter email"
-                required=""
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <label className="control-label" htmlFor="pwds">
-              Password:
-            </label>
-            <div>
-              <input
-                className="form-control"
-                id="pwds"
-                type="password"
-                placeholder="Enter password"
-                required=""
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-offset-1">
-              <button className="btn btn-block" id="sign" type="submit">
-                SIGN IN
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
+          </Form>
+        )}
+      />
     </div>
   </div>
 );
+
+export default Authorization;
