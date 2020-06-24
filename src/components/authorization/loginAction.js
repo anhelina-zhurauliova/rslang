@@ -1,3 +1,5 @@
+import setSession from './userSession';
+
 const errMessage = {
   204: 'The user has been deleted',
   400: 'Bad request',
@@ -7,30 +9,9 @@ const errMessage = {
   417: 'User with this e-mail exists',
   422: 'Incorrect e-mail or password',
 };
-
-const createUser = async user => {
-  let content;
-  try {
-    const rawResponse = await fetch('https://afternoon-falls-25894.herokuapp.com/users', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-    // if (rawResponse.status > 200) {
-    //   const err = errMessage[rawResponse.status];
-    // } else {
-    content = await rawResponse.json();
-  } catch (error) {
-    return error.message;
-  }
-  return content;
-};
+const TOKEN_VALID = 14000;
 
 const signIn = async user => {
-  let content;
   try {
     const rawResponse = await fetch('https://afternoon-falls-25894.herokuapp.com/signin', {
       method: 'POST',
@@ -40,18 +21,48 @@ const signIn = async user => {
       },
       body: JSON.stringify(user),
     });
-    // if (rawResponse.status > 200) {
-    //   return errMessage[rawResponse.status];
-    // }
-    content = await rawResponse.json();
+    if (!rawResponse.ok) {
+      return errMessage[rawResponse.status];
+    }
+    const { userId, token } = await rawResponse.json();
+    const userData = {
+      userId,
+      token,
+      timestamp: new Date().toString(),
+    };
+    const authState = {
+      isLoggedIn: true,
+      user: userData,
+    };
+    setSession('authState', JSON.stringify(authState), { secure: true, expires: TOKEN_VALID });
   } catch (error) {
     return error.message;
   }
-  return content;
+  return null;
+};
+
+const createUser = async user => {
+  try {
+    const rawResponse = await fetch('https://afternoon-falls-25894.herokuapp.com/users', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    });
+    if (!rawResponse.ok) {
+      return errMessage[rawResponse.status];
+    }
+    const content = await rawResponse.json();
+    if (typeof content !== 'string') signIn(user);
+  } catch (error) {
+    return error.message;
+  }
+  return null;
 };
 
 const getUser = async (token, userId) => {
-  let content;
   try {
     const rawResponse = await fetch(`https://afternoon-falls-25894.herokuapp.com/users/${userId}`, {
       method: 'GET',
@@ -61,14 +72,14 @@ const getUser = async (token, userId) => {
         Accept: 'application/json',
       },
     });
-    if (rawResponse.status > 200) {
+    if (rawResponse.ok) {
       return errMessage[rawResponse.status];
     }
-    content = await rawResponse.json();
+    await rawResponse.json();
   } catch (error) {
     return error.message;
   }
-  return content;
+  return null;
 };
 
 export { createUser, signIn, getUser };
