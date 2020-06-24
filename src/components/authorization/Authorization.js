@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import { signIn } from './loginAction';
 
@@ -25,111 +26,130 @@ export const Authorization = () => (
         initialValues={{
           email: '',
           password: '',
-          form: '',
         }}
         validate={values => {
           const errors = {};
           if (!values.email) {
-            errors.email = 'required';
+            errors.email = '"email" is required; ';
           } else if (!/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(values.email)) {
-            errors.email = 'invalid email adress';
+            errors.email = 'email must be a valid email; ';
           }
           if (!values.password) {
-            errors.password = 'required';
+            errors.password = '"password" is required; ';
           } else if (
             !/^(?=^.{8,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/.test(
               values.password,
             )
           ) {
-            errors.password = 'invalid password';
+            errors.password = 'invalid password; ';
           }
+          return errors;
         }}
         onSubmit={({ values }) => {
           signIn({ values });
-          // add cookies
         }}
-        render={({
-          values,
-          errors,
-          touched,
-          isSubmitting,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-        }) => (
-          <Form name="signin" onSubmit={handleSubmit}>
-            <div className="form-group has-feedback">
-              <label htmlFor="email" className="control-label">
-                Email:
-              </label>
-              <div>
-                <div className="input-group">
-                  <span className="input-group-addon">
-                    <i className="glyphicon glyphicon-envelope" />
-                  </span>
-                  <input
-                    name="email"
-                    id="email"
-                    type="text"
-                    className="form-control"
-                    autoComplete="off"
-                    placeholder="Enter your email"
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
+      >
+        {props => {
+          const {
+            values,
+            touched,
+            errors,
+            isSubmitting,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+          } = props;
+          return (
+            <Form onSubmit={handleSubmit}>
+              <div className="form-group has-feedback">
+                <label htmlFor="email" className="control-label">
+                  Email:
+                </label>
+                <div>
+                  <div className="input-group">
+                    <span className="input-group-addon">
+                      <i className="glyphicon glyphicon-envelope" />
+                    </span>
+                    <input
+                      name="email"
+                      id="email"
+                      type="text"
+                      className="form-control"
+                      placeholder="Enter your email"
+                      autoComplete="off"
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div
-              // className="form-group has-feedback"
-              className={
-                errors.password && touched.password
-                  ? 'form-group has-feedback has-error'
-                  : 'form-group has-feedback'
-              }
-            >
-              <label htmlFor="password" className="control-label">
-                Password:
-              </label>
-              <div>
-                <div className="input-group">
-                  <span className="input-group-addon">
-                    <i className="glyphicon glyphicon-lock" />
-                  </span>
-                  <input
-                    name="password"
-                    type="password"
-                    className="form-control"
-                    id="pwd"
-                    placeholder="Enter password"
-                    value={values.password}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
+              <div
+                className={
+                  errors.password && touched.password
+                    ? 'form-group has-feedback has-error'
+                    : 'form-group has-feedback'
+                }
+              >
+                <label htmlFor="password" className="control-label">
+                  Password:
+                </label>
+                <div>
+                  <div className="input-group">
+                    <span className="input-group-addon">
+                      <i className="glyphicon glyphicon-lock" />
+                    </span>
+                    <input
+                      name="password"
+                      id="pwd"
+                      type="password"
+                      className="form-control"
+                      placeholder="Enter password"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="form-group">
-              <div className="mt-3 mb-7 text-danger text-center" />
-              {errors.email && touched.email && <p className="input-feedback">{errors.email}</p>}
-              {errors.password && touched.password && (
-                <p className="field-error">{errors.password}</p>
-              )}
-
-              <div id="signin" className="tab-pane in active">
-                <button type="submit" id="signin" className="btn btn-block" disabled={isSubmitting}>
-                  SIGN IN
-                </button>
+              <div className="form-group">
+                <div className="field-error">
+                  {errors.email && touched.email && (
+                    <span className="mt-3 mb-7 text-danger text-center">{errors.email}</span>
+                  )}
+                  {errors.password && touched.password && (
+                    <span className="mt-3 mb-7 text-danger text-center">{errors.password}</span>
+                  )}
+                </div>
+                <div id="signin" className="tab-pane in active">
+                  <button
+                    type="submit"
+                    id="signin"
+                    className="btn btn-block"
+                    disabled={isSubmitting}
+                  >
+                    SIGN IN
+                  </button>
+                </div>
               </div>
-            </div>
-          </Form>
-        )}
-      />
+            </Form>
+          );
+        }}
+      </Formik>
     </div>
   </div>
 );
+
+Authorization.propTypes = {
+  values: PropTypes.object.isRequired,
+  touched: PropTypes.object,
+  errors: PropTypes.object,
+  isSubmitting: PropTypes.bool,
+  handleChange: PropTypes.bool,
+  handleBlur: PropTypes.bool,
+  handleSubmit: PropTypes.bool,
+};
 
 export default Authorization;

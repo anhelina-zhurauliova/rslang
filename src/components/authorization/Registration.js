@@ -47,6 +47,7 @@ export const Registration = () => (
           } else if (values.password !== values.rpassword) {
             errors.rpassword = 'password mismatch';
           }
+          return errors;
         }}
         onSubmit={({ values }) => {
           createUser({ values });
