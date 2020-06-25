@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CONSTANTS from '../../shared/constants';
+import { CONSTANTS } from '../../shared/constants';
 import { Word } from './Word';
 import './vocabulary.scss';
 

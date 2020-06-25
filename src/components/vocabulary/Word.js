@@ -2,7 +2,7 @@ import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import PropTypes from 'prop-types';
 import { ReactComponent as Megaphone } from '../../assets/svg/megaphone.svg';
-import CONSTANTS from '../../shared/constants';
+import { CONSTANTS } from '../../shared/constants';
 
 export const Word = props => {
   const { id, audio, word, translation, example } = props;
