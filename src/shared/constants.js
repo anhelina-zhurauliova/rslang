@@ -1,2 +1,8 @@
-export const requestUrl = 'https://afternoon-falls-25894.herokuapp.com';
-export const filesUrl = 'https://raw.githubusercontent.com/ars6300/rslang-data/master';
+const CONSTANTS = {
+  URL: {
+    API: 'https://afternoon-falls-25894.herokuapp.com',
+    FILES: 'https://raw.githubusercontent.com/ars6300/rslang-data/master',
+  },
+};
+
+export { CONSTANTS as default };
