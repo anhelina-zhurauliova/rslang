@@ -39,15 +39,15 @@ module.exports = {
     'prefer-destructuring': 'off',
 
     'jsx-a11y/anchor-is-valid': ['error', { components: ['Link'], specialLink: ['to'] }],
-    'jsx-a11y/label-has-for': [
-      2,
-      {
-        required: {
-          every: ['id'],
-        },
-      },
-    ],
-
+   
+    'jsx-a11y/label-has-associated-control': [ 2, {
+      labelComponents: [],
+      labelAttributes: [],
+      controlComponents: [],
+      assert: 'either',
+      depth: 3,
+    }],
+    
     'prettier/prettier': ['error'],
   },
 };

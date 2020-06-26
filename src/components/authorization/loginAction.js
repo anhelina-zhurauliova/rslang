@@ -1,14 +1,5 @@
-import setSession from './userSession';
+import { setSession } from './userSession';
 
-const errMessage = {
-  204: 'The user has been deleted',
-  400: 'Bad request',
-  401: 'Access token is missing or invalid',
-  403: 'Incorrect e-mail or password',
-  404: 'User not found',
-  417: 'User with this e-mail exists',
-  422: 'Incorrect e-mail or password',
-};
 const TOKEN_VALID = 14000;
 
 const signIn = async user => {
@@ -22,7 +13,7 @@ const signIn = async user => {
       body: JSON.stringify(user),
     });
     if (!rawResponse.ok) {
-      return errMessage[rawResponse.status];
+      return rawResponse.statusText;
     }
     const { userId, token } = await rawResponse.json();
     const userData = {
@@ -52,7 +43,7 @@ const createUser = async user => {
       body: JSON.stringify(user),
     });
     if (!rawResponse.ok) {
-      return errMessage[rawResponse.status];
+      return rawResponse.statusText;
     }
     const content = await rawResponse.json();
     if (typeof content !== 'string') signIn(user);
@@ -72,8 +63,8 @@ const getUser = async (token, userId) => {
         Accept: 'application/json',
       },
     });
-    if (rawResponse.ok) {
-      return errMessage[rawResponse.status];
+    if (!rawResponse.ok) {
+      return rawResponse.statusText;
     }
     await rawResponse.json();
   } catch (error) {

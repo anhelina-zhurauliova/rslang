@@ -17,4 +17,4 @@ const setSession = (name, value, options) => {
   document.cookie = updatedCookie;
 };
 
-export default setSession;
+export { setSession };

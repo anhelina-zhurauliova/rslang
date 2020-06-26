@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
@@ -9,19 +8,17 @@ export const Authorization = () => (
     <ul className="nav nav-tabs">
       <li className="mr-auto ml-5 active">
         <button type="button" className="btn btn-link">
-          SIGN IN
+          SignIn
         </button>
       </li>
       <li className="ml-auto mr-5">
         <button type="button" className="btn btn-link">
-          LOG IN
+          LogIn
         </button>
       </li>
     </ul>
-
     <div id="signin">
       <p className="mt-3 mb-3">Enter registration data to enter your personal account.</p>
-
       <Formik
         initialValues={{
           email: '',
@@ -45,7 +42,7 @@ export const Authorization = () => (
           }
           return errors;
         }}
-        onSubmit={({ values }) => {
+        onSubmit={values => {
           signIn({ values });
         }}
       >
@@ -84,7 +81,6 @@ export const Authorization = () => (
                   </div>
                 </div>
               </div>
-
               <div
                 className={
                   errors.password && touched.password
@@ -113,7 +109,6 @@ export const Authorization = () => (
                   </div>
                 </div>
               </div>
-
               <div className="form-group">
                 <div className="field-error">
                   {errors.email && touched.email && (
@@ -130,7 +125,7 @@ export const Authorization = () => (
                     className="btn btn-block"
                     disabled={isSubmitting}
                   >
-                    SIGN IN
+                    SignIn
                   </button>
                 </div>
               </div>
@@ -151,5 +146,3 @@ Authorization.propTypes = {
   handleBlur: PropTypes.bool,
   handleSubmit: PropTypes.bool,
 };
-
-export default Authorization;
