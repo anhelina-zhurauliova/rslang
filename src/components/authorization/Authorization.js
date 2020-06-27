@@ -8,12 +8,12 @@ export const Authorization = () => (
     <ul className="nav nav-tabs">
       <li className="mr-auto ml-5 active">
         <button type="button" className="btn btn-link">
-          SignIn
+          Sign In
         </button>
       </li>
       <li className="ml-auto mr-5">
         <button type="button" className="btn btn-link">
-          LogIn
+          Log In
         </button>
       </li>
     </ul>
@@ -43,7 +43,7 @@ export const Authorization = () => (
           return errors;
         }}
         onSubmit={values => {
-          signIn({ values });
+          signIn(values);
         }}
       >
         {props => {
@@ -125,7 +125,7 @@ export const Authorization = () => (
                     className="btn btn-block"
                     disabled={isSubmitting}
                   >
-                    SignIn
+                    Sign In
                   </button>
                 </div>
               </div>
