@@ -53,7 +53,7 @@ export const Registration = () => (
             email,
             password,
           };
-          createUser({ newUser });
+          createUser(newUser);
         }}
       >
         {props => {
