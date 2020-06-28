@@ -1,18 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { CONSTANTS } from '../../shared/constants';
+import { Word } from './Word';
+import './vocabulary.scss';
 
-export const Vocabulary = () => (
-  <ul className="list-group list-group-flush">
-    <li className="list-group-item d-flex align-items-center">
-      <input className="mr-3" type="checkbox" checked="" />
-      <button className="btn" type="button">
-        <img className="mr-3" height="30" src="./assets/img/megaphone.svg" alt="Speak it" />
-      </button>
-      <div className="words-container">
-        <h5 className="text-primary mb-0">commitment</h5>
-        <p>обязательство</p>
-        <h6 className="mb-o">Do you know your commitments?</h6>
-        <p className="text-secondary mb-0">Давность: 11 часов назад | Повторений: 6</p>
-      </div>
-    </li>
-  </ul>
-);
+const defaultQuery = 'words';
+
+export const Vocabulary = () => {
+  const [vocabulary, setVocabulary] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const wordsUrl = `${CONSTANTS.URL.API}/${defaultQuery}`;
+      try {
+        const res = await fetch(wordsUrl);
+        if (!res.ok) {
+          res.text().then(text => {
+            throw Error(text);
+          });
+        }
+        const data = await res.json();
+        setVocabulary(data);
+      } catch (error) {
+        // ToDo: handle errors
+      }
+    }
+    fetchData();
+  }, []);
+  return (
+    <ul className="vocabulary__list list-group list-group-flush">
+      <li className="list-group-item align-items-center">
+        <h2>Выученные слова</h2>
+        <p className="text-secondary mb-0">
+          Число слов:
+          {vocabulary.length}
+        </p>
+      </li>
+      {vocabulary.map(word => (
+        <Word
+          key={word.id}
+          audio={word.audio}
+          word={word.word}
+          translation={word.wordTranslate}
+          example={word.textExample}
+        />
+      ))}
+    </ul>
+  );
+};
