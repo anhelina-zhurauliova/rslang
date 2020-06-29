@@ -2,8 +2,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { CONSTANTS } from '../../shared/constants';
 
-// TODO: Take these from cookies
 const auth = {
   message: 'Authenticated',
   token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWJhYjU4OThmZmJmMDAxNzQ1ODFlOSIsImlhdCI6
@@ -11,12 +11,25 @@ const auth = {
   userId: '5eebab5898ffbf00174581e9',
 };
 
+const defaultQuery = 'settings';
+const settingsUrl = `${CONSTANTS.URL.API}/${auth.userId}/${defaultQuery}`;
+// TODO: Take these from cookies
+
 export const Settings = () => {
   const [settings, setSettings] = useState(null);
 
   // TODO: Get data here
   useEffect(() => {
-    fetch('')
+    fetch(settingsUrl, {
+      method: 'GET',
+      headers: {
+        Authorization: `${auth.token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        settings
+      }),
+    })
       .then(response => setSettings(response))
       .catch(error =>
         // TODO: Show some notification
@@ -58,7 +71,7 @@ export const Settings = () => {
           setSubmitting(true);
 
           // TODO: Put data here
-          fetch('', {
+          fetch(settingsUrl, {
             method: 'PUT',
             headers: {
               Authorization: `${auth.token}`,
