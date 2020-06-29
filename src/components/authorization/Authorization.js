@@ -127,11 +127,6 @@ export const Authorization = () => {
                       component="span"
                     />
                   </div>
-                  <ErrorMessage
-                    className="mt-3 mb-7 text-danger text-center"
-                    name="email"
-                    component="span"
-                  />
                 </div>
                 <div className="form-group has-feedback">
                   <label htmlFor="password" className="authenticated__content control-label">
@@ -155,11 +150,6 @@ export const Authorization = () => {
                       component="span"
                     />
                   </div>
-                  <ErrorMessage
-                    className="mt-3 mb-7 text-danger text-center"
-                    name="password"
-                    component="span"
-                  />
                 </div>
                 <div className="form-group">
                   <div className="tab-pane in active">
