@@ -26,16 +26,14 @@ export const Settings = () => {
         Authorization: `${auth.token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        settings
-      }),
+      body: JSON.stringify({ settings }),
     })
       .then(response => setSettings(response))
       .catch(error =>
         // TODO: Show some notification
         console.log(error),
       );
-  }, []);
+  });
 
   if (!settings) {
     return <h2>Loading...</h2>;
@@ -89,6 +87,13 @@ export const Settings = () => {
         {({ isSubmitting }) => (
           <div className="container">
             <Form>
+              <div className="input-group input-group-sm mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text "> Your name</span>
+                </div>
+                <Field className="form-control has-error" type="text" name="userName" />
+              </div>
+              <ErrorMessage className="is-invalid" name="nameValid" component="div" />
               <div className="input-group input-group-sm mb-3">
                 <div className="input-group-prepend">
                   <span className="input-group-text ">Daily limit of words</span>
