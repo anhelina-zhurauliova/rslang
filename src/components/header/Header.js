@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const Header = () => (
   <div className="container">
@@ -22,54 +23,59 @@ export const Header = () => (
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item active">
-            <a className="nav-link" href="#">
-              Home
+            <Link className="nav-link" to="/main">
+              На главную
               <span className="sr-only">(current)</span>
-            </a>
+            </Link>
           </li>
           <li className="nav-item dropdown">
-            <a
+            <Link
               className="nav-link dropdown-toggle"
               id="navbarDropdown"
-              href="#"
+              to="/games"
               role="button"
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
             >
-              Games
-            </a>
+              Тренировки
+            </Link>
             <div className="dropdown-menu">
               {' '}
-              <a className="dropdown-item" href="#">
-                Speakit
-              </a>
-              <a className="dropdown-item" href="#">
+              <Link className="dropdown-item" to="/games/speakit">
+                SpeakIt
+              </Link>
+              <Link className="dropdown-item" to="/games/englishPuzzle">
                 English Puzzle
-              </a>
-              <a className="dropdown-item" href="#">
+              </Link>
+              <Link className="dropdown-item" to="/games/savanna">
                 Savanna
-              </a>
-              <a className="dropdown-item" href="#">
+              </Link>
+              <Link className="dropdown-item" to="/games/audioCall">
                 Audio Call
-              </a>
-              <a className="dropdown-item" href="#">
+              </Link>
+              <Link className="dropdown-item" to="/games/sprint">
                 Sprint
-              </a>
-              <a className="dropdown-item" href="#">
+              </Link>
+              <Link className="dropdown-item" to="/games/ourGame">
                 Our Game
-              </a>
+              </Link>
             </div>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
-              Our Team
-            </a>
+            <Link className="nav-link" to="/ourTeam">
+              Наша команда
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
-              Settings
-            </a>
+            <Link className="nav-link" to="/vocabulary">
+              Словарь
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/settings">
+              Настройки
+            </Link>
           </li>
         </ul>
         <div className="col-md-1">
