@@ -1,6 +1,6 @@
-import { setSession } from './userSession';
+import { Cookies } from 'react-cookie';
 
-const TOKEN_VALID = 14000;
+const TOKEN_VALID = 14400;
 
 const signIn = async user => {
   try {
@@ -25,7 +25,7 @@ const signIn = async user => {
       isLoggedIn: true,
       user: userData,
     };
-    setSession('authState', JSON.stringify(authState), { secure: true, expires: TOKEN_VALID });
+    Cookies.set('authState', JSON.stringify(authState), { secure: true, maxAge: TOKEN_VALID });
   } catch (error) {
     return error.message;
   }
@@ -73,4 +73,12 @@ const getUser = async (token, userId) => {
   return null;
 };
 
-export { createUser, signIn, getUser };
+const logoutUser = () => {
+  const authState = {
+    isLoggedIn: false,
+    user: {},
+  };
+  Cookies.set('authState', JSON.stringify(authState), { secure: true });
+};
+
+export { createUser, signIn, getUser, logoutUser };

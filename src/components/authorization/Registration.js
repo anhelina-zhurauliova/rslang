@@ -1,27 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { createUser } from './loginAction';
 
 export const Registration = () => (
-  <div className="container col-sm-4">
-    <ul className="nav nav-tabs">
-      <li className="mr-auto ml-5 active">
-        <button type="button" className="btn btn-link">
-          Sign In
-        </button>
-      </li>
-      <li className="ml-auto mr-5">
-        <button type="button" className="btn btn-link">
-          Log In
-        </button>
-      </li>
-    </ul>
+  <div className="container col-8 col-sm-6 col-md-4 col-xl-3 justify-content-center">
+    <h2 className="text-center">Регистрация</h2>
     <div id="signin">
-      <p className="mt-3 mb-3">Enter registration data to create personal account.</p>
+      <p className="mt-3 mb-3 text-justify">
+        Заполните форму, чтобы создать аккаунт и начать полноценно пользоваться нашим приложением
+      </p>
       <Formik
         initialValues={{
-          username: '',
           email: '',
           password: '',
           rpassword: '',
@@ -57,39 +47,9 @@ export const Registration = () => (
         }}
       >
         {props => {
-          const {
-            values,
-            touched,
-            errors,
-            isSubmitting,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-          } = props;
+          const { isSubmitting } = props;
           return (
-            <Form name="signin" onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="email" className="control-label">
-                  Name:
-                </label>
-                <div>
-                  <div className="input-group">
-                    <span className="input-group-addon">
-                      <i className="glyphicon glyphicon-envelope" />
-                    </span>
-                    <input
-                      name="username"
-                      type="text"
-                      className="form-control"
-                      autoComplete="off"
-                      placeholder="Enter your name"
-                      value={values.username}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                  </div>
-                </div>
-              </div>
+            <Form>
               <div className="form-group has-feedback">
                 <label htmlFor="email" className="control-label">
                   Email:
@@ -99,95 +59,71 @@ export const Registration = () => (
                     <span className="input-group-addon">
                       <i className="glyphicon glyphicon-envelope" />
                     </span>
-                    <input
+                    <Field
                       name="email"
                       type="text"
                       className="form-control"
+                      placeholder="username@gmail.com"
                       autoComplete="off"
-                      placeholder="Enter your email"
-                      value={values.email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
                     />
                   </div>
+                  <ErrorMessage
+                    className="mt-3 mb-7 text-danger text-center"
+                    name="email"
+                    component="span"
+                  />
                 </div>
               </div>
-              <div
-                className={
-                  errors.password && touched.password
-                    ? 'form-group has-feedback has-error'
-                    : 'form-group has-feedback'
-                }
-              >
+              <div className="form-group has-feedback">
                 <label htmlFor="password" className="control-label">
-                  Enter password:
+                  Пароль:
                 </label>
                 <div>
                   <div className="input-group">
                     <span className="input-group-addon">
                       <i className="glyphicon glyphicon-lock" />
                     </span>
-                    <input
+                    <Field
                       name="password"
                       type="password"
                       className="form-control"
-                      id="pwd"
-                      placeholder="Enter password"
-                      value={values.password}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
+                      placeholder="********"
                     />
                   </div>
+                  <ErrorMessage
+                    className="mt-3 mb-7 text-danger text-center"
+                    name="password"
+                    component="span"
+                  />
                 </div>
               </div>
-              <div
-                className={
-                  errors.password && touched.password
-                    ? 'form-group has-feedback has-error'
-                    : 'form-group has-feedback'
-                }
-              >
+              <div className="form-group has-feedback">
                 <label htmlFor="password" className="control-label">
-                  Repeat password:
+                  Повторите пароль:
                 </label>
                 <div>
                   <div className="input-group">
                     <span className="input-group-addon">
                       <i className="glyphicon glyphicon-lock" />
                     </span>
-                    <input
+                    <Field
                       name="rpassword"
                       type="password"
                       className="form-control"
-                      id="rpwd"
-                      placeholder="Repeat password"
-                      value={values.rpassword}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
+                      placeholder="********"
                     />
                   </div>
+                  <ErrorMessage
+                    className="mt-3 mb-7 text-danger text-center"
+                    name="rpassword"
+                    component="span"
+                  />
                 </div>
               </div>
               <div className="form-group">
-                <div className="field-error">
-                  {errors.email && touched.email && (
-                    <span className="mt-3 mb-7 text-danger text-center">{errors.email}</span>
-                  )}
-                  {errors.password && touched.password && (
-                    <span className="mt-3 mb-7 text-danger text-center">{errors.password}</span>
-                  )}
-                  {errors.rpassword && touched.rpassword && (
-                    <span className="mt-3 mb-7 text-danger text-center">{errors.rpassword}</span>
-                  )}
-                </div>
-                <div id="signin" className="tab-pane in active">
-                  <button
-                    type="submit"
-                    id="signin"
-                    className="btn btn-block"
-                    disabled={isSubmitting}
-                  >
-                    Log In
+                <div className="tab-pane">
+                  <button type="submit" className="btn btn-block" disabled={isSubmitting}>
+                    Зарегистрироваться
                   </button>
                 </div>
               </div>
@@ -200,11 +136,5 @@ export const Registration = () => (
 );
 
 Registration.propTypes = {
-  values: PropTypes.object.isRequired,
-  touched: PropTypes.object,
-  errors: PropTypes.object,
   isSubmitting: PropTypes.bool,
-  handleChange: PropTypes.bool,
-  handleBlur: PropTypes.bool,
-  handleSubmit: PropTypes.bool,
 };

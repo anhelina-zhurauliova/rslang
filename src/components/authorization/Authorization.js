@@ -1,24 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { signIn } from './loginAction';
+import './authorization.scss';
 
 export const Authorization = () => (
-  <div className="container col-sm-4">
-    <ul className="nav nav-tabs">
-      <li className="mr-auto ml-5 active">
-        <button type="button" className="btn btn-link">
-          Sign In
-        </button>
-      </li>
-      <li className="ml-auto mr-5">
-        <button type="button" className="btn btn-link">
-          Log In
-        </button>
-      </li>
-    </ul>
+  <div className="container col-8 col-sm-6 col-md-4 col-xl-3 justify-content-center">
+    <h2 className="text-center">Авторизация</h2>
     <div id="signin">
-      <p className="mt-3 mb-3">Enter registration data to enter your personal account.</p>
+      <p className="mt-3 mb-3 text-justify">
+        Для входа в личный кабинет введите регистрационные данные
+      </p>
       <Formik
         initialValues={{
           email: '',
@@ -27,18 +19,18 @@ export const Authorization = () => (
         validate={values => {
           const errors = {};
           if (!values.email) {
-            errors.email = '"email" is required; ';
+            errors.email = '"email"';
           } else if (!/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(values.email)) {
-            errors.email = 'email must be a valid email; ';
+            errors.email = 'email must be a valid email';
           }
           if (!values.password) {
-            errors.password = '"password" is required; ';
+            errors.password = '"password" is required';
           } else if (
             !/^(?=^.{8,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/.test(
               values.password,
             )
           ) {
-            errors.password = 'invalid password; ';
+            errors.password = 'invalid password';
           }
           return errors;
         }}
@@ -47,17 +39,9 @@ export const Authorization = () => (
         }}
       >
         {props => {
-          const {
-            values,
-            touched,
-            errors,
-            isSubmitting,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-          } = props;
+          const { isSubmitting } = props;
           return (
-            <Form onSubmit={handleSubmit}>
+            <Form>
               <div className="form-group has-feedback">
                 <label htmlFor="email" className="control-label">
                   Email:
@@ -67,65 +51,48 @@ export const Authorization = () => (
                     <span className="input-group-addon">
                       <i className="glyphicon glyphicon-envelope" />
                     </span>
-                    <input
+                    <Field
                       name="email"
-                      id="email"
                       type="text"
                       className="form-control"
-                      placeholder="Enter your email"
+                      placeholder="username@gmail.com"
                       autoComplete="off"
-                      value={values.email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
                     />
                   </div>
+                  <ErrorMessage
+                    className="mt-3 mb-7 text-danger text-center"
+                    name="email"
+                    component="span"
+                  />
                 </div>
               </div>
-              <div
-                className={
-                  errors.password && touched.password
-                    ? 'form-group has-feedback has-error'
-                    : 'form-group has-feedback'
-                }
-              >
+              <div className="form-group has-feedback">
                 <label htmlFor="password" className="control-label">
-                  Password:
+                  Пароль:
                 </label>
                 <div>
                   <div className="input-group">
                     <span className="input-group-addon">
                       <i className="glyphicon glyphicon-lock" />
                     </span>
-                    <input
+                    <Field
                       name="password"
-                      id="pwd"
                       type="password"
                       className="form-control"
-                      placeholder="Enter password"
-                      value={values.password}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
+                      placeholder="********"
                     />
                   </div>
+                  <ErrorMessage
+                    className="mt-3 mb-7 text-danger text-center"
+                    name="password"
+                    component="span"
+                  />
                 </div>
               </div>
               <div className="form-group">
-                <div className="field-error">
-                  {errors.email && touched.email && (
-                    <span className="mt-3 mb-7 text-danger text-center">{errors.email}</span>
-                  )}
-                  {errors.password && touched.password && (
-                    <span className="mt-3 mb-7 text-danger text-center">{errors.password}</span>
-                  )}
-                </div>
-                <div id="signin" className="tab-pane in active">
-                  <button
-                    type="submit"
-                    id="signin"
-                    className="btn btn-block"
-                    disabled={isSubmitting}
-                  >
-                    Sign In
+                <div className="tab-pane in active">
+                  <button type="submit" className="btn btn-block" disabled={isSubmitting}>
+                    Войти
                   </button>
                 </div>
               </div>
@@ -138,11 +105,5 @@ export const Authorization = () => (
 );
 
 Authorization.propTypes = {
-  values: PropTypes.object.isRequired,
-  touched: PropTypes.object,
-  errors: PropTypes.object,
   isSubmitting: PropTypes.bool,
-  handleChange: PropTypes.bool,
-  handleBlur: PropTypes.bool,
-  handleSubmit: PropTypes.bool,
 };
