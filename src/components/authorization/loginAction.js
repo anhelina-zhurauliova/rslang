@@ -1,10 +1,8 @@
-import { Cookies } from 'react-cookie';
-
-const TOKEN_VALID = 14400;
+import { CONSTANTS } from '../../shared/constants';
 
 const signIn = async user => {
   try {
-    const rawResponse = await fetch('https://afternoon-falls-25894.herokuapp.com/signin', {
+    const rawResponse = await fetch(`${CONSTANTS.URL.API}/signin`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -25,16 +23,15 @@ const signIn = async user => {
       isLoggedIn: true,
       user: userData,
     };
-    Cookies.set('authState', JSON.stringify(authState), { secure: true, maxAge: TOKEN_VALID });
+    return authState;
   } catch (error) {
     return error.message;
   }
-  return null;
 };
 
 const createUser = async user => {
   try {
-    const rawResponse = await fetch('https://afternoon-falls-25894.herokuapp.com/users', {
+    const rawResponse = await fetch(`${CONSTANTS.URL.API}/users`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -46,16 +43,19 @@ const createUser = async user => {
       return rawResponse.statusText;
     }
     const content = await rawResponse.json();
-    if (typeof content !== 'string') signIn(user);
+    let authState;
+    if (typeof content !== 'string') {
+      authState = signIn(user);
+    }
+    return authState;
   } catch (error) {
     return error.message;
   }
-  return null;
 };
 
 const getUser = async (token, userId) => {
   try {
-    const rawResponse = await fetch(`https://afternoon-falls-25894.herokuapp.com/users/${userId}`, {
+    const rawResponse = await fetch(`${CONSTANTS.URL.API}/users/${userId}`, {
       method: 'GET',
       withCredentials: true,
       headers: {
@@ -66,11 +66,11 @@ const getUser = async (token, userId) => {
     if (!rawResponse.ok) {
       return rawResponse.statusText;
     }
-    await rawResponse.json();
+    const content = await rawResponse.json();
+    return content;
   } catch (error) {
     return error.message;
   }
-  return null;
 };
 
 const logoutUser = () => {
@@ -78,7 +78,7 @@ const logoutUser = () => {
     isLoggedIn: false,
     user: {},
   };
-  Cookies.set('authState', JSON.stringify(authState), { secure: true });
+  return authState;
 };
 
 export { createUser, signIn, getUser, logoutUser };
