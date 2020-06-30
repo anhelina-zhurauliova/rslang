@@ -5,7 +5,8 @@ import { useCookies } from 'react-cookie';
 import { createUser } from './loginAction';
 
 export const Registration = () => {
-  const [setCookies] = useCookies(['authState']);
+  // eslint-disable-next-line no-unused-vars
+  const [cookies, setCookies] = useCookies(['authState']);
 
   return (
     <div className="container col-8 col-sm-6 col-md-4 col-xl-3 justify-content-center">
