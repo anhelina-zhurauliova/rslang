@@ -1,5 +1,8 @@
-import React, { useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
 
