@@ -38,17 +38,11 @@ module.exports = {
     'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
 
     'prefer-destructuring': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
 
     'jsx-a11y/anchor-is-valid': ['error', { components: ['Link'], specialLink: ['to'] }],
-   
-    'jsx-a11y/label-has-associated-control': [ 2, {
-      labelComponents: [],
-      labelAttributes: [],
-      controlComponents: [],
-      assert: 'either',
-      depth: 3,
-    }],
-    
+    'jsx-a11y/label-has-for': 'off',
+
     'prettier/prettier': ['error'],
   },
 };

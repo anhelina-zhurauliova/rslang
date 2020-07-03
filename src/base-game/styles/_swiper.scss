@@ -1,0 +1,25 @@
+.slick-arrow {
+  background-color: black;
+}
+.progressbar__container {
+  width: 545px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 50px;
+  position: relative;
+}
+
+.end-value,
+.start-value {
+  position: absolute;
+  color: #8e90a6;
+  top: 20px;
+}
+.start-value {
+  left: 10px;
+}
+.end-value {
+  right: 10px;
+}
