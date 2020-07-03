@@ -1,52 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { CookiesProvider, useCookies } from 'react-cookie';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
+import { AppContext } from './libs/contextLib';
 import { Header } from './components/header/Header';
+import { Home } from './components/home/Home';
 import { Settings } from './components/settings/Settings';
 import { Card } from './components/card/Card';
 import { Authorization } from './components/authorization/Authorization';
+import { Registration } from './components/authorization/Registration';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
 
 function App() {
-  const [cookies, setCookies] = useCookies(['authState']);
-  if (!Object.keys(cookies).length) {
-    setCookies('authState', { isLoggedIn: false, user: {} });
-  }
-  const { isLoggedIn } = cookies.authState;
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
 
   return (
     <CookiesProvider>
-      <Router>
-        <div className="App">
-          <Switch>
-            {!isLoggedIn && (
-              <>
-                <Route exact path="/">
-                  <Header />
-                  <Authorization />
-                </Route>
-                <Redirect to="/" />
-              </>
-            )}
-            {isLoggedIn && (
-              <>
-                <Route path="/settings">
-                  <Settings />
-                </Route>
-                <Route path="/main">
-                  <Header />
-                  <Card />
-                </Route>
-                <Route path="/vocabulary">
-                  <Vocabulary />
-                </Route>
-                <Redirect to="/main" />
-              </>
-            )}
-          </Switch>
-        </div>
-      </Router>
+      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+        <Router>
+          <div className="App">
+            <Header />
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/settings">
+                <Settings />
+              </Route>
+              <Route path="/signin">
+                <Authorization />
+              </Route>
+              <Route path="/login">
+                <Registration />
+              </Route>
+              <Route path="/main">
+                <Card />
+              </Route>
+              <Route path="/vocabulary">
+                <Vocabulary />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </AppContext.Provider>
     </CookiesProvider>
   );
 }
