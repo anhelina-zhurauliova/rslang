@@ -1,0 +1,9 @@
+$bottom-margin: 80px; 
+
+.start-header, .start-text {
+  margin-bottom: $bottom-margin;
+}
+
+.start-header {
+  text-transform: uppercase;
+}

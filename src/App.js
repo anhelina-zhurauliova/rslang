@@ -6,6 +6,7 @@ import { Settings } from './components/settings/Settings';
 import { Card } from './components/card/Card';
 import { Authorization } from './components/authorization/Authorization';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
+import { AudioCall } from './audiocall/index';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
           <Route path="/main">
             <Header />
             <Card />
+          </Route>
+          <Route path="/audiocall">
+            <AudioCall />
           </Route>
           <Route path="/vocabulary">
             <Vocabulary />
