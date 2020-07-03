@@ -1,46 +1,46 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Task } from '../../base-game/Task';
+import './card.scss';
 
-export const Card = () => (
-  <div className="container">
-    <div className="row justify-content-md-center">
-      <div className="row justify-content-center align-items-center">
-        <button className="col h2" type="button">
-          prev
-        </button>
+export const Card = ({ words, сardNumber }) => {
+  return words[сardNumber] ? (
+    <div className="card__container swiper-slide">
+      <div className="card-image__container">
+        <img
+          className="card__image"
+          src={`https://raw.githubusercontent.com/irinainina/rslang-data/master/${words[сardNumber].image}`}
+          alt=""
+        />
       </div>
-      <div className="card col-8">
-        <div className="h3">
-          <p>
-            I
-            <input type="text" value="run" />
-            every morning.
-          </p>
-          <hr />
-          <p className="h5">Я бегаю каждое утро.</p>
+      <div className="card">
+        <div className="card-info__container">
+          <div className="card-info">
+            {' '}
+            <Task sentence={words[сardNumber].textExample} />
+          </div>
+          <p className="card-info sentense-meaning">{words[сardNumber].textMeaning}</p>
+          <p className="card-info transcription">{words[сardNumber].transcription}</p>
+          <div className="translation__container">
+            <div className="separator" />
+            <p className="card-info translation">{words[сardNumber].wordTranslate}</p>
+          </div>
         </div>
       </div>
-      <div className="row justify-content-center align-items-center">
-        <button className="col h2" type="button">
-          next
-        </button>
-      </div>
     </div>
-    <div className="container">
-      <p className="row justify-content-center h2">бежать, бегать</p>
-    </div>
-    <div className="container">
-      <div className="row justify-content-center align-items-center">
-        <span>17</span>
-        <progress id="progress" value="17" max="50" />
-        <span>50</span>
-      </div>
-    </div>
-    <div className="container card">
-      <img className="img-fluid rounded" alt="run" />
-      <div className="card-body">
-        <p>|rʌn|</p>
-        <img width="40" height="40" alt="audio" />
-      </div>
-    </div>
-  </div>
-);
+  ) : null;
+};
+
+Card.propTypes = {
+  сardNumber: PropTypes.number,
+  words: PropTypes.arrayOf(
+    PropTypes.shape({
+      image: PropTypes.string,
+      title: PropTypes.string,
+      textMeaning: PropTypes.string,
+      textExample: PropTypes.string,
+      wordTranslate: PropTypes.string,
+      transcription: PropTypes.string,
+    }),
+  ),
+};

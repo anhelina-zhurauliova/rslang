@@ -3,9 +3,9 @@ import './App.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Header } from './components/header/Header';
 import { Settings } from './components/settings/Settings';
-import { Card } from './components/card/Card';
 import { Authorization } from './components/authorization/Authorization';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
+import { BaseGame } from './base-game/index';
 
 function App() {
   return (
@@ -17,13 +17,15 @@ function App() {
             <Authorization />
           </Route>
           <Route path="/settings">
+            <Header />
             <Settings />
           </Route>
           <Route path="/main">
             <Header />
-            <Card />
+            <BaseGame />
           </Route>
           <Route path="/vocabulary">
+            <Header />
             <Vocabulary />
           </Route>
         </Switch>
