@@ -3,18 +3,19 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
+import { useAppContext } from '../../libs/contextLib';
 import { signIn } from './loginAction';
 import './authorization.scss';
 
 export const Authorization = () => {
   // eslint-disable-next-line no-unused-vars
   const [cookies, setCookies] = useCookies(['authState']);
-  console.log(cookies);
+  const { userHasAuthenticated } = useAppContext();
 
   const history = useHistory();
 
   return (
-    <div className="container col-8 col-sm-6 col-md-4 col-xl-3 justify-content-center">
+    <div className="container mt-5 col-8 col-sm-6 col-md-4 col-xl-3 justify-content-center">
       <h2 className="text-center">Авторизация</h2>
       <div id="signin">
         <p className="mt-3 mb-3 text-justify">
@@ -45,7 +46,9 @@ export const Authorization = () => {
           }}
           onSubmit={values => {
             signIn(values).then(response => setCookies('authState', response));
-            history.push('/main');
+            // console.log('onSub->', cookies.authState);
+            userHasAuthenticated(true);
+            history.push('/settings');
           }}
         >
           {props => {
