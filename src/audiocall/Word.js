@@ -1,5 +1,5 @@
 import React from 'react';
 
 export const Word = () => {
-  return ()
-}
+  return <h1>hi</h1>;
+};
