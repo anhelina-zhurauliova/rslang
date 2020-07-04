@@ -43,9 +43,6 @@ function App() {
             <div className="App">
               <Header />
               <Switch>
-                <Route exact path="/">
-                  <Home />
-                </Route>
                 <Route path="/settings">
                   <Settings />
                 </Route>
