@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
-import { onError } from '../../libs/errorLib';
+// import { onError } from '../../libs/errorLib';
 import { signIn } from './loginAction';
+import { validateEmail, validatePassword } from './helpers';
 import './authorization.scss';
 
 export const Authorization = () => {
@@ -29,27 +30,13 @@ export const Authorization = () => {
           }}
           validate={values => {
             const errors = {};
-            if (!values.email) {
-              errors.email = '"email"';
-            } else if (!/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(values.email)) {
-              errors.email = 'email must be a valid email';
-            }
-            if (!values.password) {
-              errors.password = '"password" is required';
-            } else if (
-              !/^(?=^.{8,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/.test(
-                values.password,
-              )
-            ) {
-              errors.password = 'invalid password';
-            }
+            errors.email = validateEmail(values.email);
+            errors.password = validatePassword(values.password);
             return errors;
           }}
           onSubmit={values => {
-            signIn(values)
-              .then(response => setCookies('authState', response))
-              .catch(Error => onError(Error));
-
+            signIn(values).then(response => setCookies('authState', response));
+            // console.log('onSub->', cookies.authState);
             userHasAuthenticated(true);
             history.push('/settings');
           }}
