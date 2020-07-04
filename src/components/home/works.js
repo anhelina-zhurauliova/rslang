@@ -20,7 +20,7 @@ export const Games = [
     title: 'English-puzzle',
     screenshot: puzzle,
     description: 'description',
-    link: '#',
+    link: '/englishpuzzle',
   },
   {
     id: 'g-4',

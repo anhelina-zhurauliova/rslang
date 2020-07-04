@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './home.scss';
 
@@ -13,9 +14,9 @@ export const Card = props => {
         <p className="card-text">{description}</p>
       </div>
       <div className="card-body">
-        <a href={link} className="card-link">
+        <Link className="card-link" to={link}>
           Go
-        </a>
+        </Link>
       </div>
     </div>
   );
