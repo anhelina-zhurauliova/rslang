@@ -10,6 +10,12 @@ $bottom-margin: 80px;
   background: $background;
   color: $text-color;
 
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__hint {
     margin-bottom: $bottom-margin;
   }
@@ -37,16 +43,16 @@ $bottom-margin: 80px;
       padding-right: 0;
     }
   }
-}
 
-.btn-next {
-  color: $text-color;
-  text-transform: uppercase;
-  width: fit-content;
-  border-color: $text-color;
-  border-radius: 0;
-  padding: 8px 16px 8px 16px;
-  align-self: center;
+  &__btn {
+    color: $text-color;
+    text-transform: uppercase;
+    width: fit-content;
+    border-color: $text-color;
+    border-radius: 0;
+    padding: 8px 16px 8px 16px;
+    align-self: center;
+  }
 }
 
 .word__btn {

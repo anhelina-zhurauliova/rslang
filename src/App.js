@@ -6,7 +6,7 @@ import { Settings } from './components/settings/Settings';
 import { Card } from './components/card/Card';
 import { Authorization } from './components/authorization/Authorization';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
-import { AudioCall } from './audiocall/index';
+import { AudioCall } from './audiocall/AudioCall';
 
 function App() {
   return (
