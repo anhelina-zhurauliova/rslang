@@ -14,7 +14,6 @@ const signIn = async user => {
       rawResponse.text().then(text => {
         throw Error(text);
       });
-      return rawResponse.statusText;
     }
     const { userId, token } = await rawResponse.json();
     const userData = {

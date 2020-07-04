@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
+import { onError } from '../../libs/errorLib';
 import { signIn } from './loginAction';
 import './authorization.scss';
 
@@ -45,8 +46,10 @@ export const Authorization = () => {
             return errors;
           }}
           onSubmit={values => {
-            signIn(values).then(response => setCookies('authState', response));
-            // console.log('onSub->', cookies.authState);
+            signIn(values)
+              .then(response => setCookies('authState', response))
+              .catch(Error => onError(Error));
+
             userHasAuthenticated(true);
             history.push('/settings');
           }}
