@@ -6,7 +6,7 @@ import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
 import { onError } from '../../libs/errorLib';
 import { fetchSignIn } from './loginAction';
-import { validateEmail, validatePassword } from './helpers';
+// import { validateEmail, validatePassword } from './helpers';
 // import { LoaderButton } from './LoaderButton';
 import './authorization.scss';
 
@@ -16,19 +16,11 @@ export const Authorization = () => {
   const { userHasAuthenticated } = useAppContext();
   // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
-
   const history = useHistory();
-
   const signIn = async values => {
     setIsLoading(true);
     try {
       const responce = await fetchSignIn(values);
-      // console.log(responce);
-      // if (!responce.ok) {
-      //   responce.text().then(text => {
-      //     throw new Error(text);
-      //   });
-      // }
       const { userId, token, refreshToken } = responce;
       const userData = {
         userId,
@@ -44,15 +36,12 @@ export const Authorization = () => {
       userHasAuthenticated(true);
       history.push('/settings');
     } catch (error) {
-      // if (!responce.ok) {
-      //   responce.text().then(text => {
-      //     throw new Error(text);
-      //   });
-      // }
       onError(error.message);
       setIsLoading(false);
     }
   };
+  // useEffect(() => {
+  // }, []);
 
   return (
     <div className="container mt-5 col-8 col-sm-6 col-md-4 col-xl-3 justify-content-center">
@@ -68,27 +57,26 @@ export const Authorization = () => {
           }}
           validate={values => {
             const errors = {};
-            // if (!values.email) {
-            //   errors.email = '"email" is required; ';
-            // } else if (!/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(values.email)) {
-            //   errors.email = 'email must be a valid email; ';
-            // }
-            // if (!values.password) {
-            //   errors.password = '"password" is required; ';
-            // } else if (
-            //   !/^(?=^.{8,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/.test(
-            //     values.password,
-            //   )
-            // ) {
-            //   errors.password = 'invalid password; ';
-            // }
-            errors.email = validateEmail(values.email);
-            errors.password = validatePassword(values.password);
+            if (!values.email) {
+              errors.email = '"email" is required; ';
+            } else if (!/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(values.email)) {
+              errors.email = 'email must be a valid email; ';
+            }
+            if (!values.password) {
+              errors.password = '"password" is required; ';
+            } else if (
+              !/^(?=^.{8,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/.test(
+                values.password,
+              )
+            ) {
+              errors.password = 'invalid password; ';
+            }
+            // errors.email = validateEmail(values.email);
+            // errors.password = validatePassword(values.password);
             return errors;
           }}
           onSubmit={values => {
-            signIn(values); // .then(response => setCookies('authState', response));
-            // console.log('onSub->', cookies.authState);
+            signIn(values);
           }}
         >
           {props => {

@@ -1,24 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
-import { fetchCreateUser } from './loginAction';
+import { onError } from '../../libs/errorLib';
+import { fetchCreateUser, fetchSignIn } from './loginAction';
 
 export const Registration = () => {
   // eslint-disable-next-line no-unused-vars
   const [cookies, setCookies] = useCookies(['authState']);
   const { userHasAuthenticated } = useAppContext();
+  // eslint-disable-next-line no-unused-vars
+  const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
-
   const createUser = async values => {
     try {
-      await fetchCreateUser(values);
-      // userHasAuthenticated(true);
-      // history.push("/settings");
-    } catch (e) {
-      // alert(e.message);
+      const data = await fetchCreateUser(values);
+      if (!data.ok) {
+        data.text().then(text => {
+          throw new Error(text);
+        });
+      }
+      const responce = await fetchSignIn(values);
+      const { userId, token, refreshToken } = responce;
+      const userData = {
+        userId,
+        token,
+        refreshToken,
+        timestamp: new Date(),
+      };
+      const authState = {
+        isLoggedIn: true,
+        user: userData,
+      };
+      setCookies('authState', authState);
+      userHasAuthenticated(true);
+      history.push('/settings');
+    } catch (error) {
+      onError(error.message);
+      setIsLoading(false);
     }
   };
 
@@ -62,9 +83,7 @@ export const Registration = () => {
               email,
               password,
             };
-            createUser(newUser).then(response => setCookies('authState', response));
-            userHasAuthenticated(true);
-            history.push('/settings');
+            createUser(newUser);
           }}
         >
           {props => {
