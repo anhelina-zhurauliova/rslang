@@ -6,7 +6,7 @@ import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
 import { onError } from '../../libs/errorLib';
 import { fetchSignIn } from './loginAction';
-// import { validateEmail, validatePassword } from './helpers';
+import { validateEmail, validatePassword } from './helpers';
 // import { LoaderButton } from './LoaderButton';
 import './authorization.scss';
 
@@ -68,20 +68,22 @@ export const Authorization = () => {
           }}
           validate={values => {
             const errors = {};
-            if (!values.email) {
-              errors.email = '"email" is required; ';
-            } else if (!/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(values.email)) {
-              errors.email = 'email must be a valid email; ';
-            }
-            if (!values.password) {
-              errors.password = '"password" is required; ';
-            } else if (
-              !/^(?=^.{8,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/.test(
-                values.password,
-              )
-            ) {
-              errors.password = 'invalid password; ';
-            }
+            // if (!values.email) {
+            //   errors.email = '"email" is required; ';
+            // } else if (!/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(values.email)) {
+            //   errors.email = 'email must be a valid email; ';
+            // }
+            // if (!values.password) {
+            //   errors.password = '"password" is required; ';
+            // } else if (
+            //   !/^(?=^.{8,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/.test(
+            //     values.password,
+            //   )
+            // ) {
+            //   errors.password = 'invalid password; ';
+            // }
+            errors.email = validateEmail(values.email);
+            errors.password = validatePassword(values.password);
             return errors;
           }}
           onSubmit={values => {
