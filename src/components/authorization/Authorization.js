@@ -40,6 +40,34 @@ export const Authorization = () => {
     }
   };
 
+  const signIn = async values => {
+    try {
+      const responce = await fetchSignIn(values);
+      // console.log(responce);
+      // if (!responce.ok) {
+      //   responce.text().then(text => {
+      //     throw new Error(text);
+      //   });
+      // }
+      const { userId, token, refreshToken } = responce;
+      const userData = {
+        userId,
+        token,
+        refreshToken,
+        timestamp: new Date(),
+      };
+      const authState = {
+        isLoggedIn: true,
+        user: userData,
+      };
+      setCookies('authState', authState);
+      userHasAuthenticated(true);
+      history.push('/settings');
+    } catch (error) {
+      // console.log(error.message);
+    }
+  };
+
   return (
     <div className="authenticated container p-4 mt-5 justify-content-center">
       <h3 className="text-center">Авторизация</h3>
