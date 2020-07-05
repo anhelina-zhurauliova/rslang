@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
-// import { onError } from '../../libs/errorLib';
+import { onError } from '../../libs/errorLib';
 import { fetchSignIn } from './loginAction';
 // import { validateEmail, validatePassword } from './helpers';
+// import { LoaderButton } from './LoaderButton';
 import './authorization.scss';
 
 export const Authorization = () => {
   // eslint-disable-next-line no-unused-vars
   const [cookies, setCookies] = useCookies(['authState']);
   const { userHasAuthenticated } = useAppContext();
+  // eslint-disable-next-line no-unused-vars
+  const [isLoading, setIsLoading] = useState(false);
 
   const history = useHistory();
 
   const signIn = async values => {
+    setIsLoading(true);
     try {
       const responce = await fetchSignIn(values);
       // console.log(responce);
@@ -40,7 +44,13 @@ export const Authorization = () => {
       userHasAuthenticated(true);
       history.push('/settings');
     } catch (error) {
-      // console.log(error.message);
+      // if (!responce.ok) {
+      //   responce.text().then(text => {
+      //     throw new Error(text);
+      //   });
+      // }
+      onError(error.message);
+      setIsLoading(false);
     }
   };
 
@@ -135,6 +145,14 @@ export const Authorization = () => {
                     <button type="submit" className="btn btn-block" disabled={isSubmitting}>
                       Войти
                     </button>
+                    {/* <LoaderButton
+                      type="submit"
+                      className="btn btn-block"
+                      isLoading={isLoading}
+                      disabled={isSubmitting}
+                    >
+                      Войти
+                    </LoaderButton> */}
                   </div>
                 </div>
               </Form>
