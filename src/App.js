@@ -6,6 +6,7 @@ import { Settings } from './components/settings/Settings';
 import { Card } from './components/card/Card';
 import { Authorization } from './components/authorization/Authorization';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
+import { Timer } from './components/timer/Timer';
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route path="/vocabulary">
             <Vocabulary />
+          </Route>
+          <Route path="/timer">
+            <Timer />
           </Route>
         </Switch>
       </div>
