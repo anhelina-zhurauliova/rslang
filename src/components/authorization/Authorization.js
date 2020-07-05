@@ -41,6 +41,7 @@ export const Authorization = () => {
   };
 
   const signIn = async values => {
+    setIsLoading(true);
     try {
       const responce = await fetchSignIn(values);
       // console.log(responce);
@@ -64,7 +65,13 @@ export const Authorization = () => {
       userHasAuthenticated(true);
       history.push('/settings');
     } catch (error) {
-      // console.log(error.message);
+      // if (!responce.ok) {
+      //   responce.text().then(text => {
+      //     throw new Error(text);
+      //   });
+      // }
+      onError(error.message);
+      setIsLoading(false);
     }
   };
 
