@@ -1,78 +1,42 @@
 import { CONSTANTS } from '../../shared/constants';
 
-const signIn = async user => {
-  try {
-    const rawResponse = await fetch(`${CONSTANTS.URL.API}/signin`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-    if (!rawResponse.ok) {
-      rawResponse.text().then(text => {
-        throw Error(text);
-      });
-    }
-    const { userId, token } = await rawResponse.json();
-    const userData = {
-      userId,
-      token,
-      timestamp: new Date(),
-    };
-    const authState = {
-      isLoggedIn: true,
-      user: userData,
-    };
-    return authState;
-  } catch (error) {
-    throw Error(error.message);
-  }
+const fetchSignIn = async user => {
+  const rawResponse = await fetch(`${CONSTANTS.URL.API}/signin`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  });
+  const content = await rawResponse.json();
+  return content;
 };
 
-const createUser = async user => {
-  try {
-    const rawResponse = await fetch(`${CONSTANTS.URL.API}/users`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-    if (!rawResponse.ok) {
-      return rawResponse.statusText;
-    }
-    const content = await rawResponse.json();
-    let authState;
-    if (typeof content !== 'string') {
-      authState = signIn(user);
-    }
-    return authState;
-  } catch (error) {
-    return error.message;
-  }
+const fetchCreateUser = async user => {
+  const rawResponse = await fetch(`${CONSTANTS.URL.API}/users`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  });
+  const content = await rawResponse.json();
+  return content;
 };
 
-const getUser = async (token, userId) => {
-  try {
-    const rawResponse = await fetch(`${CONSTANTS.URL.API}/users/${userId}`, {
-      method: 'GET',
-      withCredentials: true,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-      },
-    });
-    if (!rawResponse.ok) {
-      return rawResponse.statusText;
-    }
-    const content = await rawResponse.json();
-    return content;
-  } catch (error) {
-    return error.message;
-  }
+const fetchGetUser = async (token, userId) => {
+  const rawResponse = await fetch(`${CONSTANTS.URL.API}/users/${userId}`, {
+    method: 'GET',
+    withCredentials: true,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+    },
+  });
+  const content = await rawResponse.json();
+  return content;
 };
 
 const logoutUser = () => {
@@ -83,4 +47,4 @@ const logoutUser = () => {
   return authState;
 };
 
-export { createUser, signIn, getUser, logoutUser };
+export { fetchCreateUser, fetchSignIn, fetchGetUser, logoutUser };

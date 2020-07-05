@@ -5,8 +5,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
 // import { onError } from '../../libs/errorLib';
-import { signIn } from './loginAction';
-import { validateEmail, validatePassword } from './helpers';
+import { fetchSignIn } from './loginAction';
+// import { validateEmail, validatePassword } from './helpers';
 import './authorization.scss';
 
 export const Authorization = () => {
@@ -15,6 +15,34 @@ export const Authorization = () => {
   const { userHasAuthenticated } = useAppContext();
 
   const history = useHistory();
+
+  const signIn = async values => {
+    try {
+      const responce = await fetchSignIn(values);
+      // console.log(responce);
+      // if (!responce.ok) {
+      //   responce.text().then(text => {
+      //     throw new Error(text);
+      //   });
+      // }
+      const { userId, token, refreshToken } = responce;
+      const userData = {
+        userId,
+        token,
+        refreshToken,
+        timestamp: new Date(),
+      };
+      const authState = {
+        isLoggedIn: true,
+        user: userData,
+      };
+      setCookies('authState', authState);
+      userHasAuthenticated(true);
+      history.push('/settings');
+    } catch (error) {
+      // console.log(error.message);
+    }
+  };
 
   return (
     <div className="container mt-5 col-8 col-sm-6 col-md-4 col-xl-3 justify-content-center">
@@ -30,15 +58,25 @@ export const Authorization = () => {
           }}
           validate={values => {
             const errors = {};
-            errors.email = validateEmail(values.email);
-            errors.password = validatePassword(values.password);
+            if (!values.email) {
+              errors.email = '"email" is required; ';
+            } else if (!/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(values.email)) {
+              errors.email = 'email must be a valid email; ';
+            }
+            if (!values.password) {
+              errors.password = '"password" is required; ';
+            } else if (
+              !/^(?=^.{8,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/.test(
+                values.password,
+              )
+            ) {
+              errors.password = 'invalid password; ';
+            }
             return errors;
           }}
           onSubmit={values => {
-            signIn(values).then(response => setCookies('authState', response));
+            signIn(values); // .then(response => setCookies('authState', response));
             // console.log('onSub->', cookies.authState);
-            userHasAuthenticated(true);
-            history.push('/settings');
           }}
         >
           {props => {
