@@ -9,6 +9,7 @@ import { Card } from './components/card/Card';
 import { Authorization } from './components/authorization/Authorization';
 import { Registration } from './components/authorization/Registration';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
+import { PrivateRoute } from './components/authorization/PrivateRoute';
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -20,7 +21,7 @@ function App() {
       if (!Object.keys(cookies).length) {
         setCookies('authState', { isLoggedIn: false, user: {} });
       } else {
-        const { isLoggedIn } = cookies.authState;
+        const { isLoggedIn } = cookies || cookies.authState;
         if (isLoggedIn) {
           userHasAuthenticated(true);
         }
@@ -43,20 +44,20 @@ function App() {
             <div className="App">
               <Header />
               <Switch>
-                <Route path="/settings">
+                <PrivateRoute path="/vocabulary">
+                  <Vocabulary />
+                </PrivateRoute>
+                <PrivateRoute path="/settings">
                   <Settings />
-                </Route>
+                </PrivateRoute>
                 <Route path="/signin">
                   <Authorization />
                 </Route>
                 <Route path="/login">
                   <Registration />
                 </Route>
-                <Route path="/main">
+                <Route path="/">
                   <Card />
-                </Route>
-                <Route path="/vocabulary">
-                  <Vocabulary />
                 </Route>
               </Switch>
             </div>
