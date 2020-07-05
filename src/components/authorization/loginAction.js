@@ -39,12 +39,4 @@ const fetchGetUser = async (token, userId) => {
   return content;
 };
 
-const logoutUser = () => {
-  const authState = {
-    isLoggedIn: false,
-    user: {},
-  };
-  return authState;
-};
-
-export { fetchCreateUser, fetchSignIn, fetchGetUser, logoutUser };
+export { fetchCreateUser, fetchSignIn, fetchGetUser };
