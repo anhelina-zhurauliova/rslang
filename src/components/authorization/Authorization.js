@@ -44,12 +44,6 @@ export const Authorization = () => {
     setIsLoading(true);
     try {
       const responce = await fetchSignIn(values);
-      // console.log(responce);
-      // if (!responce.ok) {
-      //   responce.text().then(text => {
-      //     throw new Error(text);
-      //   });
-      // }
       const { userId, token, refreshToken } = responce;
       const userData = {
         userId,
@@ -65,15 +59,12 @@ export const Authorization = () => {
       userHasAuthenticated(true);
       history.push('/settings');
     } catch (error) {
-      // if (!responce.ok) {
-      //   responce.text().then(text => {
-      //     throw new Error(text);
-      //   });
-      // }
       onError(error.message);
       setIsLoading(false);
     }
   };
+  // useEffect(() => {
+  // }, []);
 
   return (
     <div className="authenticated container p-4 mt-5 justify-content-center">

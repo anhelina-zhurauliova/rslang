@@ -47,16 +47,6 @@ export const Registration = () => {
     }
   };
 
-  const createUser = async values => {
-    try {
-      await fetchCreateUser(values);
-      // userHasAuthenticated(true);
-      // history.push("/settings");
-    } catch (e) {
-      // alert(e.message);
-    }
-  };
-
   return (
     <div className="authenticated container p-4 mt-5 justify-content-center">
       <h3 className="text-center">Регистрация</h3>
