@@ -1,51 +1,54 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
-import { signIn } from './loginAction';
-import './authorization.scss';
+import { createUser } from './loginAction';
 
-export const Authorization = () => {
+export const Registration = () => {
   // eslint-disable-next-line no-unused-vars
   const [cookies, setCookies] = useCookies(['authState']);
-  console.log(cookies);
-
-  const history = useHistory();
 
   return (
     <div className="container col-8 col-sm-6 col-md-4 col-xl-3 justify-content-center">
-      <h2 className="text-center">Авторизация</h2>
+      <h2 className="text-center">Регистрация</h2>
       <div id="signin">
         <p className="mt-3 mb-3 text-justify">
-          Для входа в личный кабинет введите регистрационные данные
+          Заполните форму, чтобы создать аккаунт и начать полноценно пользоваться нашим приложением
         </p>
         <Formik
           initialValues={{
             email: '',
             password: '',
+            rpassword: '',
           }}
           validate={values => {
             const errors = {};
             if (!values.email) {
-              errors.email = '"email"';
+              errors.email = '"email" is required; ';
             } else if (!/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(values.email)) {
-              errors.email = 'email must be a valid email';
+              errors.email = 'email must be a valid email; ';
             }
             if (!values.password) {
-              errors.password = '"password" is required';
+              errors.password = '"password" is required; ';
             } else if (
               !/^(?=^.{8,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/.test(
                 values.password,
               )
             ) {
-              errors.password = 'invalid password';
+              errors.password = 'invalid password; ';
+            }
+            if (!values.rpassword || values.password !== values.rpassword) {
+              errors.rpassword = 'passwords mismatch; ';
             }
             return errors;
           }}
           onSubmit={values => {
-            signIn(values).then(response => setCookies('authState', response));
-            history.push('/main');
+            const { email, password } = values;
+            const newUser = {
+              email,
+              password,
+            };
+            createUser(newUser).then(response => setCookies('authState', response));
           }}
         >
           {props => {
@@ -99,10 +102,33 @@ export const Authorization = () => {
                     />
                   </div>
                 </div>
+                <div className="form-group has-feedback">
+                  <label htmlFor="password" className="control-label">
+                    Повторите пароль:
+                  </label>
+                  <div>
+                    <div className="input-group">
+                      <span className="input-group-addon">
+                        <i className="glyphicon glyphicon-lock" />
+                      </span>
+                      <Field
+                        name="rpassword"
+                        type="password"
+                        className="form-control"
+                        placeholder="********"
+                      />
+                    </div>
+                    <ErrorMessage
+                      className="mt-3 mb-7 text-danger text-center"
+                      name="rpassword"
+                      component="span"
+                    />
+                  </div>
+                </div>
                 <div className="form-group">
-                  <div className="tab-pane in active">
+                  <div className="tab-pane">
                     <button type="submit" className="btn btn-block" disabled={isSubmitting}>
-                      Войти
+                      Зарегистрироваться
                     </button>
                   </div>
                 </div>
@@ -115,6 +141,6 @@ export const Authorization = () => {
   );
 };
 
-Authorization.propTypes = {
+Registration.propTypes = {
   isSubmitting: PropTypes.bool,
 };
