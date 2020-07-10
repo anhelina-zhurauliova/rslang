@@ -1,1 +1,6 @@
-@import "~bootstrap/scss/bootstrap.scss";
+@import "./shared/styles/vendor/vendor.scss";
+
+@import "./shared/styles/colors.scss";
+@import "./shared/styles/fonts.scss";
+@import "./shared/styles/stacks.scss";
+@import "./shared/styles/typography.scss";
