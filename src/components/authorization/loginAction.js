@@ -11,13 +11,16 @@ const signIn = async user => {
       body: JSON.stringify(user),
     });
     if (!rawResponse.ok) {
+      rawResponse.text().then(text => {
+        throw Error(text);
+      });
       return rawResponse.statusText;
     }
     const { userId, token } = await rawResponse.json();
     const userData = {
       userId,
       token,
-      timestamp: new Date().toString(),
+      timestamp: new Date(),
     };
     const authState = {
       isLoggedIn: true,
@@ -25,7 +28,7 @@ const signIn = async user => {
     };
     return authState;
   } catch (error) {
-    return error.message;
+    throw Error(error.message);
   }
 };
 
