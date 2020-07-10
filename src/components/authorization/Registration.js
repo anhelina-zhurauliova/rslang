@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
 import { onError } from '../../libs/errorLib';
 import { fetchCreateUser, fetchSignIn } from './loginAction';
+import './authorization.scss';
 
 export const Registration = () => {
   // eslint-disable-next-line no-unused-vars
@@ -44,10 +45,10 @@ export const Registration = () => {
   };
 
   return (
-    <div className="container mt-5 col-8 col-sm-6 col-md-4 col-xl-3 justify-content-center">
-      <h2 className="text-center">Регистрация</h2>
+    <div className="authenticated container p-4 mt-5 justify-content-center">
+      <h3 className="text-center">Регистрация</h3>
       <div id="signin">
-        <p className="mt-3 mb-3 text-justify">
+        <p className="authenticated__content mt-3 mb-3 text-justify">
           Заполните форму, чтобы создать аккаунт и начать полноценно пользоваться нашим приложением
         </p>
         <Formik
@@ -91,8 +92,8 @@ export const Registration = () => {
             return (
               <Form>
                 <div className="form-group has-feedback">
-                  <label htmlFor="email" className="control-label">
-                    Email:
+                  <label htmlFor="email" className="authenticated__content control-label">
+                    <strong>Email:</strong>
                   </label>
                   <div>
                     <div className="input-group">
@@ -102,7 +103,7 @@ export const Registration = () => {
                       <Field
                         name="email"
                         type="text"
-                        className="form-control"
+                        className="form-control  input"
                         placeholder="username@gmail.com"
                         autoComplete="off"
                       />
@@ -115,8 +116,8 @@ export const Registration = () => {
                   </div>
                 </div>
                 <div className="form-group has-feedback">
-                  <label htmlFor="password" className="control-label">
-                    Пароль:
+                  <label htmlFor="password" className="authenticated__content control-label">
+                    <strong>Пароль:</strong>
                   </label>
                   <div>
                     <div className="input-group">
@@ -126,7 +127,7 @@ export const Registration = () => {
                       <Field
                         name="password"
                         type="password"
-                        className="form-control"
+                        className="form-control  input"
                         placeholder="********"
                       />
                     </div>
@@ -138,8 +139,8 @@ export const Registration = () => {
                   </div>
                 </div>
                 <div className="form-group has-feedback">
-                  <label htmlFor="password" className="control-label">
-                    Повторите пароль:
+                  <label htmlFor="password" className="authenticated__content control-label">
+                    <strong>Повторите пароль:</strong>
                   </label>
                   <div>
                     <div className="input-group">
@@ -149,7 +150,7 @@ export const Registration = () => {
                       <Field
                         name="rpassword"
                         type="password"
-                        className="form-control"
+                        className="form-control  input"
                         placeholder="********"
                       />
                     </div>
@@ -162,8 +163,12 @@ export const Registration = () => {
                 </div>
                 <div className="form-group">
                   <div className="tab-pane">
-                    <button type="submit" className="btn btn-block" disabled={isSubmitting}>
-                      Зарегистрироваться
+                    <button
+                      type="submit"
+                      className="authenticated__btn btn-block  p-2 mt-4"
+                      disabled={isSubmitting}
+                    >
+                      Pегистрация
                     </button>
                   </div>
                 </div>

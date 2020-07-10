@@ -1,28 +1,28 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
 
 export const Header = () => {
   const { isAuthenticated, userHasAuthenticated } = useAppContext();
-  // eslint-disable-next-line no-unused-vars
   const [cookies, setCookies] = useCookies(['authState']);
   const history = useHistory();
 
   function handleLogout() {
-    userHasAuthenticated(false);
     setCookies('authState', { isLoggedIn: false, user: {} });
-    history.push('/home');
+    history.push('/');
+    userHasAuthenticated(false);
   }
+
+  useEffect(() => {
+    console.log('2->', cookies);
+  }, []);
 
   return (
     <div className="container">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <img src="#" alt="none" />
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="#!">
           WebSiteName
         </a>
         <button
@@ -95,8 +95,8 @@ export const Header = () => {
             </li>
 
             {isAuthenticated ? (
-              <li className="nav-item" onClick={handleLogout}>
-                <Link className="nav-link" to="/">
+              <li className="nav-item">
+                <Link className="nav-link" onClick={handleLogout} to="/">
                   Выход
                 </Link>
               </li>

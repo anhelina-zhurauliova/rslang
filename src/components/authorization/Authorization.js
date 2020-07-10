@@ -6,8 +6,7 @@ import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
 import { onError } from '../../libs/errorLib';
 import { fetchSignIn } from './loginAction';
-// import { validateEmail, validatePassword } from './helpers';
-// import { LoaderButton } from './LoaderButton';
+import { LoaderButton } from './LoaderButton';
 import './authorization.scss';
 
 export const Authorization = () => {
@@ -44,10 +43,10 @@ export const Authorization = () => {
   // }, []);
 
   return (
-    <div className="container mt-5 col-8 col-sm-6 col-md-4 col-xl-3 justify-content-center">
-      <h2 className="text-center">Авторизация</h2>
+    <div className="authenticated container p-4 mt-5 justify-content-center">
+      <h3 className="text-center">Авторизация</h3>
       <div id="signin">
-        <p className="mt-3 mb-3 text-justify">
+        <p className="authenticated__content mt-3 mb-3 text-justify">
           Для входа в личный кабинет введите регистрационные данные
         </p>
         <Formik
@@ -84,8 +83,8 @@ export const Authorization = () => {
             return (
               <Form>
                 <div className="form-group has-feedback">
-                  <label htmlFor="email" className="control-label">
-                    Email:
+                  <label htmlFor="email" className="authenticated__content control-label">
+                    <strong>Email:</strong>
                   </label>
                   <div>
                     <div className="input-group">
@@ -95,7 +94,7 @@ export const Authorization = () => {
                       <Field
                         name="email"
                         type="text"
-                        className="form-control"
+                        className="form-control input"
                         placeholder="username@gmail.com"
                         autoComplete="off"
                       />
@@ -108,8 +107,8 @@ export const Authorization = () => {
                   </div>
                 </div>
                 <div className="form-group has-feedback">
-                  <label htmlFor="password" className="control-label">
-                    Пароль:
+                  <label htmlFor="password" className="authenticated__content control-label">
+                    <strong>Пароль:</strong>
                   </label>
                   <div>
                     <div className="input-group">
@@ -119,7 +118,7 @@ export const Authorization = () => {
                       <Field
                         name="password"
                         type="password"
-                        className="form-control"
+                        className="form-control input"
                         placeholder="********"
                       />
                     </div>
@@ -132,17 +131,14 @@ export const Authorization = () => {
                 </div>
                 <div className="form-group">
                   <div className="tab-pane in active">
-                    <button type="submit" className="btn btn-block" disabled={isSubmitting}>
-                      Войти
-                    </button>
-                    {/* <LoaderButton
+                    <LoaderButton
                       type="submit"
-                      className="btn btn-block"
+                      className="authenticated__btn btn-block p-2 mt-4"
                       isLoading={isLoading}
                       disabled={isSubmitting}
                     >
                       Войти
-                    </LoaderButton> */}
+                    </LoaderButton>
                   </div>
                 </div>
               </Form>
