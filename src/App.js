@@ -1,38 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
+import { AppContext } from './libs/contextLib';
 import { Header } from './components/header/Header';
+import { Home } from './components/home/Home';
 import { Settings } from './components/settings/Settings';
 import { Card } from './components/card/Card';
 import { Authorization } from './components/authorization/Authorization';
+import { Registration } from './components/authorization/Registration';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
-import { AudioCall } from './audiocall/AudioCall';
 
 function App() {
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
+
   return (
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route exact path="/">
+    <CookiesProvider>
+      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+        <Router>
+          <div className="App">
             <Header />
-            <Authorization />
-          </Route>
-          <Route path="/settings">
-            <Settings />
-          </Route>
-          <Route path="/main">
-            <Header />
-            <Card />
-          </Route>
-          <Route path="/audiocall">
-            <AudioCall />
-          </Route>
-          <Route path="/vocabulary">
-            <Vocabulary />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/settings">
+                <Settings />
+              </Route>
+              <Route path="/signin">
+                <Authorization />
+              </Route>
+              <Route path="/login">
+                <Registration />
+              </Route>
+              <Route path="/main">
+                <Card />
+              </Route>
+              <Route path="/vocabulary">
+                <Vocabulary />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </AppContext.Provider>
+    </CookiesProvider>
   );
 }
 
