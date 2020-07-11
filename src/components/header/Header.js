@@ -5,6 +5,7 @@ import { useAppContext } from '../../libs/contextLib';
 
 export const Header = () => {
   const { isAuthenticated, userHasAuthenticated } = useAppContext();
+  // eslint-disable-next-line no-unused-vars
   const [cookies, setCookies] = useCookies(['authState']);
   const history = useHistory();
 
