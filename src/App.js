@@ -10,6 +10,7 @@ import { Card } from './components/card/Card';
 import { Authorization } from './components/authorization/Authorization';
 import { Registration } from './components/authorization/Registration';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
+import { AudioCall } from './games/audiocall/AudioCall';
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -38,6 +39,9 @@ function App() {
               </Route>
               <Route path="/vocabulary">
                 <Vocabulary />
+              </Route>
+              <Route path="/audiocall">
+                <AudioCall />
               </Route>
             </Switch>
           </div>

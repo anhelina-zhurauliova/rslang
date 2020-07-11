@@ -5,53 +5,53 @@ import { ReactComponent as Megaphone } from '../../assets/svg/megaphone.svg';
 import { Word } from './Word';
 
 export const Game = props => {
-  const { globalWords } = props;
+  const { globalWords, cookies } = props;
   const [currentWords, setCurrentWords] = useState([]);
-  // const example = [
-  //   {
-  //     id: 1,
-  //     wordTranslate: 'some',
-  //   },
-  //   {
-  //     id: 2,
-  //     wordTranslate: 'people',
-  //   },
-  //   {
-  //     id: 3,
-  //     wordTranslate: 'person',
-  //   },
-  //   {
-  //     id: 4,
-  //     wordTranslate: 'human',
-  //   },
-  //   {
-  //     id: 5,
-  //     wordTranslate: 'earth',
-  //   },
-  // ];
-  const getWordDetalization = async word => {
-    const rawResponse = await fetch(`${CONSTANTS.URL.DETALIZATION}=${word}`);
-    const wordInfo = await rawResponse.json();
-    return wordInfo[0].meanings[0].partOfSpeechCode;
+  const { token, userId } = cookies.authState.user;
+
+  function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
+
+  const getSimilarWords = async word => {
+    const url = new URL(`${CONSTANTS.URL.API}`);
+    const filter = {
+      $or: [
+        {
+          wordTranslate: {
+            $regex: `\\w*${word.substring(word.length - 2)}$`,
+            $options: 'i',
+          },
+        },
+        {
+          wordTranslate: {
+            $regex: `^${word.substring(0, 2)}\\w*`,
+            $options: 'i',
+          },
+        },
+      ],
+    };
+    url.pathname = `users/${userId}/aggregatedWords`;
+    url.searchParams.append('wordsPerPage', JSON.stringify(5));
+    url.searchParams.append('filter', JSON.stringify(filter));
+    const headers = new Headers();
+    headers.append('Authorization', `Bearer ${token}`);
+    headers.append('Accept', 'application/json');
+    const rawResponse = await fetch(url, { headers });
+    const content = await rawResponse.json();
+    return content[0].paginatedResults;
   };
 
   const trainWord = async () => {
-    const arr = [];
     const currentWord = globalWords.pop();
-    const partOfSpeech = await getWordDetalization(currentWord.wordTranslate);
-    globalWords.forEach(async x => {
-      const anotherWordPartOfSpeech = await getWordDetalization(x.wordTranslate);
-      if (partOfSpeech === anotherWordPartOfSpeech && arr.length < 5) {
-        arr.push(x);
-      }
-    });
-    arr.push(currentWord);
-    // console.log(JSON.stringify(arr));
-    return arr;
+    const similarWords = await getSimilarWords(currentWord.wordTranslate);
+    const result = similarWords.filter(word => word.word !== currentWord.word).slice(0, 4);
+    result.push(currentWord);
+    return shuffle(result);
   };
 
   useEffect(() => {
-    if (globalWords.length) {
+    if (globalWords.length > 0) {
       trainWord().then(words => setCurrentWords(words));
     }
   }, []);
@@ -66,7 +66,8 @@ export const Game = props => {
         </div>
         <ol className="audiocall__list row">
           {currentWords.map(word => (
-            <Word key={word.id} word={word} />
+            // eslint-disable-next-line no-underscore-dangle
+            <Word key={word._id} word={word} />
           ))}
         </ol>
         <button className="audiocall__btn btn" type="button">
@@ -79,4 +80,5 @@ export const Game = props => {
 
 Game.propTypes = {
   globalWords: PropTypes.array,
+  cookies: PropTypes.object,
 };

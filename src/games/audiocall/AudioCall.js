@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import { Game } from './Game';
 import { CONSTANTS } from '../../shared/constants';
 import './audiocall.scss';
@@ -6,15 +7,36 @@ import './audiocall.scss';
 export const AudioCall = () => {
   const [screen, setScreen] = useState({ isStarted: false });
   const [words, setWords] = useState([]);
+  const [cookies] = useCookies(['authState']);
 
-  const fetchWords = async (page, group) => {
-    const rawResponse = await fetch(`${CONSTANTS.URL.API}/words?page=${page}&group=${group}`);
+  const url = new URL(`${CONSTANTS.URL.API}`);
+  const filter = {
+    $or: [
+      {
+        'userWord.difficulty': 'easy',
+      },
+      {
+        userWord: null,
+      },
+    ],
+  };
+
+  const fetchWords = async () => {
+    const { token, userId } = cookies.authState.user;
+    url.pathname = `users/${userId}/aggregatedWords`;
+    url.searchParams.append('userId', JSON.stringify(userId));
+    url.searchParams.append('wordsPerPage', JSON.stringify(10));
+    url.searchParams.append('filter', JSON.stringify(filter));
+    const headers = new Headers();
+    headers.append('Authorization', `Bearer ${token}`);
+    headers.append('Accept', 'application/json');
+    const rawResponse = await fetch(url, { headers });
     const content = await rawResponse.json();
-    return content;
+    return content[0].paginatedResults;
   };
 
   const getWords = async () => {
-    const wordsNew = await fetchWords(0, 0);
+    const wordsNew = await fetchWords();
     return wordsNew;
   };
 
@@ -41,5 +63,5 @@ export const AudioCall = () => {
       </div>
     );
   }
-  return <Game globalWords={words} />;
+  return <Game globalWords={words} cookies={cookies} />;
 };
