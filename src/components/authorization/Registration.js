@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
 import { onError } from '../../libs/errorLib';
 import { fetchCreateUser, fetchSignIn } from './loginAction';
+import { LoaderButton } from './LoaderButton';
 import './authorization.scss';
 
 export const Registration = () => {
@@ -23,6 +24,7 @@ export const Registration = () => {
           throw new Error(text);
         });
       }
+      setIsLoading(true);
       const responce = await fetchSignIn(values);
       const { userId, token, refreshToken } = responce;
       const userData = {
@@ -163,13 +165,14 @@ export const Registration = () => {
                 </div>
                 <div className="form-group">
                   <div className="tab-pane">
-                    <button
+                    <LoaderButton
                       type="submit"
-                      className="authenticated__btn btn-block  p-2 mt-4"
+                      className="authenticated__btn btn-block p-2 mt-4"
+                      isLoading={isLoading}
                       disabled={isSubmitting}
                     >
                       Pегистрация
-                    </button>
+                    </LoaderButton>
                   </div>
                 </div>
               </Form>
