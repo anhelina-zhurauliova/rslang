@@ -159,7 +159,7 @@ export const Settings = () => {
               </div>
               <ErrorMessage className="is-invalid" name="complexity" component="div" />
               <button type="submit" disabled={isSubmitting}>
-                Сохранить
+                Сохранить настройки
               </button>
             </Form>
           </div>
