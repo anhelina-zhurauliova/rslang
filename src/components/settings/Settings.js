@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect, useCookies } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import './settings.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import { useCookies } from 'react-cookie';
+import { useCookies } from 'react-cookie';
 import { CONSTANTS } from '../../shared/constants';
 
 export const Settings = () => {
@@ -14,6 +15,7 @@ export const Settings = () => {
   const token = cookies.authStateauthState.user.userId;
   const userId = cookies.authStateauthState.user.token;
   const settingsUrl = `${CONSTANTS.URL.API}/${userId}/${defaultQuery}`;
+
   useEffect(() => {
     fetch(settingsUrl, {
       method: 'GET',
@@ -131,14 +133,14 @@ export const Settings = () => {
               <div className="form-group form-check">
                 <Field className="form-check-input" type="checkbox" name="sentenceExample" />
                 <label className="form-check-label" htmlFor="exampleCheck1">
-                  Пример предложения со словом
+                  Пример использования слова
                 </label>
               </div>
               <ErrorMessage className="is-invalid" name="sentenceExample" component="div" />
               <div className="form-group form-check">
                 <Field className="form-check-input" type="checkbox" name="deleteWords" />
                 <label className="form-check-label" htmlFor="exampleCheck1">
-                  Удалить слова
+                  Удалить
                 </label>
               </div>
               <ErrorMessage className="is-invalid" name="deleteWords" component="div" />
@@ -155,31 +157,6 @@ export const Settings = () => {
                   Complexity
                 </label>
               </div>
-              <ErrorMessage className="is-invalid" name="complexity" component="div" />
-
-              <div className="form-group form-check">
-                <Field className="form-check-input" type="checkbox" name="learningNewWords" />
-                <label className="form-check-label" htmlFor="exampleCheck1">
-                  Изучать только новые слова
-                </label>
-              </div>
-              <ErrorMessage className="is-invalid" name="learningNewWords" component="div" />
-
-              <div className="form-group form-check">
-                <Field className="form-check-input" type="checkbox" name="repeatLearnedWords" />
-                <label className="form-check-label" htmlFor="exampleCheck1">
-                  Повторять изученные слова
-                </label>
-              </div>
-              <ErrorMessage className="is-invalid" name="repeatLearnedWords" component="div" />
-
-              <div className="form-group form-check">
-                <Field className="form-check-input" type="checkbox" name="repeatAndlearning" />
-                <label className="form-check-label" htmlFor="exampleCheck1">
-                  Изучать новые слова и повторять изученные
-                </label>
-              </div>
-              <ErrorMessage className="is-invalid" name="repeatAndlearning" component="div" />
               <ErrorMessage className="is-invalid" name="complexity" component="div" />
               <button type="submit" disabled={isSubmitting}>
                 Сохранить

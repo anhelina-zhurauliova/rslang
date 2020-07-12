@@ -5,20 +5,26 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
 import { onError } from '../../libs/errorLib';
-import { fetchSignIn } from './loginAction';
+import { fetchCreateUser, fetchSignIn } from './loginAction';
 import { LoaderButton } from './LoaderButton';
 import './authorization.scss';
 
-export const Authorization = () => {
+export const Registration = () => {
   // eslint-disable-next-line no-unused-vars
   const [cookies, setCookies] = useCookies(['authState']);
   const { userHasAuthenticated } = useAppContext();
   // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
-  const signIn = async values => {
-    setIsLoading(true);
+  const createUser = async values => {
     try {
+      const data = await fetchCreateUser(values);
+      if (!data.ok) {
+        data.text().then(text => {
+          throw new Error(text);
+        });
+      }
+      setIsLoading(true);
       const responce = await fetchSignIn(values);
       const { userId, token, refreshToken } = responce;
       const userData = {
@@ -39,20 +45,19 @@ export const Authorization = () => {
       setIsLoading(false);
     }
   };
-  // useEffect(() => {
-  // }, []);
 
   return (
     <div className="authenticated container p-4 mt-5 justify-content-center">
-      <h3 className="text-center">Авторизация</h3>
+      <h3 className="text-center">Регистрация</h3>
       <div id="signin">
         <p className="authenticated__content mt-3 mb-3 text-justify">
-          Для входа в личный кабинет введите регистрационные данные
+          Заполните форму, чтобы создать аккаунт и начать полноценно пользоваться нашим приложением
         </p>
         <Formik
           initialValues={{
             email: '',
             password: '',
+            rpassword: '',
           }}
           validate={values => {
             const errors = {};
@@ -70,12 +75,18 @@ export const Authorization = () => {
             ) {
               errors.password = 'invalid password; ';
             }
-            // errors.email = validateEmail(values.email);
-            // errors.password = validatePassword(values.password);
+            if (!values.rpassword || values.password !== values.rpassword) {
+              errors.rpassword = 'passwords mismatch; ';
+            }
             return errors;
           }}
           onSubmit={values => {
-            signIn(values);
+            const { email, password } = values;
+            const newUser = {
+              email,
+              password,
+            };
+            createUser(newUser);
           }}
         >
           {props => {
@@ -94,7 +105,7 @@ export const Authorization = () => {
                       <Field
                         name="email"
                         type="text"
-                        className="form-control input"
+                        className="form-control  input"
                         placeholder="username@gmail.com"
                         autoComplete="off"
                       />
@@ -118,7 +129,7 @@ export const Authorization = () => {
                       <Field
                         name="password"
                         type="password"
-                        className="form-control input"
+                        className="form-control  input"
                         placeholder="********"
                       />
                     </div>
@@ -129,15 +140,38 @@ export const Authorization = () => {
                     />
                   </div>
                 </div>
+                <div className="form-group has-feedback">
+                  <label htmlFor="password" className="authenticated__content control-label">
+                    <strong>Повторите пароль:</strong>
+                  </label>
+                  <div>
+                    <div className="input-group">
+                      <span className="input-group-addon">
+                        <i className="glyphicon glyphicon-lock" />
+                      </span>
+                      <Field
+                        name="rpassword"
+                        type="password"
+                        className="form-control  input"
+                        placeholder="********"
+                      />
+                    </div>
+                    <ErrorMessage
+                      className="mt-3 mb-7 text-danger text-center"
+                      name="rpassword"
+                      component="span"
+                    />
+                  </div>
+                </div>
                 <div className="form-group">
-                  <div className="tab-pane in active">
+                  <div className="tab-pane">
                     <LoaderButton
                       type="submit"
                       className="authenticated__btn btn-block p-2 mt-4"
                       isLoading={isLoading}
                       disabled={isSubmitting}
                     >
-                      Войти
+                      Pегистрация
                     </LoaderButton>
                   </div>
                 </div>
@@ -150,6 +184,6 @@ export const Authorization = () => {
   );
 };
 
-Authorization.propTypes = {
+Registration.propTypes = {
   isSubmitting: PropTypes.bool,
 };
