@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 import React, { useState, useEffect } from 'react';
 import './App.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -11,6 +12,7 @@ import { Vocabulary } from './components/vocabulary/Vocabulary';
 import { Speakit } from './games/speakIt/App';
 import { AudioCall } from './games/audiocall/AudioCall';
 import { PrivateRoute } from './components/authorization/PrivateRoute';
+import { Home } from './components/home/Home';
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -65,6 +67,9 @@ function App() {
                 </Route>
                 <PrivateRoute path="/games/speakIt">
                   <Speakit />
+                </PrivateRoute>
+                <PrivateRoute path="/games">
+                  <Home />
                 </PrivateRoute>
                 <PrivateRoute path="/games/englishPuzzle">
                   <EnglishPuzzle />
