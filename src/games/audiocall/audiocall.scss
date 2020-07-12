@@ -2,7 +2,7 @@
 
 $background: url('../../assets/audiocall-background.jpeg');
 $text-color: white;
-$bottom-margin: 80px;
+$bottom-margin: 10vh;
 
 .audiocall {
   height: 100vh;
@@ -19,6 +19,32 @@ $bottom-margin: 80px;
 
   &__hint {
     margin-bottom: $bottom-margin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  &__image {
+    width: auto;
+    height: 100%;
+    margin-left: -50px;
+    &-circular {
+      display: inline-block;
+      position: relative;
+      width: 170px;
+      height: 170px;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+  }
+
+  &__row {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10vh;
   }
 
   &__voice-btn {
@@ -26,14 +52,18 @@ $bottom-margin: 80px;
   }
 
   &__icon {
-    max-width: 100%;
+    max-width: 5vw;
     height: auto;
+    &-large {
+      max-width: 17vw;
+      height: auto;
+    }
   }
 
   &__list {
     align-self: normal;
     margin-bottom: $bottom-margin;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
 
   &__list-item {
@@ -62,8 +92,20 @@ $bottom-margin: 80px;
 }
 
 @media only screen and (max-width: 767px) {
-  .audiocall__icon {
-    max-width: 30%;
+  $margin: 5vh;
+  .audiocall {
+    &__icon {
+      max-width: 12vw;
+    }
+    &__list {
+      margin-bottom: $margin;
+    }
+    &__hint {
+      margin-bottom: $margin;
+    }
+    &__row {
+      margin-top: $margin;
+    }
   }
 }
 
@@ -76,6 +118,25 @@ $bottom-margin: 80px;
 
     &-item:last-child {
       padding-right: 24px;
+    }
+  }
+
+  $margin: 3vh;
+  .audiocall {
+    &__icon {
+      max-width: 16vw;
+      &-large {
+        max-width: 24vw;
+      }
+    }
+    &__list {
+      margin-bottom: $margin;
+    }
+    &__hint {
+      margin-bottom: $margin;
+    }
+    &__row {
+      margin-top: $margin;
     }
   }
 }

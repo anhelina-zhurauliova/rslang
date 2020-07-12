@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 import React, { useState, useEffect } from 'react';
 import './App.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -5,12 +6,13 @@ import { CookiesProvider, useCookies } from 'react-cookie';
 import { AppContext } from './libs/contextLib';
 import { Header } from './components/header/Header';
 import { Settings } from './components/settings/Settings';
-import { Card } from './components/card/Card';
 import { Authorization } from './components/authorization/Authorization';
 import { Registration } from './components/authorization/Registration';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
+import { Speakit } from './games/speakIt/App';
 import { AudioCall } from './games/audiocall/AudioCall';
 import { PrivateRoute } from './components/authorization/PrivateRoute';
+import { Home } from './components/home/Home';
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -45,24 +47,29 @@ function App() {
             <div className="App">
               <Header />
               <Switch>
-                <PrivateRoute path="/vocabulary">
-                  <Vocabulary />
-                </PrivateRoute>
-                <PrivateRoute path="/settings">
-                  <Settings />
-                </PrivateRoute>
                 <Route path="/signin">
                   <Authorization />
                 </Route>
                 <Route path="/login">
                   <Registration />
                 </Route>
-                <Route path="/audiocall">
+                <PrivateRoute path="/vocabulary">
+                  <Vocabulary />
+                </PrivateRoute>
+                <PrivateRoute path="/settings">
+                  <Settings />
+                </PrivateRoute>
+                <PrivateRoute path="/audiocall">
                   <AudioCall />
-                </Route>
-                <Route path="/">
-                  <Card />
-                </Route>
+                </PrivateRoute>
+                <Route path="/">{/* <Promo /> */}</Route>
+                <PrivateRoute path="/games/speakIt">
+                  <Speakit />
+                </PrivateRoute>
+                <PrivateRoute path="/games">
+                  <Home />
+                </PrivateRoute>
+                <PrivateRoute path="/games/englishPuzzle">{/* <EnglishPuzzle /> */}</PrivateRoute>
               </Switch>
             </div>
           </Router>

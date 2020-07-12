@@ -10,7 +10,7 @@ export const Controllers = props => {
   const getCurrent = () => allWords.filter(x => x.answer === true);
 
   return (
-    <div className="audiocall__content col-lg-8 col-md-10 container flex-column">
+    <div className="audiocall__content col-md-10 container flex-column">
       <WordInfo answered={view.isAnswered} word={getCurrent()} />
       <ol className="audiocall__list row">
         {allWords.map(word => (
