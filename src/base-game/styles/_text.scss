@@ -1,0 +1,56 @@
+.button-switch__text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: bold;
+  line-height: 22px;
+  font-size: 12px;
+  padding-top: 10px;
+  margin-right: 8px;
+  font-weight: bold;
+  color: white;
+}
+.word {
+  margin-right: 4px;
+}
+.studied-word__container {
+  display: inline;
+  width: 100%;
+  color: #338c99;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0 0.25em;
+  z-index: 1000;
+}
+.hidden {
+  visibility: hidden;
+}
+.red {
+  color: rgb(216, 94, 94);
+}
+.word__container {
+  background: #ffe9f2;
+  margin: 0;
+  border-radius: 2px;
+  padding: 0.25rem 0.25em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.studied-word-to-show {
+  position: absolute;
+  margin-left: 5px;
+  -webkit-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+  padding-bottom: 0px;
+  border-bottom: 2px solid transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  color: #43d281;
+  border-bottom: 2px solid #43d281;
+}
+.hidden__container {
+  background-color: transparent;
+}
