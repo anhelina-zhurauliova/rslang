@@ -73,6 +73,9 @@ function App() {
                   <PrivateRoute path="/games">
                     <Home />
                   </PrivateRoute>
+                  <PrivateRoute path="/games/main">
+                    <BaseGame />
+                  </PrivateRoute>
                   <PrivateRoute path="/games/englishPuzzle">{/* <EnglishPuzzle /> */}</PrivateRoute>
                 </Switch>
               </div>

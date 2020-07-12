@@ -12,6 +12,8 @@ export const Card = ({
   currentCard,
   lastStudiedCard,
   shouldShowInput,
+  inputValue,
+  shouldShowStudiedWord,
 }) => {
   return words[сardNumber] ? (
     <div className="card__container">
@@ -34,6 +36,8 @@ export const Card = ({
               currentCard={currentCard}
               lastStudiedCard={lastStudiedCard}
               shouldShowInput={shouldShowInput}
+              inputValue={inputValue}
+              shouldShowStudiedWord={shouldShowStudiedWord}
             />
           </div>
           <p className="card-info sentense-meaning">{words[сardNumber].textMeaning}</p>
@@ -66,4 +70,6 @@ Card.propTypes = {
   currentCard: PropTypes.number,
   lastStudiedCard: PropTypes.number,
   shouldShowInput: PropTypes.bool,
+  shouldShowStudiedWord: PropTypes.bool,
+  inputValue: PropTypes.string,
 };

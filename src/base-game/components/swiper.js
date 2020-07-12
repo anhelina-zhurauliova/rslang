@@ -7,14 +7,15 @@ import '../baseGame.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const SimpleSwiperWithParams = ({ words, token, userId, createUserWord }) => {
-  const [inputValue, setInputValue] = useState([]);
+const SimpleSwiperWithParams = ({ words, token, userId, createUserWord, shouldTurnOnSound }) => {
+  const [inputValue, setInputValue] = useState('');
   const [studiedWord, setStudiedWord] = useState([]);
   const [userMistakes, setUserMistakes] = useState([]);
   const [lastStudiedCard, setLastStudiedCard] = useState(0);
   const [currentCard, setCurrentCard] = useState(0);
   const [completed, setCompleted] = useState(0);
   const [shouldShowInput, setShowInput] = useState({});
+  const [shouldShowStudiedWord, setShowStudiedWord] = useState({});
   const slider = useRef(null);
 
   const getInputValue = value => {
@@ -32,6 +33,36 @@ const SimpleSwiperWithParams = ({ words, token, userId, createUserWord }) => {
   const goPrev = () => {
     slider.current.slickPrev();
   };
+  const playAudioMeaning = idx => {
+    if (shouldTurnOnSound) {
+      const audioWordMeaning = new Audio(
+        `https://raw.githubusercontent.com/irinainina/rslang-data/master/${words[idx].audioMeaning}`,
+      );
+      audioWordMeaning.play();
+    }
+  };
+  const playAudioExample = idx => {
+    if (shouldTurnOnSound) {
+      const audioWordExample = new Audio(
+        `https://raw.githubusercontent.com/irinainina/rslang-data/master/${words[idx].audioExample}`,
+      );
+      audioWordExample.play();
+      audioWordExample.onended = () => {
+        playAudioMeaning(currentCard);
+      };
+    }
+  };
+  const playAudioWord = idx => {
+    if (shouldTurnOnSound) {
+      const audioWord = new Audio(
+        `https://raw.githubusercontent.com/irinainina/rslang-data/master/${words[idx].audio}`,
+      );
+      audioWord.play();
+      audioWord.onended = () => {
+        playAudioExample(currentCard);
+      };
+    }
+  };
 
   const checkInput = () => {
     setUserMistakes([]);
@@ -45,16 +76,21 @@ const SimpleSwiperWithParams = ({ words, token, userId, createUserWord }) => {
           setUserMistakes(prevState => [...prevState, i + arr.length]);
         }
       });
+      setInputValue('');
+      setShowStudiedWord(prevState => ({ ...prevState, [currentCard]: true }));
+      setShowInput(prevState => ({ ...prevState, [currentCard]: true }));
     } else {
       setCompleted(completed + 100 / 40);
+      goNext();
+      setShowStudiedWord(prevState => ({ ...prevState, [currentCard]: false }));
+      setShowInput(prevState => ({ ...prevState, [currentCard]: false }));
+      setLastStudiedCard(currentCard);
+      setInputValue('');
+      playAudioWord(currentCard);
     }
-    setShowInput(prevState => ({ ...prevState, [currentCard]: false }));
-    // goNext();
   };
-
   const handleSlideChange = currentSlide => {
     setCurrentCard(currentSlide);
-    if (currentSlide > lastStudiedCard) setLastStudiedCard(currentSlide);
   };
 
   const handleHardWords = () => {
@@ -112,7 +148,7 @@ const SimpleSwiperWithParams = ({ words, token, userId, createUserWord }) => {
       </button>
       <Slider ref={slider} {...settingsSlider}>
         {words.map((word, i) => {
-          return shouldShowInput[i] === false ? (
+          return shouldShowInput[i] === false || shouldShowStudiedWord[i] === true ? (
             <Card
               сardNumber={i}
               words={words}
@@ -122,7 +158,10 @@ const SimpleSwiperWithParams = ({ words, token, userId, createUserWord }) => {
               userMistakes={userMistakes}
               lastStudiedCard={lastStudiedCard}
               currentCard={currentCard}
-              shouldShowInput={shouldShowInput.i}
+              shouldShowInput={shouldShowInput[i]}
+              inputValue={inputValue}
+              shouldShowStudiedWord={shouldShowStudiedWord[i]}
+              shouldTurnOnSound={shouldTurnOnSound}
             />
           ) : (
             <Card
@@ -135,6 +174,9 @@ const SimpleSwiperWithParams = ({ words, token, userId, createUserWord }) => {
               lastStudiedCard={lastStudiedCard}
               currentCard={currentCard}
               shouldShowInput
+              inputValue={inputValue}
+              shouldShowStudiedWord={false}
+              shouldTurnOnSound={shouldTurnOnSound}
             />
           );
         })}
@@ -185,6 +227,7 @@ SimpleSwiperWithParams.propTypes = {
   createUserWord: PropTypes.func,
   token: PropTypes.string,
   userId: PropTypes.string,
+  shouldTurnOnSound: PropTypes.bool,
 };
 
 export default SimpleSwiperWithParams;

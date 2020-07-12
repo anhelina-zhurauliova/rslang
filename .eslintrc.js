@@ -5,7 +5,7 @@ module.exports = {
     node: true,
   },
   extends: ['airbnb', 'prettier'],
-  plugins: ['babel', 'import', 'jsx-a11y', 'react', 'prettier'],
+  plugins: ['babel', 'import', 'jsx-a11y', 'react', 'prettier', 'react-hooks'],
   parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 6,
@@ -36,6 +36,8 @@ module.exports = {
     'react/forbid-prop-types': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
 
     'prefer-destructuring': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
