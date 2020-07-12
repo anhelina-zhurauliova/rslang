@@ -7,3 +7,25 @@
   padding: 3px 13px 3px 13px;
 }
   
+.gamearea {
+  width: 100%;
+  max-width: 1020px;
+  height: 400px;
+  left: 30px;
+  // margin: 0 auto;
+  overflow: hidden;
+  border: 2px;
+  background-color: rgb(231, 214, 192);
+  box-shadow:
+    0 1px 4px rgba(145, 30, 30, 0.3),
+    -13px 0 20px -13px rgba(122, 89, 48, 0.8),
+    13px 0 20px -13px rgba(122, 89, 48, 0.8),
+    0 0 40px rgba(160, 51, 51, 0.1) inset;
+}
+
+.sentence {
+  width: 100%;
+  max-width: 1020px;
+  height: 34px;
+  border: 0px solid rgb(199, 164, 120);
+}
