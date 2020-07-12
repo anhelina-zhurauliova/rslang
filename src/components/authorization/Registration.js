@@ -13,50 +13,36 @@ export const Registration = () => {
   // eslint-disable-next-line no-unused-vars
   const [cookies, setCookies] = useCookies(['authState']);
   const { userHasAuthenticated } = useAppContext();
-  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const createUser = async values => {
-    const errMessage = {
-      204: 'The user has been deleted',
-      400: 'Bad request',
-      401: 'Access token is missing or invalid',
-      403: 'Incorrect e-mail or password',
-      404: 'User not found',
-      417: 'User with this e-mail exists',
-      422: 'Incorrect e-mail or password',
-    };
-    let data;
-    let responce;
+    setIsLoading(true);
     try {
-      data = await fetchCreateUser(values);
-      if (!data.ok) {
-        const { email, password } = values;
-        const newValues = {
-          email,
-          password,
-        };
-        setIsLoading(true);
-        responce = await fetchSignIn(newValues);
-        const { userId, token, refreshToken, name } = responce;
-        const userData = {
-          userId,
-          token,
-          refreshToken,
-          name,
-          timestamp: new Date(),
-        };
-        const authState = {
-          isLoggedIn: true,
-          user: userData,
-        };
-        setCookies('authState', authState);
-        userHasAuthenticated(true);
-        history.push('/settings');
-      }
+      // eslint-disable-next-line no-unused-vars
+      const data = await fetchCreateUser(values);
+      const { email, password } = values;
+      const newValues = {
+        email,
+        password,
+      };
+      const responce = await fetchSignIn(newValues);
+      const { userId, token, refreshToken, name } = responce;
+      const userData = {
+        userId,
+        token,
+        refreshToken,
+        name,
+        timestamp: new Date(),
+      };
+      const authState = {
+        isLoggedIn: true,
+        user: userData,
+      };
+      setCookies('authState', authState);
+      userHasAuthenticated(true);
+      history.push('/games');
     } catch (error) {
-      if (!data.ok) onError(errMessage(data.ok));
-      if (!responce.ok) onError(errMessage(responce.ok));
+      onError('User with this e-mail exists');
       setIsLoading(false);
     }
   };
