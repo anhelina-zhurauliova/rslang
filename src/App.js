@@ -3,9 +3,10 @@ import './App.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { CookiesProvider, useCookies } from 'react-cookie';
 import { AppContext } from './libs/contextLib';
+import { onError } from './libs/errorLib';
 import { Header } from './components/header/Header';
 import { Settings } from './components/settings/Settings';
-import { Card } from './components/card/Card';
+import { Home } from './components/home/Home';
 import { Authorization } from './components/authorization/Authorization';
 import { Registration } from './components/authorization/Registration';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
@@ -20,14 +21,13 @@ function App() {
     try {
       if (!Object.keys(cookies).length) {
         setCookies('authState', { isLoggedIn: false, user: {} });
-      } else {
-        const { isLoggedIn } = cookies || cookies.authState;
-        if (isLoggedIn) {
-          userHasAuthenticated(true);
-        }
+      }
+      const { isLoggedIn } = cookies.authState;
+      if (isLoggedIn) {
+        userHasAuthenticated(true);
       }
     } catch (e) {
-      // console.log(e);
+      onError(e.message);
     }
     setIsAuthenticating(false);
   }
@@ -57,7 +57,7 @@ function App() {
                   <Registration />
                 </Route>
                 <Route path="/">
-                  <Card />
+                  <Home />
                 </Route>
               </Switch>
             </div>
