@@ -1,0 +1,37 @@
+.footer {
+  background-color: #ab669a;
+  height: 66px;
+}
+.footer__wrapper {
+  display: flex;
+  background-color: inherit;
+  width: 100%;
+  //   margin: auto;
+  padding: 0rem 5rem;
+  justify-content: space-around;
+}
+.team-mate {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50px;
+  background: #e3e4eb;
+  margin-right: 50px;
+  &:last-child {
+    margin-right: 0px;
+  }
+}
+.team-mate__container {
+  display: flex;
+  margin-top: 7px;
+}
+.footer-info {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  margin-top: 20px;
+  color: white;
+}
