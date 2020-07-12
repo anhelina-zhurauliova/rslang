@@ -34,7 +34,7 @@ export const Games = [
     title: 'Audio Call',
     screenshot: puzzle,
     description: 'description',
-    link: '#',
+    link: '/audiocall',
   },
   {
     id: 'g-6',
