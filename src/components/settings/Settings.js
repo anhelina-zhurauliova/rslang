@@ -154,7 +154,7 @@ export const Settings = () => {
               <div className="form-group form-check">
                 <Field className="form-check-input" type="checkbox" name="complexity" />
                 <label className="form-check-label" htmlFor="exampleCheck1">
-                  Complexity
+                  Составные слова
                 </label>
               </div>
               <ErrorMessage className="is-invalid" name="complexity" component="div" />
