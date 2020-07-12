@@ -1,22 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
-import { createUser } from './loginAction';
+import { onError } from '../../libs/errorLib';
+import { fetchCreateUser, fetchSignIn } from './loginAction';
+import { LoaderButton } from './LoaderButton';
+import './authorization.scss';
 
 export const Registration = () => {
   // eslint-disable-next-line no-unused-vars
   const [cookies, setCookies] = useCookies(['authState']);
   const { userHasAuthenticated } = useAppContext();
+  // eslint-disable-next-line no-unused-vars
+  const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
+  const createUser = async values => {
+    try {
+      const data = await fetchCreateUser(values);
+      if (!data.ok) {
+        data.text().then(text => {
+          throw new Error(text);
+        });
+      }
+      setIsLoading(true);
+      const responce = await fetchSignIn(values);
+      const { userId, token, refreshToken } = responce;
+      const userData = {
+        userId,
+        token,
+        refreshToken,
+        timestamp: new Date(),
+      };
+      const authState = {
+        isLoggedIn: true,
+        user: userData,
+      };
+      setCookies('authState', authState);
+      userHasAuthenticated(true);
+      history.push('/settings');
+    } catch (error) {
+      onError(error.message);
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <div className="container mt-5 col-8 col-sm-6 col-md-4 col-xl-3 justify-content-center">
-      <h2 className="text-center">Регистрация</h2>
+    <div className="authenticated container p-4 mt-5 justify-content-center">
+      <h3 className="text-center">Регистрация</h3>
       <div id="signin">
-        <p className="mt-3 mb-3 text-justify">
+        <p className="authenticated__content mt-3 mb-3 text-justify">
           Заполните форму, чтобы создать аккаунт и начать полноценно пользоваться нашим приложением
         </p>
         <Formik
@@ -52,9 +86,7 @@ export const Registration = () => {
               email,
               password,
             };
-            createUser(newUser).then(response => setCookies('authState', response));
-            userHasAuthenticated(true);
-            history.push('/settings');
+            createUser(newUser);
           }}
         >
           {props => {
@@ -62,8 +94,8 @@ export const Registration = () => {
             return (
               <Form>
                 <div className="form-group has-feedback">
-                  <label htmlFor="email" className="control-label">
-                    Email:
+                  <label htmlFor="email" className="authenticated__content control-label">
+                    <strong>Email:</strong>
                   </label>
                   <div>
                     <div className="input-group">
@@ -73,7 +105,7 @@ export const Registration = () => {
                       <Field
                         name="email"
                         type="text"
-                        className="form-control"
+                        className="form-control  input"
                         placeholder="username@gmail.com"
                         autoComplete="off"
                       />
@@ -86,8 +118,8 @@ export const Registration = () => {
                   </div>
                 </div>
                 <div className="form-group has-feedback">
-                  <label htmlFor="password" className="control-label">
-                    Пароль:
+                  <label htmlFor="password" className="authenticated__content control-label">
+                    <strong>Пароль:</strong>
                   </label>
                   <div>
                     <div className="input-group">
@@ -97,7 +129,7 @@ export const Registration = () => {
                       <Field
                         name="password"
                         type="password"
-                        className="form-control"
+                        className="form-control  input"
                         placeholder="********"
                       />
                     </div>
@@ -109,8 +141,8 @@ export const Registration = () => {
                   </div>
                 </div>
                 <div className="form-group has-feedback">
-                  <label htmlFor="password" className="control-label">
-                    Повторите пароль:
+                  <label htmlFor="password" className="authenticated__content control-label">
+                    <strong>Повторите пароль:</strong>
                   </label>
                   <div>
                     <div className="input-group">
@@ -120,7 +152,7 @@ export const Registration = () => {
                       <Field
                         name="rpassword"
                         type="password"
-                        className="form-control"
+                        className="form-control  input"
                         placeholder="********"
                       />
                     </div>
@@ -133,9 +165,14 @@ export const Registration = () => {
                 </div>
                 <div className="form-group">
                   <div className="tab-pane">
-                    <button type="submit" className="btn btn-block" disabled={isSubmitting}>
-                      Зарегистрироваться
-                    </button>
+                    <LoaderButton
+                      type="submit"
+                      className="authenticated__btn btn-block p-2 mt-4"
+                      isLoading={isLoading}
+                      disabled={isSubmitting}
+                    >
+                      Pегистрация
+                    </LoaderButton>
                   </div>
                 </div>
               </Form>
