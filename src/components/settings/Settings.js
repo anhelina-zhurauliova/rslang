@@ -1,38 +1,33 @@
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCookies } from 'react';
+import './settings.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+// import { useCookies } from 'react-cookie';
 import { CONSTANTS } from '../../shared/constants';
-
-const auth = {
-  message: 'Authenticated',
-  token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWJhYjU4OThmZmJmMDAxNzQ1ODFlOSIsImlhdCI6
-    MTU5MjkzNjk4MywiZXhwIjoxNTkyOTUxMzgzfQ.130z1Euhr0B0rI4AFdQe3RgtJI46uihVvQnT2OAqqAU`,
-  userId: '5eebab5898ffbf00174581e9',
-};
-
-const defaultQuery = 'settings';
-const settingsUrl = `${CONSTANTS.URL.API}/${auth.userId}/${defaultQuery}`;
-// TODO: Take these from cookies
 
 export const Settings = () => {
   const [settings, setSettings] = useState(null);
+  const [cookies] = useCookies(['authState']);
+  const defaultQuery = 'settings';
 
-  // TODO: Get data here
+  const token = cookies.authStateauthState.user.userId;
+  const userId = cookies.authStateauthState.user.token;
+  const settingsUrl = `${CONSTANTS.URL.API}/${userId}/${defaultQuery}`;
   useEffect(() => {
     fetch(settingsUrl, {
       method: 'GET',
       headers: {
-        Authorization: `${auth.token}`,
+        Authorization: `${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ settings }),
     })
       .then(response => setSettings(response))
-      .catch(error =>
+      .catch(() => {
         // TODO: Show some notification
-        console.log(error),
-      );
+        // console.log(error);
+      });
   });
 
   if (!settings) {
@@ -64,22 +59,19 @@ export const Settings = () => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          console.log('values');
-          console.log(values);
           setSubmitting(true);
 
-          // TODO: Put data here
           fetch(settingsUrl, {
             method: 'PUT',
             headers: {
-              Authorization: `${auth.token}`,
+              Authorization: `${token}`,
               'Content-Type': 'application/json',
             },
           })
             .then(response => response.json())
-            .catch(error => {
+            .catch(() => {
               // TODO: Handle errors with some notifications or toasters
-              console.error('Error:', error);
+              //   console.error('Error:', error);
             })
             .finally(() => setSubmitting(false));
         }}
@@ -89,21 +81,21 @@ export const Settings = () => {
             <Form>
               <div className="input-group input-group-sm mb-3">
                 <div className="input-group-prepend">
-                  <span className="input-group-text "> Your name</span>
+                  <span className="input-group-text "> Ваше имя</span>
                 </div>
                 <Field className="form-control has-error" type="text" name="userName" />
               </div>
               <ErrorMessage className="is-invalid" name="nameValid" component="div" />
               <div className="input-group input-group-sm mb-3">
                 <div className="input-group-prepend">
-                  <span className="input-group-text ">Daily limit of words</span>
+                  <span className="input-group-text ">Лимит слов в день</span>
                 </div>
                 <Field className="form-control has-error" type="number" name="wordsLimit" />
               </div>
               <ErrorMessage className="is-invalid" name="wordsLimit" component="div" />
               <div className="input-group input-group-sm mb-3">
                 <div className="input-group-prepend">
-                  <span className="input-group-text">Daily limit of cards</span>
+                  <span className="input-group-text">Лимит карточек в день</span>
                 </div>
                 <Field className="form-control has-error" type="number" name="cardsLimit" />
               </div>
@@ -111,49 +103,49 @@ export const Settings = () => {
               <div className="form-group form-check">
                 <Field className="form-check-input" type="checkbox" name="translate" />
                 <label className="form-check-label" htmlFor="exampleCheck1">
-                  Translate
+                  Перевод
                 </label>
               </div>
               <ErrorMessage className="is-invalid" name="translate" component="div" />
               <div className="form-group form-check">
                 <Field className="form-check-input" type="checkbox" name="transcription" />
                 <label className="form-check-label" htmlFor="exampleCheck1">
-                  Transcription
+                  Транскрипция
                 </label>
               </div>
               <ErrorMessage className="is-invalid" name="transcription" component="div" />
               <div className="form-group form-check">
                 <Field className="form-check-input" type="checkbox" name="image" />
                 <label className="form-check-label" htmlFor="exampleCheck1">
-                  Image
+                  Картинка
                 </label>
               </div>
               <ErrorMessage className="is-invalid" name="image" component="div" />
               <div className="form-group form-check">
                 <Field className="form-check-input" type="checkbox" name="sentenceUnderstanding" />
                 <label className="form-check-label" htmlFor="exampleCheck1">
-                  Sentence for best understanding
+                  Значение слова
                 </label>
               </div>
               <ErrorMessage className="is-invalid" name="sentenceUnderstanding" component="div" />
               <div className="form-group form-check">
                 <Field className="form-check-input" type="checkbox" name="sentenceExample" />
                 <label className="form-check-label" htmlFor="exampleCheck1">
-                  Sentence example of usage
+                  Пример предложения со словом
                 </label>
               </div>
               <ErrorMessage className="is-invalid" name="sentenceExample" component="div" />
               <div className="form-group form-check">
                 <Field className="form-check-input" type="checkbox" name="deleteWords" />
                 <label className="form-check-label" htmlFor="exampleCheck1">
-                  Delete
+                  Удалить слова
                 </label>
               </div>
               <ErrorMessage className="is-invalid" name="deleteWords" component="div" />
               <div className="form-group form-check">
                 <Field className="form-check-input" type="checkbox" name="difficultWords" />
                 <label className="form-check-label" htmlFor="exampleCheck1">
-                  Difficult Words
+                  Сложные слова
                 </label>
               </div>
               <ErrorMessage className="is-invalid" name="difficultWords" component="div" />
@@ -164,8 +156,33 @@ export const Settings = () => {
                 </label>
               </div>
               <ErrorMessage className="is-invalid" name="complexity" component="div" />
+
+              <div className="form-group form-check">
+                <Field className="form-check-input" type="checkbox" name="learningNewWords" />
+                <label className="form-check-label" htmlFor="exampleCheck1">
+                  Изучать только новые слова
+                </label>
+              </div>
+              <ErrorMessage className="is-invalid" name="learningNewWords" component="div" />
+
+              <div className="form-group form-check">
+                <Field className="form-check-input" type="checkbox" name="repeatLearnedWords" />
+                <label className="form-check-label" htmlFor="exampleCheck1">
+                  Повторять изученные слова
+                </label>
+              </div>
+              <ErrorMessage className="is-invalid" name="repeatLearnedWords" component="div" />
+
+              <div className="form-group form-check">
+                <Field className="form-check-input" type="checkbox" name="repeatAndlearning" />
+                <label className="form-check-label" htmlFor="exampleCheck1">
+                  Изучать новые слова и повторять изученные
+                </label>
+              </div>
+              <ErrorMessage className="is-invalid" name="repeatAndlearning" component="div" />
+              <ErrorMessage className="is-invalid" name="complexity" component="div" />
               <button type="submit" disabled={isSubmitting}>
-                Save
+                Сохранить
               </button>
             </Form>
           </div>
