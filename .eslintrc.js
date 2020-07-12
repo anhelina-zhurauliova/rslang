@@ -34,6 +34,7 @@ module.exports = {
 
     'react/require-default-props': 'off',
     'react/forbid-prop-types': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
 
     'prefer-destructuring': 'off',
