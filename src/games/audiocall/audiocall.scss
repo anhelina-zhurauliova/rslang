@@ -1,13 +1,14 @@
 @import 'start';
 
-$background: linear-gradient(90deg, rgba(9,9,121,1) 30%, rgba(0,212,255,1) 100%);;
+$background: url('../../assets/audiocall-background.jpeg');
 $text-color: white;
 $bottom-margin: 80px;
 
 .audiocall {
   height: 100vh;
   max-width: unset;
-  background: $background;
+  background: $background no-repeat center center fixed;
+  background-size: cover;
   color: $text-color;
 
   &__content {
@@ -19,27 +20,27 @@ $bottom-margin: 80px;
   &__hint {
     margin-bottom: $bottom-margin;
   }
-  
+
   &__voice-btn {
     align-self: center;
   }
-  
+
   &__icon {
     max-width: 100%;
     height: auto;
   }
-  
+
   &__list {
     align-self: normal;
     margin-bottom: $bottom-margin;
     justify-content: space-between;
   }
-  
+
   &__list-item {
     padding-right: 24px;
     padding-left: 0;
 
-    &:last-child{
+    &:last-child {
       padding-right: 0;
     }
   }
