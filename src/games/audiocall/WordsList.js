@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Word = props => {
+export const WordsList = props => {
   const { word } = props;
   return (
-    // eslint-disable-next-line no-underscore-dangle
     <li key={word._id} className="audiocall__list-item word">
       <button type="button" className="word__btn btn">
         {word.wordTranslate}
@@ -13,6 +12,6 @@ export const Word = props => {
   );
 };
 
-Word.propTypes = {
+WordsList.propTypes = {
   word: PropTypes.object,
 };

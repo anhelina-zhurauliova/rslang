@@ -24,7 +24,7 @@ module.exports = {
     'no-plusplus': 'off',
     'space-before-function-paren': 0,
     'import/prefer-default-export': 'off',
-
+    'no-underscore-dangle': ['error', { 'allow': ['id_', '_id'] }],
     'max-len': ['error', 100, 2, { ignoreUrls: true }],
     'no-console': 'error',
     'no-alert': 'error',
