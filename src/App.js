@@ -9,6 +9,7 @@ import { Card } from './components/card/Card';
 import { Authorization } from './components/authorization/Authorization';
 import { Registration } from './components/authorization/Registration';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
+import { AudioCall } from './games/audiocall/AudioCall';
 import { PrivateRoute } from './components/authorization/PrivateRoute';
 
 function App() {
@@ -55,6 +56,9 @@ function App() {
                 </Route>
                 <Route path="/login">
                   <Registration />
+                </Route>
+                <Route path="/audiocall">
+                  <AudioCall />
                 </Route>
                 <Route path="/">
                   <Card />
