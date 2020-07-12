@@ -1,47 +1,40 @@
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { onError } from '../../libs/errorLib';
+import 'react-toastify/dist/ReactToastify.css';
 import { CONSTANTS } from '../../shared/constants';
-
-const auth = {
-  message: 'Authenticated',
-  token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZWJhYjU4OThmZmJmMDAxNzQ1ODFlOSIsImlhdCI6
-    MTU5MjkzNjk4MywiZXhwIjoxNTkyOTUxMzgzfQ.130z1Euhr0B0rI4AFdQe3RgtJI46uihVvQnT2OAqqAU`,
-  userId: '5eebab5898ffbf00174581e9',
-};
-
-const defaultQuery = 'settings';
-const settingsUrl = `${CONSTANTS.URL.API}/${auth.userId}/${defaultQuery}`;
-// TODO: Take these from cookies
 
 export const Settings = () => {
   const [settings, setSettings] = useState(null);
+  const [cookies] = useCookies(['authState']);
+  const { token, userId } = cookies.authState.user;
+  // const defaultQuery = 'settings';
+  // const settingsUrl = `${CONSTANTS.URL.API}/${userId}/${defaultQuery}`;
 
   // TODO: Get data here
   useEffect(() => {
-    fetch(settingsUrl, {
+    fetch(`${CONSTANTS.URL.API}/${userId}/settings`, {
       method: 'GET',
       headers: {
-        Authorization: `${auth.token}`,
+        Authorization: `${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ settings }),
+      // body: JSON.stringify({ settings }),
     })
       .then(response => setSettings(response))
-      .catch(error =>
-        // TODO: Show some notification
-        console.log(error),
-      );
-  });
-
+      .catch(error => onError(error.message));
+  }, [settings]);
+  console.log('token', token);
   if (!settings) {
     return <h2>Loading...</h2>;
   }
-
+  console.log('settings', settings);
   return (
     <div>
-      <h1>Anywhere in your app!</h1>
+      <h1>Settings</h1>
       <Formik
         initialValues={settings}
         validate={values => {
@@ -69,10 +62,10 @@ export const Settings = () => {
           setSubmitting(true);
 
           // TODO: Put data here
-          fetch(settingsUrl, {
+          fetch(`${CONSTANTS.URL.API}/${userId}/settings`, {
             method: 'PUT',
             headers: {
-              Authorization: `${auth.token}`,
+              Authorization: `${token}`,
               'Content-Type': 'application/json',
             },
           })
