@@ -17,31 +17,46 @@ export const Registration = () => {
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const createUser = async values => {
+    const errMessage = {
+      204: 'The user has been deleted',
+      400: 'Bad request',
+      401: 'Access token is missing or invalid',
+      403: 'Incorrect e-mail or password',
+      404: 'User not found',
+      417: 'User with this e-mail exists',
+      422: 'Incorrect e-mail or password',
+    };
+    let data;
+    let responce;
     try {
-      const data = await fetchCreateUser(values);
+      data = await fetchCreateUser(values);
       if (!data.ok) {
-        data.text().then(text => {
-          throw new Error(text);
-        });
+        const { email, password } = values;
+        const newValues = {
+          email,
+          password,
+        };
+        setIsLoading(true);
+        responce = await fetchSignIn(newValues);
+        const { userId, token, refreshToken, name } = responce;
+        const userData = {
+          userId,
+          token,
+          refreshToken,
+          name,
+          timestamp: new Date(),
+        };
+        const authState = {
+          isLoggedIn: true,
+          user: userData,
+        };
+        setCookies('authState', authState);
+        userHasAuthenticated(true);
+        history.push('/settings');
       }
-      setIsLoading(true);
-      const responce = await fetchSignIn(values);
-      const { userId, token, refreshToken } = responce;
-      const userData = {
-        userId,
-        token,
-        refreshToken,
-        timestamp: new Date(),
-      };
-      const authState = {
-        isLoggedIn: true,
-        user: userData,
-      };
-      setCookies('authState', authState);
-      userHasAuthenticated(true);
-      history.push('/settings');
     } catch (error) {
-      onError(error.message);
+      if (!data.ok) onError(errMessage(data.ok));
+      if (!responce.ok) onError(errMessage(responce.ok));
       setIsLoading(false);
     }
   };
@@ -55,6 +70,7 @@ export const Registration = () => {
         </p>
         <Formik
           initialValues={{
+            name: '',
             email: '',
             password: '',
             rpassword: '',
@@ -81,10 +97,11 @@ export const Registration = () => {
             return errors;
           }}
           onSubmit={values => {
-            const { email, password } = values;
+            const { email, password, name } = values;
             const newUser = {
               email,
               password,
+              name,
             };
             createUser(newUser);
           }}
@@ -94,18 +111,31 @@ export const Registration = () => {
             return (
               <Form>
                 <div className="form-group has-feedback">
+                  <label htmlFor="name" className="authenticated__content control-label">
+                    <strong>Имя:</strong>
+                  </label>
+                  <div>
+                    <div className="input-group">
+                      <Field
+                        name="name"
+                        type="text"
+                        className="form-control input"
+                        placeholder="username"
+                        autoComplete="off"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="form-group has-feedback">
                   <label htmlFor="email" className="authenticated__content control-label">
                     <strong>Email:</strong>
                   </label>
                   <div>
                     <div className="input-group">
-                      <span className="input-group-addon">
-                        <i className="glyphicon glyphicon-envelope" />
-                      </span>
                       <Field
                         name="email"
                         type="text"
-                        className="form-control  input"
+                        className="form-control input"
                         placeholder="username@gmail.com"
                         autoComplete="off"
                       />
@@ -123,9 +153,6 @@ export const Registration = () => {
                   </label>
                   <div>
                     <div className="input-group">
-                      <span className="input-group-addon">
-                        <i className="glyphicon glyphicon-lock" />
-                      </span>
                       <Field
                         name="password"
                         type="password"
@@ -146,9 +173,6 @@ export const Registration = () => {
                   </label>
                   <div>
                     <div className="input-group">
-                      <span className="input-group-addon">
-                        <i className="glyphicon glyphicon-lock" />
-                      </span>
                       <Field
                         name="rpassword"
                         type="password"
