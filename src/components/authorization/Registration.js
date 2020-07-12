@@ -16,7 +16,6 @@ export const Registration = () => {
   // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
-
   const createUser = async values => {
     const errMessage = {
       204: 'The user has been deleted',
