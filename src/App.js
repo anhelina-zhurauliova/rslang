@@ -5,11 +5,12 @@ import { CookiesProvider, useCookies } from 'react-cookie';
 import { AppContext } from './libs/contextLib';
 import { Header } from './components/header/Header';
 import { Settings } from './components/settings/Settings';
-import { Card } from './components/card/Card';
+// import { Card } from './components/card/Card';
 import { Authorization } from './components/authorization/Authorization';
 import { Registration } from './components/authorization/Registration';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
 import { PrivateRoute } from './components/authorization/PrivateRoute';
+import { EnglishPuzzle } from './games/englishPuzzle';
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -57,8 +58,11 @@ function App() {
                   <Registration />
                 </Route>
                 <Route path="/">
-                  <Card />
+                  <EnglishPuzzle />
                 </Route>
+                {/* <Route path="/englishpuzzle">
+                  <EnglishPuzzle />
+                </Route> */}
               </Switch>
             </div>
           </Router>
