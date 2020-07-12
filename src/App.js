@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 import React, { useState, useEffect } from 'react';
 import './App.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -5,12 +6,11 @@ import { CookiesProvider, useCookies } from 'react-cookie';
 import { AppContext } from './libs/contextLib';
 import { Header } from './components/header/Header';
 import { Settings } from './components/settings/Settings';
-// import { Card } from './components/card/Card';
 import { Authorization } from './components/authorization/Authorization';
 import { Registration } from './components/authorization/Registration';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
 import { PrivateRoute } from './components/authorization/PrivateRoute';
-import { EnglishPuzzle } from './games/englishPuzzle';
+import { Home } from './components/home/Home';
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -57,12 +57,21 @@ function App() {
                 <Route path="/login">
                   <Registration />
                 </Route>
+                <PrivateRoute path="/audiocall">
+                  <AudioCall />
+                </PrivateRoute>
                 <Route path="/">
-                  <EnglishPuzzle />
+                  <Promo />
                 </Route>
-                {/* <Route path="/englishpuzzle">
+                <PrivateRoute path="/games/speakIt">
+                  <Speakit />
+                </PrivateRoute>
+                <PrivateRoute path="/games">
+                  <Home />
+                </PrivateRoute>
+                <PrivateRoute path="/games/englishPuzzle">
                   <EnglishPuzzle />
-                </Route> */}
+                </PrivateRoute>
               </Switch>
             </div>
           </Router>
