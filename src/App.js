@@ -9,6 +9,7 @@ import { Card } from './components/card/Card';
 import { Authorization } from './components/authorization/Authorization';
 import { Registration } from './components/authorization/Registration';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
+import { Speakit } from './games/speakIt/App';
 import { AudioCall } from './games/audiocall/AudioCall';
 import { PrivateRoute } from './components/authorization/PrivateRoute';
 
@@ -62,6 +63,9 @@ function App() {
                </Route>
                 <Route path="/">
                   <Card />
+                </Route>
+                <Route path="/games/speakIt">
+                  <Speakit />
                 </Route>
               </Switch>
             </div>
