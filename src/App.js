@@ -14,7 +14,6 @@ import { Vocabulary } from './components/vocabulary/Vocabulary';
 import { Speakit } from './games/speakIt/App';
 import { AudioCall } from './games/audiocall/AudioCall';
 import { PrivateRoute } from './components/authorization/PrivateRoute';
-import { Home } from './components/home/Home';
 import { Footer } from './components/footer/footer';
 import { BaseGame } from './base-game/index';
 
