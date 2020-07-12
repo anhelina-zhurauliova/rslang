@@ -13,7 +13,7 @@ export const Games = [
     title: 'SpeakIt',
     screenshot: puzzle,
     description: 'description',
-    link: '#',
+    link: '/games/speakIt',
   },
   {
     id: 'g-3',
@@ -34,7 +34,7 @@ export const Games = [
     title: 'Audio Call',
     screenshot: puzzle,
     description: 'description',
-    link: '#',
+    link: '/audiocall',
   },
   {
     id: 'g-6',

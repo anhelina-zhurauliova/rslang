@@ -24,6 +24,7 @@
     "react-html-parser": "^2.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-speech-recognition": "^2.1.4",
     "react-toastify": "^6.0.8"
   },
   "scripts": {
@@ -37,7 +38,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+    "pre-commit": "npm test",
+    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
