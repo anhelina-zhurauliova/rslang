@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import {myStyle,clicked} from "../../WordsList/Word";
+/* eslint react/prop-types: 0 */
+import React from 'react';
+import { myStyle, clicked } from '../../WordsList/Word';
 
 const startBtn = {
-  width: 640
+  width: 640,
 };
 
-const StartGame = ({startListening,listening,setIsClicked}) => {
-
+const StartGame = ({ startListening, listening, setIsClicked }) => {
   let styles;
 
   const handleClick = () => {
@@ -14,18 +14,21 @@ const StartGame = ({startListening,listening,setIsClicked}) => {
     startListening();
   };
 
-  if(listening){
-    styles = Object.assign({}, myStyle, startBtn,clicked);
+  if (listening) {
+    styles = { ...myStyle, ...startBtn, ...clicked };
     return (
-      <div style={styles} onClick={startListening}>Speak</div>
+      <div role="presentation" style={styles} onClick={startListening}>
+        Speak
+      </div>
     );
   }
-  else{
-    styles = Object.assign({}, myStyle, startBtn);
-    return (
-      <div style={styles} onClick={handleClick}>Start Game</div>
-    );
-  }
+
+  styles = { ...myStyle, ...startBtn };
+  return (
+    <div role="presentation" style={styles} onClick={handleClick}>
+      Start Game
+    </div>
+  );
 };
 
 export default StartGame;

@@ -1,14 +1,16 @@
+/* eslint react/prop-types: 0 */
 import React from 'react';
-import {myStyle} from "../../WordsList/Word";
+import { myStyle } from '../../WordsList/Word';
 
-const Results = ({setShowStatistics}) => {
-
+const Results = ({ setShowStatistics }) => {
   const handleClick = () => {
     setShowStatistics(true);
   };
 
   return (
-      <div style={myStyle} onClick={handleClick}>Results</div>
+    <div role="presentation" style={myStyle} onClick={handleClick}>
+      Results
+    </div>
   );
 };
 

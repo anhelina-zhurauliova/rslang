@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import SpeechRecognition from "react-speech-recognition";
-import WordList from "../WordsList/WordsList";
+/* eslint react/prop-types: 0 */
+import React from 'react';
+import PropTypes from 'prop-types';
+import SpeechRecognition from 'react-speech-recognition';
+import WordList from '../WordsList/WordsList';
 
 const propTypes = {
-  // Props injected by SpeechRecognition
   transcript: PropTypes.string,
   resetTranscript: PropTypes.func,
-  browserSupportsSpeechRecognition: PropTypes.bool
+  browserSupportsSpeechRecognition: PropTypes.bool,
 };
 
 const options = {
@@ -15,15 +15,28 @@ const options = {
   continuous: true,
 };
 
-
-const Dictaphone = ({speech,setTranscript,setListening,words,setTranslation,setImage,setShowStatistics,setAnswered,answered,isRefresh,setIsRefresh,
-                      transcript,
-                      startListening,
-                      stopListening,
-                      listening,
-                      recognition,
-                      browserSupportsSpeechRecognition,resetTranscript,isClicked,setIsClicked
-                    }) => {
+const Dictaphone = ({
+  speech,
+  setTranscript,
+  setListening,
+  words,
+  setTranslation,
+  setImage,
+  setShowStatistics,
+  setAnswered,
+  answered,
+  isRefresh,
+  setIsRefresh,
+  transcript,
+  startListening,
+  stopListening,
+  listening,
+  recognition,
+  browserSupportsSpeechRecognition,
+  resetTranscript,
+  isClicked,
+  setIsClicked,
+}) => {
   if (!browserSupportsSpeechRecognition) {
     return null;
   }
@@ -32,8 +45,6 @@ const Dictaphone = ({speech,setTranscript,setListening,words,setTranslation,setI
   recognition.interimResults = true;
   setListening(listening);
   setTranscript(transcript);
-
-
 
   return (
     <div>
