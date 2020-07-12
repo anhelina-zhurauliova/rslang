@@ -1,0 +1,120 @@
+@import '../../shared/styles/colors.scss';
+@import 'gamepage';
+@import 'settings';
+
+$background: url(../../assets/jpg/bg_puzzle.jpg);
+$text-color: #fff;
+$bg-color: $color-blue-darker;
+$top-margin: 10vh;
+
+.puzzle {
+  height: 100vh;
+  background: $background;
+  background-size: cover;
+  background-position: center;
+  color: $text-color;
+  text-align: center;
+  font-size: 2vh;
+  
+  &__content {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    color: $bg-color;
+    font-size: 90%;
+  }
+
+  &__content h5 {
+    text-shadow: 0 1px 1px #f8f8fa;
+    white-space: pre-line;
+  }
+
+  &__title {
+    margin-top: $top-margin;
+    text-transform: uppercase;
+    font-size: 350%;
+    text-shadow: 0 1px 3px #2C3D82;
+  }
+
+  &__btn {
+    color: $color-yellow;
+    text-transform: uppercase;
+    width: fit-content;
+    background-color: $bg-color;
+    border-radius: 5px;
+    align-self: center;
+  }
+
+  
+&__btn:focus,
+&__btn:active:focus,
+&__btn.active:focus,
+&__btn.focus,
+&__btn:active.focus,
+&__btn.active.focus {
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+&__btn:hover,
+&__btn:focus,
+&__btn.focus {
+    color: $text-color;
+    text-decoration: none;
+}
+&__btn:active,
+&__btn.active {
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.125);
+    box-shadow: inset 0 3px 5px rgba(255, 255, 255, 0.125);
+}
+&__btn.disabled,
+&__btn[disabled],
+fieldset[disabled] .btn {
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: .65;
+}
+
+  .btn-start {
+    font-size: 210%;
+    padding: 5px 20px 5px 20px;
+  }
+
+  .btn-settings{
+    font-size: 150%;
+    padding: 3px 20px 3px 20px;
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .puzzle {
+    font-size: 1.8vh;
+
+    &__icon {
+      max-width: 30%;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .puzzle {
+    font-size: 1.7vh;
+
+    &__icon {
+      max-width: 30%;
+    }
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .puzzle {
+    font-size: 1.5vh;
+
+    &-item:last-child {
+      padding-right: 24px;
+    }
+  }
+}
