@@ -47,33 +47,29 @@ function App() {
             <div className="App">
               <Header />
               <Switch>
-                <PrivateRoute path="/vocabulary">
-                  <Vocabulary />
-                </PrivateRoute>
-                <PrivateRoute path="/settings">
-                  <Settings />
-                </PrivateRoute>
                 <Route path="/signin">
                   <Authorization />
                 </Route>
                 <Route path="/login">
                   <Registration />
                 </Route>
+                <PrivateRoute path="/vocabulary">
+                  <Vocabulary />
+                </PrivateRoute>
+                <PrivateRoute path="/settings">
+                  <Settings />
+                </PrivateRoute>
                 <PrivateRoute path="/audiocall">
                   <AudioCall />
                 </PrivateRoute>
-                <Route path="/">
-                  <Promo />
-                </Route>
+                <Route path="/">{/* <Promo /> */}</Route>
                 <PrivateRoute path="/games/speakIt">
                   <Speakit />
                 </PrivateRoute>
                 <PrivateRoute path="/games">
                   <Home />
                 </PrivateRoute>
-                <PrivateRoute path="/games/englishPuzzle">
-                  <EnglishPuzzle />
-                </PrivateRoute>
+                <PrivateRoute path="/games/englishPuzzle">{/* <EnglishPuzzle /> */}</PrivateRoute>
               </Switch>
             </div>
           </Router>
