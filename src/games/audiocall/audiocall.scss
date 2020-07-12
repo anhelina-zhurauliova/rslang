@@ -1,0 +1,81 @@
+@import 'start';
+
+$background: url('../../assets/audiocall-background.jpeg');
+$text-color: white;
+$bottom-margin: 80px;
+
+.audiocall {
+  height: 100vh;
+  max-width: unset;
+  background: $background no-repeat center center fixed;
+  background-size: cover;
+  color: $text-color;
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__hint {
+    margin-bottom: $bottom-margin;
+  }
+
+  &__voice-btn {
+    align-self: center;
+  }
+
+  &__icon {
+    max-width: 100%;
+    height: auto;
+  }
+
+  &__list {
+    align-self: normal;
+    margin-bottom: $bottom-margin;
+    justify-content: space-between;
+  }
+
+  &__list-item {
+    padding-right: 24px;
+    padding-left: 0;
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  &__btn {
+    color: $text-color;
+    text-transform: uppercase;
+    width: fit-content;
+    border-color: $text-color;
+    border-radius: 0;
+    padding: 8px 16px 8px 16px;
+    align-self: center;
+  }
+}
+
+.word__btn {
+  vertical-align: baseline;
+  color: $text-color;
+}
+
+@media only screen and (max-width: 767px) {
+  .audiocall__icon {
+    max-width: 30%;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .audiocall__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &-item:last-child {
+      padding-right: 24px;
+    }
+  }
+}
