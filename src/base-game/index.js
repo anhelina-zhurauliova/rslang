@@ -26,7 +26,7 @@ export const BaseGame = () => {
     if (!words.length) {
       getWords();
     }
-  }, [words.length]);
+  }, [getWords, words.length]);
   const { token, userId } = cookies.authState.user;
 
   const createUserWord = async ({ idUser, wordId, word }) => {

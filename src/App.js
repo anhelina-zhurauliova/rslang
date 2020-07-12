@@ -40,7 +40,7 @@ function App() {
 
   useEffect(() => {
     onLoad();
-  }, []);
+  }, [onLoad]);
 
   return (
     !isAuthenticating && (
