@@ -5,7 +5,6 @@ import { CookiesProvider, useCookies } from 'react-cookie';
 import { AppContext } from './libs/contextLib';
 import { Header } from './components/header/Header';
 import { Settings } from './components/settings/Settings';
-import { Card } from './components/card/Card';
 import { Authorization } from './components/authorization/Authorization';
 import { Registration } from './components/authorization/Registration';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
@@ -58,15 +57,18 @@ function App() {
                 <Route path="/login">
                   <Registration />
                 </Route>
-                <Route path="/audiocall">
+                <PrivateRoute path="/audiocall">
                   <AudioCall />
-               </Route>
+                </PrivateRoute>
                 <Route path="/">
-                  <Card />
+                  <Promo />
                 </Route>
-                <Route path="/games/speakIt">
+                <PrivateRoute path="/games/speakIt">
                   <Speakit />
-                </Route>
+                </PrivateRoute>
+                <PrivateRoute path="/games/englishPuzzle">
+                  <EnglishPuzzle />
+                </PrivateRoute>
               </Switch>
             </div>
           </Router>
