@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
+import './header.scss';
 
 export const Header = () => {
   const { isAuthenticated, userHasAuthenticated } = useAppContext();
@@ -20,13 +21,11 @@ export const Header = () => {
   }, []);
 
   return (
-    <div className="container">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <img src="#" alt="none" />
-        <a className="navbar-brand" href="#!">
-          WebSiteName
-        </a>
-        <button
+    <div className="wrapper__header">
+      <header className="header__container">
+        <span className="logo" />
+        <h1 className="text__logo">RocketEnglish</h1>
+        {/* <button
           className="navbar-toggler"
           type="button"
           data-toggle="collapse"
@@ -36,30 +35,22 @@ export const Header = () => {
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon" />
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto">
+        </button> */}
+        <nav className="navigation__container">
+          <ul className="navigation-links__container">
             {isAuthenticated ? (
               <>
-                <li className="nav-item active">
+                <li className="navigation__link">
                   <Link className="nav-link" to="/">
                     На главную
-                    <span className="sr-only">(current)</span>
+                    {/* <span className="">(current)</span> */}
                   </Link>
                 </li>
-                <li className="nav-item dropdown">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    id="navbarDropdown"
-                    to="/games"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
+                <li className="navigation__link">
+                  <Link className="nav-link" to="/games">
                     Тренировки
                   </Link>
-                  <div className="dropdown-menu">
+                  {/* <div className="dropdown-menu">
                     {' '}
                     <Link className="dropdown-item" to="/games/speakit">
                       SpeakIt
@@ -79,37 +70,37 @@ export const Header = () => {
                     <Link className="dropdown-item" to="/games/ourGame">
                       Our Game
                     </Link>
-                  </div>
+                  </div> */}
                 </li>
-                <li className="nav-item">
+                <li className="navigation__link">
                   <Link className="nav-link" to="/ourTeam">
                     Наша команда
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="navigation__link">
                   <Link className="nav-link" to="/vocabulary">
                     Словарь
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="navigation__link">
                   <Link className="nav-link" to="/settings">
                     Настройки
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" onClick={handleLogout} to="/">
+                <li className="navigation__link">
+                  <Link className="" onClick={handleLogout} to="/">
                     Выход
                   </Link>
                 </li>
               </>
             ) : (
               <>
-                <li className="nav-item">
+                <li className="navigation__link">
                   <Link className="nav-link" to="/signin">
                     Вход
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="navigation__link">
                   <Link className="nav-link" to="/login">
                     Регистрация
                   </Link>
@@ -117,12 +108,13 @@ export const Header = () => {
               </>
             )}
           </ul>
-          <div className="col-md-1">
-            <img className="mr-auto mx-auto" src="#" alt="alternative text" />
-            <p>User</p>
-          </div>
+        </nav>
+        <div className="col-md-1">
+          <img className="mr-auto mx-auto" src="#" alt="alternative text" />
+          <p>User</p>
         </div>
-      </nav>
+        {/* </div> */}
+      </header>
     </div>
   );
 };
