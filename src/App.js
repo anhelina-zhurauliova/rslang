@@ -10,6 +10,7 @@ import { Card } from './components/card/Card';
 import { Authorization } from './components/authorization/Authorization';
 import { Registration } from './components/authorization/Registration';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
+import { Savanna } from './games/savanna/savanna';
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -19,7 +20,7 @@ function App() {
       <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
         <Router>
           <div className="App">
-            <Header />
+            {/* <Header /> */}
             <Switch>
               <Route exact path="/">
                 <Home />
@@ -38,6 +39,9 @@ function App() {
               </Route>
               <Route path="/vocabulary">
                 <Vocabulary />
+              </Route>
+              <Route path="/savanna">
+                <Savanna />
               </Route>
             </Switch>
           </div>
