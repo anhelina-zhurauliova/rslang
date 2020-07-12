@@ -39,68 +39,69 @@ export const Header = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
-            <li className="nav-item active">
-              <Link className="nav-link" to="/">
-                На главную
-                <span className="sr-only">(current)</span>
-              </Link>
-            </li>
-            <li className="nav-item dropdown">
-              <Link
-                className="nav-link dropdown-toggle"
-                id="navbarDropdown"
-                to="/games"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Тренировки
-              </Link>
-              <div className="dropdown-menu">
-                {' '}
-                <Link className="dropdown-item" to="/games/speakit">
-                  SpeakIt
-                </Link>
-                <Link className="dropdown-item" to="/games/englishPuzzle">
-                  English Puzzle
-                </Link>
-                <Link className="dropdown-item" to="/games/savanna">
-                  Savanna
-                </Link>
-                <Link className="dropdown-item" to="/games/audioCall">
-                  Audio Call
-                </Link>
-                <Link className="dropdown-item" to="/games/sprint">
-                  Sprint
-                </Link>
-                <Link className="dropdown-item" to="/games/ourGame">
-                  Our Game
-                </Link>
-              </div>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/ourTeam">
-                Наша команда
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/vocabulary">
-                Словарь
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/settings">
-                Настройки
-              </Link>
-            </li>
-
             {isAuthenticated ? (
-              <li className="nav-item">
-                <Link className="nav-link" onClick={handleLogout} to="/">
-                  Выход
-                </Link>
-              </li>
+              <>
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/">
+                    На главную
+                    <span className="sr-only">(current)</span>
+                  </Link>
+                </li>
+                <li className="nav-item dropdown">
+                  <Link
+                    className="nav-link dropdown-toggle"
+                    id="navbarDropdown"
+                    to="/games"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Тренировки
+                  </Link>
+                  <div className="dropdown-menu">
+                    {' '}
+                    <Link className="dropdown-item" to="/games/speakit">
+                      SpeakIt
+                    </Link>
+                    <Link className="dropdown-item" to="/games/englishPuzzle">
+                      English Puzzle
+                    </Link>
+                    <Link className="dropdown-item" to="/games/savanna">
+                      Savanna
+                    </Link>
+                    <Link className="dropdown-item" to="/games/audioCall">
+                      Audio Call
+                    </Link>
+                    <Link className="dropdown-item" to="/games/sprint">
+                      Sprint
+                    </Link>
+                    <Link className="dropdown-item" to="/games/ourGame">
+                      Our Game
+                    </Link>
+                  </div>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/ourTeam">
+                    Наша команда
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/vocabulary">
+                    Словарь
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/settings">
+                    Настройки
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" onClick={handleLogout} to="/">
+                    Выход
+                  </Link>
+                </li>
+              </>
             ) : (
               <>
                 <li className="nav-item">
