@@ -14,6 +14,8 @@ import { Vocabulary } from './components/vocabulary/Vocabulary';
 import { Speakit } from './games/speakIt/App';
 import { AudioCall } from './games/audiocall/AudioCall';
 import { PrivateRoute } from './components/authorization/PrivateRoute';
+import { Footer } from './components/footer/footer';
+import { BaseGame } from './base-game/index';
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -46,31 +48,37 @@ function App() {
           <Router>
             <div className="App">
               <Header />
-              <Switch>
-                <Route path="/signin">
-                  <Authorization />
-                </Route>
-                <Route path="/login">
-                  <Registration />
-                </Route>
-                <PrivateRoute path="/vocabulary">
-                  <Vocabulary />
-                </PrivateRoute>
-                <PrivateRoute path="/settings">
-                  <Settings />
-                </PrivateRoute>
-                <PrivateRoute path="/audiocall">
-                  <AudioCall />
-                </PrivateRoute>
-                <Route path="/">{/* <Promo /> */}</Route>
-                <PrivateRoute path="/games/speakIt">
-                  <Speakit />
-                </PrivateRoute>
-                <PrivateRoute path="/games">
-                  <Home />
-                </PrivateRoute>
-                <PrivateRoute path="/games/englishPuzzle">{/* <EnglishPuzzle /> */}</PrivateRoute>
-              </Switch>
+              <div className="main__wrapper">
+                <Switch>
+                  <Route path="/signin">
+                    <Authorization />
+                  </Route>
+                  <Route path="/login">
+                    <Registration />
+                  </Route>
+                  <PrivateRoute path="/vocabulary">
+                    <Vocabulary />
+                  </PrivateRoute>
+                  <PrivateRoute path="/settings">
+                    <Settings />
+                  </PrivateRoute>
+                  <PrivateRoute path="/audiocall">
+                    <AudioCall />
+                  </PrivateRoute>
+                  <Route path="/">{/* <Promo /> */}</Route>
+                  <PrivateRoute path="/games/speakIt">
+                    <Speakit />
+                  </PrivateRoute>
+                  <PrivateRoute path="/games">
+                    <Home />
+                  </PrivateRoute>
+                  <PrivateRoute path="/games/main">
+                    <BaseGame />
+                  </PrivateRoute>
+                  <PrivateRoute path="/games/englishPuzzle">{/* <EnglishPuzzle /> */}</PrivateRoute>
+                </Switch>
+              </div>
+              <Footer />
             </div>
           </Router>
         </AppContext.Provider>
