@@ -9,7 +9,6 @@ export const BaseGame = () => {
   const [words, setWords] = useState([]);
   const [cookies] = useCookies(['authState']);
   const [shouldTurnOnSound, setShouldTurnOnSound] = useState(false);
-  // console.log(shouldTurnOnSound);
 
   const fetchWords = async (page, group, wordsAmount) => {
     const rawResponse = await fetch(
@@ -18,15 +17,15 @@ export const BaseGame = () => {
     const content = await rawResponse.json();
     return content;
   };
-  const getWords = async () => {
-    const wordsNew = await fetchWords(0, 0, 60);
-    setWords(wordsNew);
-  };
   useEffect(() => {
     if (!words.length) {
+      const getWords = async () => {
+        const wordsNew = await fetchWords(0, 0, 60);
+        setWords(wordsNew);
+      };
       getWords();
     }
-  }, [getWords, words.length]);
+  }, [words.length]);
   const { token, userId } = cookies.authState.user;
 
   const createUserWord = async ({ idUser, wordId, word }) => {

@@ -15,14 +15,14 @@ import { Speakit } from './games/speakIt/App';
 import { AudioCall } from './games/audiocall/AudioCall';
 import { PrivateRoute } from './components/authorization/PrivateRoute';
 import { Footer } from './components/footer/footer';
-import { BaseGame } from './base-game/index';
+import { BaseGame } from './base-game/BaseGame';
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true); // сессия пользователя
   const [cookies, setCookies] = useCookies(['authState']);
 
-  function onLoad() {
+  useEffect(() => {
     try {
       if (!Object.keys(cookies).length) {
         setCookies('authState', { isLoggedIn: false, user: {} });
@@ -35,11 +35,7 @@ function App() {
       onError(e.message);
     }
     setIsAuthenticating(false);
-  }
-
-  useEffect(() => {
-    onLoad();
-  }, [onLoad]);
+  }, [cookies, setCookies]);
 
   return (
     !isAuthenticating && (
@@ -47,38 +43,48 @@ function App() {
         <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
           <Router>
             <div className="App">
-              <Header />
-              <div className="main__wrapper">
-                <Switch>
-                  <Route path="/signin">
-                    <Authorization />
-                  </Route>
-                  <Route path="/login">
-                    <Registration />
-                  </Route>
-                  <PrivateRoute path="/vocabulary">
-                    <Vocabulary />
-                  </PrivateRoute>
-                  <PrivateRoute path="/settings">
-                    <Settings />
-                  </PrivateRoute>
-                  <PrivateRoute path="/audiocall">
-                    <AudioCall />
-                  </PrivateRoute>
-                  <Route path="/">{/* <Promo /> */}</Route>
-                  <PrivateRoute path="/games/speakIt">
-                    <Speakit />
-                  </PrivateRoute>
-                  <PrivateRoute path="/games">
-                    <Home />
-                  </PrivateRoute>
-                  <PrivateRoute path="/games/main">
-                    <BaseGame />
-                  </PrivateRoute>
-                  <PrivateRoute path="/games/englishPuzzle">{/* <EnglishPuzzle /> */}</PrivateRoute>
-                </Switch>
-              </div>
-              <Footer />
+              <Route path="/signin">
+                <Header />
+                <div className="main__wrapper">
+                  <Authorization />
+                </div>
+                <Footer />
+              </Route>
+              <Route exact path="/login">
+                <Header />
+                <Registration />
+                <Footer />
+              </Route>
+              <PrivateRoute exact path="/vocabulary">
+                <Header />
+                <Vocabulary />
+                <Footer />
+              </PrivateRoute>
+              <PrivateRoute exact path="/settings">
+                <Header />
+                <Settings />
+                <Footer />
+              </PrivateRoute>
+              <Route exact path="/games/audiocall">
+                <AudioCall />
+              </Route>
+              <Route exact path="/">
+                {/* <Promo /> */}
+              </Route>
+              <Route exact path="/games/speakIt">
+                <Speakit />
+              </Route>
+              <Route exact path="/games">
+                <Header />
+                <Home />
+                <Footer />
+              </Route>
+              <Route exact path="/games/main">
+                <BaseGame />
+              </Route>
+              <PrivateRoute exact path="/games/englishPuzzle">
+                {/* <EnglishPuzzle /> */}
+              </PrivateRoute>
             </div>
           </Router>
         </AppContext.Provider>
