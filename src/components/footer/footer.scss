@@ -1,21 +1,27 @@
 .footer {
   background-color: #ab669a;
+  position: absolute;
+  bottom: 0px;
   height: 66px;
+  flex: 0 0 auto;
+  display: flex;
+  width: 100%;
+  padding: 0rem 5rem;
+  justify-content: space-between;
 }
 .footer__wrapper {
   display: flex;
   background-color: inherit;
   width: 100%;
-  //   margin: auto;
   padding: 0rem 5rem;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .team-mate {
   display: inline-block;
   width: 48px;
   height: 48px;
   border-radius: 50px;
-  background: #e3e4eb;
+  background-size: cover;
   margin-right: 50px;
   &:last-child {
     margin-right: 0px;
@@ -34,4 +40,25 @@
   text-align: center;
   margin-top: 20px;
   color: white;
+}
+.anhelina {
+  background-image: url(https://avatars3.githubusercontent.com/u/56220481?s=460&u=8064a11e3c29f947d4d521aace2c2ccb535714f7&v=4);
+}
+.olga {
+  background-image: url(https://avatars2.githubusercontent.com/u/54282812?s=460&u=5f15179ece139066d5a2c37919fd702fb20c01a2&v=4);
+}
+.tanya {
+  background-image: url(https://avatars1.githubusercontent.com/u/60570588?s=460&u=456616d0980890a98f5d3c680169260046332dba&v=4);
+}
+.arslan {
+  background-image: url(https://avatars3.githubusercontent.com/u/28512469?s=460&u=e55656e92bb7e22c9536ceded314da7eb71fed1b&v=4);
+}
+.ilya {
+  background-image: url(https://avatars1.githubusercontent.com/u/46264063?s=460&u=b9be290e549985853e5534bf4bcfba2deeea55b7&v=4);
+}
+.artiem {
+  background-image: url(https://avatars1.githubusercontent.com/u/55196488?s=460&v=4);
+}
+body {
+  overflow: hidden;
 }

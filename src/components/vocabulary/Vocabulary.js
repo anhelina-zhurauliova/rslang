@@ -28,7 +28,7 @@ export const Vocabulary = () => {
   return (
     <ul className="vocabulary__list list-group list-group-flush">
       <li className="list-group-item align-items-center">
-        <h2>Выученные слова</h2>
+        <h2 className="vocabulary__text">Выученные слова</h2>
         <p className="text-secondary mb-0">
           Число слов:
           {vocabulary.length}

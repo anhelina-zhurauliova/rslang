@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 import React, { useState, useEffect } from 'react';
 import './App.scss';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { CookiesProvider, useCookies } from 'react-cookie';
 import { AppContext } from './libs/contextLib';
 import { onError } from './libs/errorLib';
@@ -52,31 +52,41 @@ function App() {
               </Route>
               <Route exact path="/login">
                 <Header />
-                <Registration />
+                <div className="main__wrapper">
+                  <Registration />
+                </div>
                 <Footer />
               </Route>
               <PrivateRoute exact path="/vocabulary">
                 <Header />
-                <Vocabulary />
+                <div className="main__wrapper">
+                  <Vocabulary />
+                </div>
                 <Footer />
               </PrivateRoute>
               <PrivateRoute exact path="/settings">
                 <Header />
-                <Settings />
+                <div className="main__wrapper">
+                  <Settings />
+                </div>
                 <Footer />
               </PrivateRoute>
               <Route exact path="/games/audiocall">
                 <AudioCall />
               </Route>
               <Route exact path="/">
+                <Header />
                 {/* <Promo /> */}
+                <Footer />
               </Route>
               <Route exact path="/games/speakIt">
                 <Speakit />
               </Route>
               <Route exact path="/games">
                 <Header />
-                <Home />
+                <div className="main__wrapper">
+                  <Home />
+                </div>
                 <Footer />
               </Route>
               <Route exact path="/games/main">
