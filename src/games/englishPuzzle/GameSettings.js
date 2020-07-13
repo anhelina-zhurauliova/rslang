@@ -61,14 +61,14 @@ export const GameSettings = () => {
                 </div>
                 <div className="justify-content-center d-inline">
                   <label htmlFor="hints">
-                    <Field type="checkbox" name="hints" value="isBacground" />
-                    <span className="p-2">Показать фон</span>
+                    <Field type="checkbox" name="hints" value="isPronounce" />
+                    <span className="p-2">Произношение</span>
                   </label>
                 </div>
                 <div className="justify-content-center d-inline">
                   <label htmlFor="hints">
-                    <Field type="checkbox" name="hints" value="isPronounce" />
-                    <span className="p-2">Произношение</span>
+                    <Field type="checkbox" name="hints" value="isBacground" />
+                    <span className="p-2">Показать фон</span>
                   </label>
                 </div>
               </div>

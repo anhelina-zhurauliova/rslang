@@ -24,7 +24,7 @@ const Hints = () => {
   };
 
   const showBacground = () => {
-    history.push('/settings');
+    history.push('/games');
     // if (hints.isAmend) {
     //   setHints({ isBacground: !hints.isBacground });
     // }

@@ -56,6 +56,7 @@ export const SetLevel = () => {
               <option value="8">Page 8</option>
               <option value="9">Page 9</option>
               <option value="0">Page 10</option>
+              <option value="0">Page 10</option>
             </select>
           </div>
           <button type="button" className="btn-game btn btn-secondary" onClick={handleGoCanvas}>

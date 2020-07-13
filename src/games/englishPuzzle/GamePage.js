@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
@@ -69,7 +70,7 @@ const GamePage = () => {
       </div>
       <div className="row justify-content-center">
         <div className="sentence mt-3 mb-3 border">
-          <p>field Words</p>
+          <p>Words area</p>
         </div>
       </div>
       <div className="ml-auto text-center mt-3 mb-3">

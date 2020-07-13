@@ -21,8 +21,8 @@ export const EnglishPuzzle = () => {
               {puzzle.isSettings ? <GameSettings /> : null}
               <div className={puzzle.isSettings ? 'puzzle__content d-none' : 'puzzle__content'}>
                 <h5 className="mb-4">
-                  Тренировка позволит лучше понимать употребление \n некоторых английских слов.
-                  Учите язык самостоятельно, быстро и не скучая!!
+                  Тренировка позволит лучше понимать употребление некоторых английских слов. Учите
+                  язык самостоятельно, быстро и не скучая!!
                 </h5>
 
                 <button
