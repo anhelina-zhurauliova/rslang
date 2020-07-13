@@ -15,26 +15,13 @@ export const Header = () => {
     userHasAuthenticated(false);
   }
 
-  useEffect(() => {
-    // console.log('2->', cookies);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div className="wrapper__header">
       <header className="header__container">
         <span className="logo" />
         <h1 className="text__logo">RocketEnglish</h1>
-        {/* <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon" />
-        </button> */}
         <nav className="navigation__container">
           <ul className="navigation-links__container">
             {isAuthenticated ? (
@@ -42,34 +29,12 @@ export const Header = () => {
                 <li className="navigation__link">
                   <Link className="nav-link" to="/">
                     На главную
-                    {/* <span className="">(current)</span> */}
                   </Link>
                 </li>
                 <li className="navigation__link">
                   <Link className="nav-link" to="/games">
                     Тренировки
                   </Link>
-                  {/* <div className="dropdown-menu">
-                    {' '}
-                    <Link className="dropdown-item" to="/games/speakit">
-                      SpeakIt
-                    </Link>
-                    <Link className="dropdown-item" to="/games/englishPuzzle">
-                      English Puzzle
-                    </Link>
-                    <Link className="dropdown-item" to="/games/savanna">
-                      Savanna
-                    </Link>
-                    <Link className="dropdown-item" to="/games/audioCall">
-                      Audio Call
-                    </Link>
-                    <Link className="dropdown-item" to="/games/sprint">
-                      Sprint
-                    </Link>
-                    <Link className="dropdown-item" to="/games/ourGame">
-                      Our Game
-                    </Link>
-                  </div> */}
                 </li>
                 <li className="navigation__link">
                   <Link className="nav-link" to="/ourTeam">
