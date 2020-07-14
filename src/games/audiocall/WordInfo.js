@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { CONSTANTS } from '../../shared/constants';
 import { ReactComponent as Megaphone } from '../../assets/svg/megaphone.svg';
@@ -7,17 +7,17 @@ export const WordInfo = props => {
   const { answered, word } = props;
   const current = word[0];
   const [info, setInfo] = useState({ image: null, word: null });
-  const playWord = () => {
+  const playWord = useCallback(() => {
     const voice = new Audio(`${CONSTANTS.URL.FILES}/${current.audio}`);
     voice.play();
-  };
+  });
 
   useEffect(() => {
     if (word.length > 0 && !answered) {
       setInfo({ image: `${CONSTANTS.URL.FILES}/${word[0].image}`, word: word[0].word });
       playWord();
     }
-  }, [word.length]);
+  }, [answered, playWord, word, word.length]);
 
   if (!answered) {
     return (

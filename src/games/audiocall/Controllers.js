@@ -8,7 +8,7 @@ export const Controllers = props => {
   const [view] = useState({ isAnswered: false });
 
   const getCurrent = () => allWords.filter(x => x.answer === true);
-
+  /* eslint-disable no-underscore-dangle  */
   return (
     <div className="audiocall__content col-md-10 container flex-column">
       <WordInfo answered={view.isAnswered} word={getCurrent()} />
