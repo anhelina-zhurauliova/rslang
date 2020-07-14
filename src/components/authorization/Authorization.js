@@ -20,11 +20,12 @@ export const Authorization = () => {
     let responce;
     try {
       responce = await fetchSignIn(values);
-      const { userId, token, refreshToken } = responce;
+      const { userId, token, refreshToken, name } = responce;
       const userData = {
         userId,
         token,
         refreshToken,
+        name,
         timestamp: new Date(),
       };
       const authState = {
@@ -68,8 +69,6 @@ export const Authorization = () => {
             ) {
               errors.password = 'invalid password; ';
             }
-            // errors.email = validateEmail(values.email);
-            // errors.password = validatePassword(values.password);
             return errors;
           }}
           onSubmit={values => {
