@@ -26,7 +26,12 @@ class SettingsSprint extends PureComponent {
     } = this.props;
     return (
       <div className="sprint-game">
-        <button type="button" onClick={closeSettings} onKeyDown={closeSettings}>
+        <button
+          type="button"
+          onClick={closeSettings}
+          onKeyDown={closeSettings}
+          className="button-background"
+        >
           <img src={exit} alt="Settings" id="settings" className="close-settings" />
         </button>
         <div className="settingsText">

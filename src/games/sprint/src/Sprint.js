@@ -1,9 +1,12 @@
 /* eslint no-shadow: "error" */
 /* eslint-disable jsx-a11y/click-events-have-key-events,
  jsx-a11y/no-noninteractive-element-interactions */
+import KeyboardEventHandler from 'react-keyboard-event-handler';
 
 import React, { Component } from 'react';
 import './sprint.scss';
+import success from './audio/success.mp3';
+import fail from './audio/error.mp3';
 import exitImage from '../../../assets/svg/exitImage.svg';
 import question from '../../../assets/svg/question.svg';
 import Timer2 from './Timer';
@@ -50,12 +53,12 @@ export class Sprint extends Component {
       parrot2Visible: false,
       parrot3Visible: false,
       parrot4Visible: false,
-      // correct1Answer: false,
-      // correct2Answer: false,
-      // correct3Answer: false,
-      // false1Answer: true,
-      // false2Answer: true,
-      // false3Answer: true,
+      correct1Answer: false,
+      correct2Answer: false,
+      correct3Answer: false,
+      false1Answer: true,
+      false2Answer: true,
+      false3Answer: true,
       helpVisible: false,
       helpPictureVisible: true,
       statisticsVisible: false,
@@ -98,6 +101,8 @@ export class Sprint extends Component {
     this.radioButtonClick5 = this.radioButtonClick5.bind(this);
     this.listenClick = this.listenClick.bind(this);
     this.resultSound = this.resultSound.bind(this);
+    this.successVoice = this.successVoice.bind(this);
+    this.errorVoice = this.errorVoice.bind(this);
   }
 
   playWord = () => {
@@ -106,6 +111,22 @@ export class Sprint extends Component {
       `https://raw.githubusercontent.com/irinainina/rslang/rslang-data/data/${gameAudio}`,
     );
     VOICE.play();
+  };
+
+  successVoice = () => {
+    const { audible } = this.state;
+    if (audible) {
+      const VOICE = new Audio(success);
+      VOICE.play();
+    }
+  };
+
+  errorVoice = () => {
+    const { audible } = this.state;
+    if (audible) {
+      const VOICE = new Audio(fail);
+      VOICE.play();
+    }
   };
 
   trueStatus = () => {
@@ -358,8 +379,10 @@ export class Sprint extends Component {
     }
     const { trueWord } = this.state;
     if (trueWord) {
+      this.successVoice();
       this.trueStatus();
     } else {
+      this.errorVoice();
       let points;
       const { gamePoints } = this.state;
       if (gamePoints === 0) {
@@ -420,8 +443,10 @@ export class Sprint extends Component {
       }));
     }
     if (!trueWord) {
+      this.successVoice();
       this.trueStatus();
     } else {
+      this.errorVoice();
       let points;
       const { gamePoints } = this.state;
       if (gamePoints === 0) {
@@ -567,7 +592,6 @@ export class Sprint extends Component {
       bonusPoints,
       settingsVisible,
       gameLevel,
-      listenClick,
       false1Answer,
       false2Answer,
       false3Answer,
@@ -575,8 +599,21 @@ export class Sprint extends Component {
       correct2Answer,
       correct3Answer,
     } = this.state;
+    const ComponentTrue = (
+      <div>
+        <KeyboardEventHandler handleKeys={['d']} onKeyEvent={() => this.trueButton()} />
+      </div>
+    );
+    const ComponentFalse = (
+      <div>
+        <KeyboardEventHandler handleKeys={['a']} onKeyEvent={() => this.falseButton()} />
+      </div>
+    );
+
     return (
       <>
+        {ComponentTrue}
+        {ComponentFalse}
         <div className="container ">
           {buttonStartVisible && (
             <ButtonStart settingsClick={this.settingsClick} fetchNewWords={this.fetchNewWords} />
@@ -603,7 +640,7 @@ export class Sprint extends Component {
               help={this.help}
               helpSrc={helpSrc}
               gameImage={gameImage}
-              listenClick={listenClick}
+              listenClick={this.listenClick}
               false1Answer={false1Answer}
               false2Answer={false2Answer}
               false3Answer={false3Answer}

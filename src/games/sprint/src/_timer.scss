@@ -48,8 +48,8 @@
 
 .timer,
 .timer2 {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   background-color: #fff;
   @include position(center);
@@ -101,8 +101,8 @@
 }
 .timer__body,
 .timer__body2 {
-  width: 100px;
-  height: 100px;
+  width: 85px;
+  height: 85px;
   border-radius: 50%;
   background-color: #071c71;
   text-align: center;
@@ -117,6 +117,7 @@
   font-size: 40px;
   @include position(center);
   height: 100px;
+  padding-bottom: 15px;
 }
 @keyframes counter {
   0% {

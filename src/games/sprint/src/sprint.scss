@@ -3,11 +3,11 @@
 @import 'buttons';
 
 $background: url('../../../assets/backgrounds/sprint.jpeg');
-$text-color:black;
+$text-color: black;
 $bottom-margin: 80px;
 $font-size: 20px;
 
- @mixin position($property) {
+@mixin position($property) {
   display: flex;
   justify-content: $property;
   align-items: $property;
@@ -36,29 +36,29 @@ body {
 .wrapper {
   min-height: 100%;
   padding: 50px;
-  @include position(center); 
+  @include position(center);
 }
 
 .sprint-game,
 .sprint-start {
-  @include position(center); 
+  @include position(center);
   flex-direction: column;
   overflow: hidden;
   position: absolute;
   width: 50vw;
   border: solid;
   border-radius: 3%;
-  color:$text-color;
+  color: $text-color;
 }
 
 .container {
-  @include position(center); 
+  @include position(center);
   width: 100vw;
   height: 100vh;
 }
 
 .wrapper2 {
-  @include position(center); 
+  @include position(center);
   margin: 40px;
   position: absolute;
   left: 20px;
@@ -86,4 +86,92 @@ body {
 
 .settingsText {
   width: 80%;
+}
+
+.keyboard-inform {
+  position: absolute;
+  bottom: 15px;
+  color: $text-color;
+}
+
+@media only screen and (max-width: 967px) {
+  .keyboard-inform {
+    display: none;
+  }
+  .exitButton {
+    right: 35px;
+    top: 20px;
+  }
+  .timer,
+  .timer2 {
+    width: 125px;
+    height: 125px;
+    margin: -40px;
+  }
+
+  .timer__body,
+  .timer__body2 {
+    width: 80px;
+    height: 80px;
+  }
+
+  .timer__counter span,
+  .timer__counter2 span {
+    padding-bottom: 20px;
+  }
+  .image-help {
+    width: 23%;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .listenPictures {
+    width: 30px;
+  }
+  .voiceImage {
+    width: 35px;
+  }
+  .voice-picture {
+    width: 75vw;
+  }
+
+  html,
+  body {
+    font-size: 18px;
+  }
+  .exitButton {
+    width: 60px;
+    position: absolute;
+  }
+  .timer,
+  .timer2 {
+    width: 80px;
+    height: 80px;
+  }
+
+  .timer__body,
+  .timer__body2 {
+    width: 50px;
+    height: 50px;
+  }
+
+  .timer__counter span,
+  .timer__counter2 span {
+    padding-bottom: 50px;
+    font-size: 30px;
+  }
+  .sprint-game {
+    width: 75vw;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  h1,
+  .h1 {
+    font-size: 1.8rem;
+  }
+  html,
+  body {
+    font-size: 16px;
+  }
 }

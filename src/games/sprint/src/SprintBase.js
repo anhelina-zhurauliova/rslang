@@ -89,10 +89,20 @@ class SprintBase extends PureComponent {
         </button>
         <div className="sprint-game">
           <div className="voice-picture">
-            <button type="button" onClick={playWord} onKeyDown={playWord}>
-              <img src={voice} alt="Voice" id="voice" />
+            <button
+              type="button"
+              onClick={playWord}
+              onKeyDown={playWord}
+              className="button-background"
+            >
+              <img src={voice} alt="Voice" id="voice" className="voiceImage" />
             </button>
-            <button type="button" onClick={listenClick} onKeyDown={listenClick}>
+            <button
+              type="button"
+              onClick={listenClick}
+              onKeyDown={listenClick}
+              className="button-background"
+            >
               <img src={music} alt="Listen" className="listenPictures" />
             </button>
           </div>
@@ -139,6 +149,10 @@ class SprintBase extends PureComponent {
             Уровень сложности:
             {gameLevel}
           </div>
+        </div>
+        <div className="keyboard-inform">
+          {' '}
+          Кнопкам Верно и Неверно соответсвуют клавишы на клавиатуре D и A соотвественно
         </div>
         {helpPictureVisible && (
           <button type="button" onClick={help} onKeyDown={help}>
