@@ -1,4 +1,4 @@
-@import './styles/base';
+// @import './styles/base';
 @import './styles/buttons';
 @import './styles/icons';
 @import './styles/text';
@@ -6,4 +6,7 @@
 
 .card__container {
   position: relative;
+}
+body {
+  background-image: url(../assets/baseGame.png);
 }

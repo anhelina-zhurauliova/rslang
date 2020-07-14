@@ -1,6 +1,7 @@
 .footer {
   background-color: #ab669a;
-  position: absolute;
+  position: fixed;
+  margin-top: 20px;
   bottom: 0px;
   height: 66px;
   flex: 0 0 auto;
@@ -58,7 +59,4 @@
 }
 .artiem {
   background-image: url(https://avatars1.githubusercontent.com/u/55196488?s=460&v=4);
-}
-body {
-  overflow: hidden;
 }

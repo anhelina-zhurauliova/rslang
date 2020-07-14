@@ -35,7 +35,7 @@ function App() {
       onError(e.message);
     }
     setIsAuthenticating(false);
-  }, [cookies, setCookies]);
+  }, []);
 
   return (
     !isAuthenticating && (

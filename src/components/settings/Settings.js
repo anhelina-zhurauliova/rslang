@@ -6,6 +6,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { onError } from '../../libs/errorLib';
 import 'react-toastify/dist/ReactToastify.css';
 import { CONSTANTS } from '../../shared/constants';
+import './settings.scss';
 
 export const Settings = () => {
   const [settings, setSettings] = useState(null);
