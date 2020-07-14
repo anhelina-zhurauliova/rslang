@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Inter:regular,bold,italic&subset=latin,latin-ext');
 .main__wrapper {
-  min-height: calc(100vh - 210px);
+  flex: 1;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+body {
+  height: 100%;
 }

@@ -26,9 +26,9 @@
     "react-id-swiper": "^4.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-slick": "^0.26.1",
     "react-speech-recognition": "^2.1.4",
     "react-toastify": "^6.0.8",
-    "react-slick": "^0.26.1",
     "slick-carousel": "^1.8.1",
     "swiper": "^6.0.0"
   },
@@ -43,8 +43,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm test",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+     "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
