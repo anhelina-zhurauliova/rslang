@@ -5,7 +5,7 @@ module.exports = {
     node: true,
   },
   extends: ['airbnb', 'prettier'],
-  plugins: ['babel', 'import', 'jsx-a11y', 'react', 'prettier'],
+  plugins: ['babel', 'import', 'jsx-a11y', 'react', 'prettier', 'react-hooks'],
   parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 6,
@@ -24,7 +24,7 @@ module.exports = {
     'no-plusplus': 'off',
     'space-before-function-paren': 0,
     'import/prefer-default-export': 'off',
-
+    'no-underscore-dangle': ['error', { 'allow': ['id_', '_id'] }],
     'max-len': ['error', 100, 2, { ignoreUrls: true }],
     'no-console': 'error',
     'no-alert': 'error',
@@ -36,11 +36,13 @@ module.exports = {
     'react/forbid-prop-types': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
 
     'prefer-destructuring': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
 
     'jsx-a11y/anchor-is-valid': ['error', { components: ['Link'], specialLink: ['to'] }],
-   
     'jsx-a11y/label-has-associated-control': [ 2, {
       labelComponents: [],
       labelAttributes: [],
@@ -48,7 +50,7 @@ module.exports = {
       assert: 'either',
       depth: 3,
     }],
-    
+    'jsx-a11y/label-has-for': 'off',
     'prettier/prettier': ['error'],
   },
 };

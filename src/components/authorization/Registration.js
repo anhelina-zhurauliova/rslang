@@ -13,24 +13,25 @@ export const Registration = () => {
   // eslint-disable-next-line no-unused-vars
   const [cookies, setCookies] = useCookies(['authState']);
   const { userHasAuthenticated } = useAppContext();
-  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const createUser = async values => {
+    setIsLoading(true);
     try {
+      // eslint-disable-next-line no-unused-vars
       const data = await fetchCreateUser(values);
-      if (!data.ok) {
-        data.text().then(text => {
-          throw new Error(text);
-        });
-      }
-      setIsLoading(true);
-      const responce = await fetchSignIn(values);
-      const { userId, token, refreshToken } = responce;
+      const { email, password } = values;
+      const newValues = {
+        email,
+        password,
+      };
+      const responce = await fetchSignIn(newValues);
+      const { userId, token, refreshToken, name } = responce;
       const userData = {
         userId,
         token,
         refreshToken,
+        name,
         timestamp: new Date(),
       };
       const authState = {
@@ -39,9 +40,9 @@ export const Registration = () => {
       };
       setCookies('authState', authState);
       userHasAuthenticated(true);
-      history.push('/settings');
+      history.push('/games');
     } catch (error) {
-      onError(error.message);
+      onError('User with this e-mail exists');
       setIsLoading(false);
     }
   };
@@ -55,6 +56,7 @@ export const Registration = () => {
         </p>
         <Formik
           initialValues={{
+            name: '',
             email: '',
             password: '',
             rpassword: '',
@@ -81,10 +83,11 @@ export const Registration = () => {
             return errors;
           }}
           onSubmit={values => {
-            const { email, password } = values;
+            const { email, password, name } = values;
             const newUser = {
               email,
               password,
+              name,
             };
             createUser(newUser);
           }}
@@ -93,6 +96,22 @@ export const Registration = () => {
             const { isSubmitting } = props;
             return (
               <Form>
+                <div className="form-group has-feedback">
+                  <label htmlFor="name" className="authenticated__content control-label">
+                    <strong>Имя:</strong>
+                  </label>
+                  <div>
+                    <div className="input-group">
+                      <Field
+                        name="name"
+                        type="text"
+                        className="form-control input"
+                        placeholder="username"
+                        autoComplete="off"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <div className="form-group has-feedback">
                   <label htmlFor="email" className="authenticated__content control-label">
                     <strong>Email:</strong>
@@ -105,7 +124,7 @@ export const Registration = () => {
                       <Field
                         name="email"
                         type="text"
-                        className="form-control  input"
+                        className="form-control input"
                         placeholder="username@gmail.com"
                         autoComplete="off"
                       />

@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-
 import React, { useState, useEffect } from 'react';
 import './settings.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';

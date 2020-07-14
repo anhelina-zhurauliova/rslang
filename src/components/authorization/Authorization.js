@@ -18,8 +18,9 @@ export const Authorization = () => {
   const history = useHistory();
   const signIn = async values => {
     setIsLoading(true);
+    let responce;
     try {
-      const responce = await fetchSignIn(values);
+      responce = await fetchSignIn(values);
       const { userId, token, refreshToken } = responce;
       const userData = {
         userId,
@@ -33,15 +34,12 @@ export const Authorization = () => {
       };
       setCookies('authState', authState);
       userHasAuthenticated(true);
-      history.push('/settings');
+      history.push('/games');
     } catch (error) {
-      onError(error.message);
+      onError('User not found');
       setIsLoading(false);
     }
   };
-  // useEffect(() => {
-  // }, []);
-
   return (
     <div className="authenticated container p-4 mt-5 justify-content-center">
       <h3 className="text-center">Авторизация</h3>
