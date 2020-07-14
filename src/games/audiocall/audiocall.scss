@@ -1,6 +1,6 @@
 @import 'start';
 
-$background: url('../../assets/audiocall-background.jpeg');
+$background: url('../../assets/backgrounds/audiocall.jpeg');
 $text-color: white;
 $bottom-margin: 10vh;
 
@@ -83,6 +83,17 @@ $bottom-margin: 10vh;
     border-radius: 0;
     padding: 8px 16px 8px 16px;
     align-self: center;
+  }
+
+  &__close {
+    position: fixed;
+    right: 2vh;
+    top: 1vw;
+    &-icon {
+      filter: invert(95%) sepia(5%) saturate(0%) hue-rotate(320deg) brightness(104%) contrast(106%);
+      height: 5vh;
+      width: auto;
+    }
   }
 }
 

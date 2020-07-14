@@ -19,7 +19,7 @@ export const WordInfo = props => {
     }
   }, [word.length]);
 
-  if (answered) {
+  if (!answered) {
     return (
       <div className="audiocall__hint d-flex justify-content-center">
         <button
