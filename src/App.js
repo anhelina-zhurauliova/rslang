@@ -21,7 +21,6 @@ function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true); // сессия пользователя
   const [cookies, setCookies] = useCookies(['authState']);
-
   useEffect(() => {
     try {
       if (!Object.keys(cookies).length) {
@@ -43,6 +42,24 @@ function App() {
         <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
           <Router>
             <div className="App">
+              <Header />
+              <Switch>
+                <PrivateRoute path="/vocabulary">
+                  <Vocabulary />
+                </PrivateRoute>
+                <PrivateRoute path="/settings">
+                  <Settings />
+                </PrivateRoute>
+                <Route path="/signin">
+                  <Authorization />
+                </Route>
+                <Route path="/login">
+                  <Registration />
+                </Route>
+                <Route path="/">
+                  <Card />
+                </Route>
+              </Switch>
               <Route path="/signin">
                 <Header />
                 <div className="main__wrapper">
