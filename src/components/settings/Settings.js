@@ -18,15 +18,16 @@ export const Settings = () => {
   useEffect(() => {
     fetch(`${CONSTANTS.URL.API}/${userId}/settings`, {
       method: 'GET',
+      withCredentials: true,
       headers: {
-        Authorization: `${token}`,
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
       },
       // body: JSON.stringify({ settings }),
     })
       .then(response => setSettings(response))
       .catch(error => onError(error.message));
-  }, [settings]);
+  }, []);
   console.log('token', token);
   if (!settings) {
     return <h2>Loading...</h2>;
