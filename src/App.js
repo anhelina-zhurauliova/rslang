@@ -1,43 +1,41 @@
 /* eslint-disable react/jsx-no-undef */
 import React, { useState, useEffect } from 'react';
 import './App.scss';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { CookiesProvider, useCookies } from 'react-cookie';
 import { AppContext } from './libs/contextLib';
+import { onError } from './libs/errorLib';
 import { Header } from './components/header/Header';
 import { Settings } from './components/settings/Settings';
+import { Home } from './components/home/Home';
 import { Authorization } from './components/authorization/Authorization';
 import { Registration } from './components/authorization/Registration';
 import { Vocabulary } from './components/vocabulary/Vocabulary';
 import { Speakit } from './games/speakIt/App';
 import { AudioCall } from './games/audiocall/AudioCall';
 import { PrivateRoute } from './components/authorization/PrivateRoute';
-import { Home } from './components/home/Home';
+import { Footer } from './components/footer/footer';
+import { BaseGame } from './base-game/BaseGame';
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true); // сессия пользователя
   const [cookies, setCookies] = useCookies(['authState']);
 
-  function onLoad() {
+  useEffect(() => {
     try {
       if (!Object.keys(cookies).length) {
         setCookies('authState', { isLoggedIn: false, user: {} });
-      } else {
-        const { isLoggedIn } = cookies || cookies.authState;
-        if (isLoggedIn) {
-          userHasAuthenticated(true);
-        }
+      }
+      const { isLoggedIn } = cookies.authState;
+      if (isLoggedIn) {
+        userHasAuthenticated(true);
       }
     } catch (e) {
-      // console.log(e);
+      onError(e.message);
     }
     setIsAuthenticating(false);
-  }
-
-  useEffect(() => {
-    onLoad();
-  }, []);
+  }, [cookies, setCookies]);
 
   return (
     !isAuthenticating && (
@@ -45,32 +43,58 @@ function App() {
         <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
           <Router>
             <div className="App">
-              <Header />
-              <Switch>
-                <Route path="/signin">
+              <Route path="/signin">
+                <Header />
+                <div className="main__wrapper">
                   <Authorization />
-                </Route>
-                <Route path="/login">
+                </div>
+                <Footer />
+              </Route>
+              <Route exact path="/login">
+                <Header />
+                <div className="main__wrapper">
                   <Registration />
-                </Route>
-                <PrivateRoute path="/vocabulary">
+                </div>
+                <Footer />
+              </Route>
+              <PrivateRoute exact path="/vocabulary">
+                <Header />
+                <div className="main__wrapper">
                   <Vocabulary />
-                </PrivateRoute>
-                <PrivateRoute path="/settings">
+                </div>
+                <Footer />
+              </PrivateRoute>
+              <PrivateRoute exact path="/settings">
+                <Header />
+                <div className="main__wrapper">
                   <Settings />
-                </PrivateRoute>
-                <PrivateRoute path="/audiocall">
-                  <AudioCall />
-                </PrivateRoute>
-                <Route path="/">{/* <Promo /> */}</Route>
-                <PrivateRoute path="/games/speakIt">
-                  <Speakit />
-                </PrivateRoute>
-                <PrivateRoute path="/games">
+                </div>
+                <Footer />
+              </PrivateRoute>
+              <Route exact path="/games/audiocall">
+                <AudioCall />
+              </Route>
+              <Route exact path="/">
+                <Header />
+                {/* <Promo /> */}
+                <Footer />
+              </Route>
+              <Route exact path="/games/speakIt">
+                <Speakit />
+              </Route>
+              <Route exact path="/games">
+                <Header />
+                <div className="main__wrapper">
                   <Home />
-                </PrivateRoute>
-                <PrivateRoute path="/games/englishPuzzle">{/* <EnglishPuzzle /> */}</PrivateRoute>
-              </Switch>
+                </div>
+                <Footer />
+              </Route>
+              <Route exact path="/games/main">
+                <BaseGame />
+              </Route>
+              <PrivateRoute exact path="/games/englishPuzzle">
+                {/* <EnglishPuzzle /> */}
+              </PrivateRoute>
             </div>
           </Router>
         </AppContext.Provider>
