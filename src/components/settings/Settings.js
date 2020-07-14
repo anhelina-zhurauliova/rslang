@@ -26,7 +26,7 @@ export const Settings = () => {
     })
       .then(response => setSettings(response))
       .catch(error => onError(error.message));
-  }, [settings]);
+  }, [settings, token, userId]);
   console.log('token', token);
   if (!settings) {
     return <h2>Loading...</h2>;

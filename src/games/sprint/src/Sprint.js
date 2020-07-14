@@ -4,27 +4,15 @@
 
 import React, { Component } from 'react';
 import './sprint.scss';
-import logo from '../../../assets/svg/tick.svg';
-import voice from '../../../assets/png/voice.png';
-import parrot1 from '../../../assets/svg/parrot1.svg';
-import parrot2 from '../../../assets/svg/parrot2.svg';
-import parrot3 from '../../../assets/svg/parrot3.svg';
-import parrot4 from '../../../assets/svg/parrot4.svg';
-import stick from '../../../assets/svg/stick.svg';
-import exit from '../../../assets/svg/exit.svg';
 import exitImage from '../../../assets/svg/exitImage.svg';
 import question from '../../../assets/svg/question.svg';
 import Timer2 from './Timer';
+import SettingsSprint from './SettingsSprint';
+import StatisticsSprint from './StatisticsSprint';
+import ButtonStart from './ButtonStart';
+import SprintBase from './SprintBase';
 
-function CircleSucess() {
-  return <img src={logo} alt="Logo" className="circleSucess " />;
-}
-
-function Circle() {
-  return <div className="circle " />;
-}
-
-export function Timer() {
+function Timer() {
   return (
     <div className="wrapper">
       <div className="timer">
@@ -62,14 +50,16 @@ export class Sprint extends Component {
       parrot2Visible: false,
       parrot3Visible: false,
       parrot4Visible: false,
-      correct1Answer: false,
-      correct2Answer: false,
-      correct3Answer: false,
-      false1Answer: true,
-      false2Answer: true,
-      false3Answer: true,
+      // correct1Answer: false,
+      // correct2Answer: false,
+      // correct3Answer: false,
+      // false1Answer: true,
+      // false2Answer: true,
+      // false3Answer: true,
       helpVisible: false,
+      helpPictureVisible: true,
       statisticsVisible: false,
+      settingsVisible: false,
       wordPosition: 0,
       words: [],
       wordsTranslate: [],
@@ -84,6 +74,9 @@ export class Sprint extends Component {
       helpSrc: question,
       trueAnser: 0,
       failAnswer: 0,
+      level: 0,
+      gameLevel: 'Начинающий',
+      audible: true,
     };
 
     this.fetchNewWords = this.fetchNewWords.bind(this);
@@ -91,10 +84,20 @@ export class Sprint extends Component {
     this.trueButton = this.trueButton.bind(this);
     this.falseButton = this.falseButton.bind(this);
     this.closeGame = this.closeGame.bind(this);
-    this.trueAnserState = this.trueAnserState.bind(this);
+    this.trueAnswerState = this.trueAnswerState.bind(this);
     this.trueStatus = this.trueStatus.bind(this);
     this.playWord = this.playWord.bind(this);
     this.help = this.help.bind(this);
+    this.settingsClick = this.settingsClick.bind(this);
+    this.closeSettings = this.closeSettings.bind(this);
+    this.radioButtonClick0 = this.radioButtonClick0.bind(this);
+    this.radioButtonClick1 = this.radioButtonClick1.bind(this);
+    this.radioButtonClick2 = this.radioButtonClick2.bind(this);
+    this.radioButtonClick3 = this.radioButtonClick3.bind(this);
+    this.radioButtonClick4 = this.radioButtonClick4.bind(this);
+    this.radioButtonClick5 = this.radioButtonClick5.bind(this);
+    this.listenClick = this.listenClick.bind(this);
+    this.resultSound = this.resultSound.bind(this);
   }
 
   playWord = () => {
@@ -121,10 +124,10 @@ export class Sprint extends Component {
       trueAnser: state.trueAnser++,
     }));
     this.parrotState();
-    this.trueAnserState();
+    this.trueAnswerState();
   };
 
-  trueAnserState = () => {
+  trueAnswerState = () => {
     const { answerTrue, correct1Answer, correct2Answer } = this.state;
     if (answerTrue) {
       this.setState(() => ({
@@ -237,11 +240,11 @@ export class Sprint extends Component {
       words,
       wordsAudioMeaning,
       wordsTranslate,
+      level,
     } = this.state;
-    const page = Math.round(Math.random() * 10);
-    const group = Math.round(Math.random() * 6);
+    const page = Math.round(Math.random() * 29);
     const rowResponse = await fetch(
-      `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${group}`,
+      `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${level}`,
     )
       .then(response => {
         return response.json();
@@ -311,7 +314,7 @@ export class Sprint extends Component {
         statisticsVisible: true,
         gameTimerVisible: false,
       }));
-    }, 67200);
+    }, 670200);
     const { words } = this.state;
     return words;
   };
@@ -343,7 +346,6 @@ export class Sprint extends Component {
 
   trueButton = () => {
     const { answer } = this.state;
-    // Проверка на использование 20 слов)))
     if (answer === 18) {
       this.fetchWords();
       this.setState(() => ({
@@ -358,8 +360,15 @@ export class Sprint extends Component {
     if (trueWord) {
       this.trueStatus();
     } else {
+      let points;
+      const { gamePoints } = this.state;
+      if (gamePoints === 0) {
+        points = 0;
+      } else {
+        points = gamePoints - 10;
+      }
       this.setState(state => ({
-        gamePoints: state.gamePoints - 10,
+        gamePoints: points,
         successAnswer: 0,
         bonusPoints: 10,
         parrot1Visible: false,
@@ -413,8 +422,16 @@ export class Sprint extends Component {
     if (!trueWord) {
       this.trueStatus();
     } else {
+      let points;
+      const { gamePoints } = this.state;
+      if (gamePoints === 0) {
+        points = 0;
+      } else {
+        points = gamePoints - 10;
+      }
+
       this.setState(state => ({
-        gamePoints: state.gamePoints - 10,
+        gamePoints: points,
         successAnswer: 0,
         bonusPoints: 10,
         parrot1Visible: false,
@@ -452,6 +469,81 @@ export class Sprint extends Component {
     }
   };
 
+  settingsClick = () => {
+    this.setState(() => ({
+      settingsVisible: true,
+      gameVisible: false,
+      buttonStartVisible: false,
+    }));
+  };
+
+  resultSound = () => {
+    const voice = 'audio/success.mp3';
+    const audio = new Audio(`${voice}`);
+    audio.play();
+  };
+
+  closeSettings = () => {
+    this.setState(() => ({
+      settingsVisible: false,
+      buttonStartVisible: true,
+    }));
+  };
+
+  listenClick = () => {
+    this.setState(state => ({
+      audible: !state.audible,
+    }));
+  };
+
+  radioButtonClick0 = () => {
+    this.setState(() => ({
+      level: 0,
+      gameLevel: 'Начинающий',
+      helpPictureVisible: true,
+    }));
+  };
+
+  radioButtonClick1 = () => {
+    this.setState(() => ({
+      level: 1,
+      gameLevel: 'Легко',
+      helpPictureVisible: true,
+    }));
+  };
+
+  radioButtonClick2 = () => {
+    this.setState(() => ({
+      level: 2,
+      gameLevel: 'Средне',
+      helpPictureVisible: true,
+    }));
+  };
+
+  radioButtonClick3 = () => {
+    this.setState(() => ({
+      level: 3,
+      gameLevel: 'Сложно',
+      helpPictureVisible: true,
+    }));
+  };
+
+  radioButtonClick4 = () => {
+    this.setState(() => ({
+      level: 4,
+      gameLevel: 'Знаток английского языка',
+      helpPictureVisible: false,
+    }));
+  };
+
+  radioButtonClick5 = () => {
+    this.setState(() => ({
+      level: 5,
+      gameLevel: 'Житель Англии',
+      helpPictureVisible: false,
+    }));
+  };
+
   render() {
     const {
       timerVisible,
@@ -463,13 +555,8 @@ export class Sprint extends Component {
       parrot2Visible,
       parrot3Visible,
       parrot4Visible,
-      correct1Answer,
-      correct2Answer,
-      correct3Answer,
-      false1Answer,
-      false2Answer,
-      false3Answer,
       helpVisible,
+      helpPictureVisible,
       statisticsVisible,
       gameWord,
       gameTranslate,
@@ -477,142 +564,72 @@ export class Sprint extends Component {
       helpSrc,
       trueAnser,
       failAnswer,
+      bonusPoints,
+      settingsVisible,
+      gameLevel,
+      listenClick,
+      false1Answer,
+      false2Answer,
+      false3Answer,
+      correct1Answer,
+      correct2Answer,
+      correct3Answer,
     } = this.state;
-
-    const img = `https://raw.githubusercontent.com/irinainina/rslang/rslang-data/data/${gameImage}`;
-    const startButton = (
-      <button
-        type="button"
-        className="btn btn-success button-start"
-        id="btn-success"
-        // className = "button-start"
-        onClick={this.fetchNewWords}
-      >
-        Начать игру
-      </button>
-    );
-
     return (
       <>
         <div className="container ">
           {buttonStartVisible && (
-            <>
-              <div className="sprint-start">
-                <h1 className="sprint">СПРИНТ</h1>
-                <div className="sprint-info">
-                  Знаешь много слов на английском,но без понятия:что они означают?Разберись с
-                  переводом слов в увлекательной игре Спринт!
-                </div>
-                {startButton}
-              </div>
-            </>
+            <ButtonStart settingsClick={this.settingsClick} fetchNewWords={this.fetchNewWords} />
           )}
           {timerVisible && <Timer />}
           {gameTimerVisible && <Timer2 />}
-
           {gameVisible && (
-            <>
-              {helpVisible && (
-                <div className="float-left">
-                  <img src={img} className="rounded image-help" alt="..." />
-                </div>
-              )}
-              <img src={exit} alt="Exit" className="exitButton" onClick={this.closeGame} />
-              <div className="sprint-game">
-                <div className="voice-picture">
-                  <img
-                    src={voice}
-                    alt="Voice"
-                    id="voice"
-                    className="white-background"
-                    onClick={this.playWord}
-                  />
-                </div>
-                <span id="gamePoints">
-                  Ваши очки:
-                  {gamePoints}
-                </span>
-                {/* <div>
-                  {' '}
-                  +
-                  {bonusPoints}
-                  за каждый правильный ответ
-                </div> */}
-                <div>-10 за каждый неправильный ответ</div>
-                <div>
-                  <div className="parrotBar">
-                    {parrot1Visible && <img src={parrot1} alt="Parrot1" />}
-                    {parrot2Visible && <img src={parrot2} alt="Parrot2" />}
-                    {parrot3Visible && <img src={parrot3} alt="Parrot3" />}
-                    {parrot4Visible && <img src={parrot4} alt="Parrot4" />}
-                  </div>
-                  <div className="stick">
-                    {' '}
-                    <img src={stick} alt="Stick" />
-                  </div>
-                </div>
-                <h2 id="word">{gameWord}</h2>
-                <h3 id="wordTranslate">{gameTranslate}</h3>
-                <div className="circleBar">
-                  {false1Answer && <Circle />}
-                  {correct1Answer && <CircleSucess />}
-                  {false2Answer && <Circle />}
-                  {correct2Answer && <CircleSucess />}
-                  {false3Answer && <Circle />}
-                  {correct3Answer && <CircleSucess />}
-                </div>
-                <div id="btn-status" className="sprint-buttons">
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    id="btn-fail"
-                    onClick={this.falseButton}
-                  >
-                    Неверно
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-success"
-                    id="btn-success"
-                    onClick={this.trueButton}
-                  >
-                    Верно
-                  </button>
-                </div>
-              </div>
-              <img src={helpSrc} alt="Question" className="question-mark" onClick={this.help} />
-            </>
+            <SprintBase
+              helpVisible={helpVisible}
+              closeGame={this.closeGame}
+              playWord={this.playWord}
+              gamePoints={gamePoints}
+              bonusPoints={bonusPoints}
+              parrot1Visible={parrot1Visible}
+              parrot2Visible={parrot2Visible}
+              parrot3Visible={parrot3Visible}
+              parrot4Visible={parrot4Visible}
+              gameWord={gameWord}
+              gameTranslate={gameTranslate}
+              falseButton={this.falseButton}
+              trueButton={this.trueButton}
+              gameLevel={gameLevel}
+              helpPictureVisible={helpPictureVisible}
+              help={this.help}
+              helpSrc={helpSrc}
+              gameImage={gameImage}
+              listenClick={listenClick}
+              false1Answer={false1Answer}
+              false2Answer={false2Answer}
+              false3Answer={false3Answer}
+              correct1Answer={correct1Answer}
+              correct2Answer={correct2Answer}
+              correct3Answer={correct3Answer}
+            />
           )}
           {statisticsVisible && (
-            <div className="sprint-game">
-              <div>
-                Твой результат:
-                {gamePoints}
-                очков
-              </div>
-              <div>
-                Количество всех ответов:
-                {trueAnser + failAnswer}
-              </div>
-              <div>
-                Количество правильных ответов:
-                {trueAnser}
-              </div>
-              <div>
-                Количество неправильных ответов:
-                {failAnswer}
-              </div>
-              <div id="btn-status">
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  id="btn-fail"
-                  onClick={this.fetchNewWords}
-                >
-                  Тренироваться еще
-                </button>
-              </div>
-            </div>
+            <StatisticsSprint
+              gamePoints={gamePoints}
+              trueAnser={trueAnser}
+              failAnswer={failAnswer}
+              fetchNewWords={this.fetchNewWords}
+            />
+          )}
+          {settingsVisible && (
+            <SettingsSprint
+              radioButtonClick0={this.radioButtonClick0}
+              radioButtonClick1={this.radioButtonClick1}
+              radioButtonClick2={this.radioButtonClick2}
+              radioButtonClick3={this.radioButtonClick3}
+              radioButtonClick4={this.radioButtonClick4}
+              radioButtonClick5={this.radioButtonClick5}
+              closeSettings={this.closeSettings}
+            />
           )}
         </div>
       </>

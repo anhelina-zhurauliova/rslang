@@ -56,7 +56,7 @@ export const Game = props => {
         setCurrentWords(words);
       });
     }
-  }, []);
+  }, [globalWords.length, trainWord]);
 
   return (
     <div className="audiocall container d-flex justify-content-center">
