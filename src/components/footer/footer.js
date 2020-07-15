@@ -6,12 +6,12 @@ export const Footer = () => {
     <footer className="footer">
       <p className="footer-info">Команда разработчиков</p>
       <div className="team-mate__container">
-        <span className="team-mate anhelina" />
-        <span className="team-mate olga" />
-        <span className="team-mate tanya" />
-        <span className="team-mate arslan" />
-        <span className="team-mate artiem" />
-        <span className="team-mate ilya" />
+        <a href="https://github.com/anhelina-zhurauliova" className="team-mate anhelina" />
+        <a href="https://github.com/olakostenok" className="team-mate olga" />
+        <a href="https://github.com/kastrubait" className="team-mate tanya" />
+        <a href="https://github.com/ars6300" className="team-mate arslan" />
+        <a href="https://github.com/Artierm" className="team-mate artiem" />
+        <a href="https://github.com/ilyayudovin" className="team-mate ilya" />
       </div>
     </footer>
   );

@@ -16,6 +16,7 @@ import { AudioCall } from './games/audiocall/AudioCall';
 import { PrivateRoute } from './components/authorization/PrivateRoute';
 import { Footer } from './components/footer/footer';
 import { BaseGame } from './base-game/BaseGame';
+import { TeamPage } from './components/teamPage/teamPage';
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -80,6 +81,11 @@ function App() {
               </Route>
               <Route exact path="/games/main">
                 <BaseGame />
+              </Route>
+              <Route exact path="/teamPage">
+                {/* <Header /> */}
+                <TeamPage />
+                <Footer />
               </Route>
               <Route exact path="/games/englishPuzzle">
                 {/* <EnglishPuzzle /> */}
