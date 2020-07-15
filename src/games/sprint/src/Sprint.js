@@ -335,7 +335,7 @@ export class Sprint extends Component {
         statisticsVisible: true,
         gameTimerVisible: false,
       }));
-    }, 670200);
+    }, 67200);
     const { words } = this.state;
     return words;
   };
@@ -362,6 +362,7 @@ export class Sprint extends Component {
       helpSrc: question,
       trueAnser: 0,
       failAnswer: 0,
+      statisticsVisible:false
     }));
   };
 
@@ -658,6 +659,7 @@ export class Sprint extends Component {
               trueAnser={trueAnser}
               failAnswer={failAnswer}
               fetchNewWords={this.fetchNewWords}
+              closeGame={this.closeGame}
             />
           )}
           {settingsVisible && (

@@ -1,16 +1,22 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import exit from '../../../assets/svg/exit.svg';
 
 const propTypes = {
   trueAnser: PropTypes.number,
   failAnswer: PropTypes.number,
   gamePoints: PropTypes.func,
   fetchNewWords: PropTypes.func,
+  closeGame:PropTypes.func
 };
 class StatisticsSprint extends PureComponent {
   render() {
-    const { trueAnser, failAnswer, gamePoints, fetchNewWords } = this.props;
+    const { trueAnser, failAnswer, gamePoints, fetchNewWords ,closeGame } = this.props;
     return (
+      <>
+      <button type="button" onClick={closeGame} onKeyDown={closeGame}>
+          <img src={exit} alt="Exit" className="exitButton" />
+        </button>
       <div className="sprint-game">
         <div>
           Твой результат:
@@ -35,6 +41,7 @@ class StatisticsSprint extends PureComponent {
           </button>
         </div>
       </div>
+      </>
     );
   }
 }
