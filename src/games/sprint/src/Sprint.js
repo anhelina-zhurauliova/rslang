@@ -113,6 +113,8 @@ export class Sprint extends Component {
     VOICE.play();
   };
 
+  closeGame = () => {};
+
   successVoice = () => {
     const { audible } = this.state;
     if (audible) {
@@ -616,7 +618,11 @@ export class Sprint extends Component {
         {ComponentFalse}
         <div className="container ">
           {buttonStartVisible && (
-            <ButtonStart settingsClick={this.settingsClick} fetchNewWords={this.fetchNewWords} />
+            <ButtonStart
+              settingsClick={this.settingsClick}
+              fetchNewWords={this.fetchNewWords}
+              closeGame={this.closeGame}
+            />
           )}
           {timerVisible && <Timer />}
           {gameTimerVisible && <Timer2 />}

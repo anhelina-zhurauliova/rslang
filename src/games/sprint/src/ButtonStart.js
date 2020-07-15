@@ -1,17 +1,22 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import gear from '../../../assets/svg/gear.svg';
+import exit from '../../../assets/svg/exit.svg';
 
 const propTypes = {
   settingsClick: PropTypes.settingsClick,
   fetchNewWords: PropTypes.fetchNewWords,
+  closeGame: PropTypes.closeGame,
 };
 
 class ButtonStart extends PureComponent {
   render() {
-    const { settingsClick, fetchNewWords } = this.props;
+    const { settingsClick, fetchNewWords, closeGame } = this.props;
     return (
       <>
+        <button type="button" onClick={closeGame} onKeyDown={closeGame}>
+          <img src={exit} alt="Exit" id="exit" className="exitButton" />
+        </button>
         <button type="button" onClick={settingsClick} onKeyDown={settingsClick}>
           <img src={gear} alt="Settings" id="settings" className="gearButton" />
         </button>
