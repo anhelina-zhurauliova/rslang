@@ -46,7 +46,7 @@ export const AudioCall = () => {
     if (!words.length) {
       getWords().then(array => setWords(array));
     }
-  }, [getWords, words.length]);
+  }, [words.length]);
 
   if (!screen.isStarted) {
     return (

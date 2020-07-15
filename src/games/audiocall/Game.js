@@ -52,20 +52,24 @@ export const Game = props => {
     return shuffle(result);
   };
 
-  useEffect(() => {
+  const nextWord = () => {
     if (globalWords.length > 0) {
       trainWord().then(words => {
         setCurrentWords(words);
       });
     }
-  }, [globalWords.length, trainWord]);
+  };
+
+  useEffect(() => {
+    nextWord();
+  }, []);
 
   return (
     <div className="audiocall container d-flex justify-content-center">
       <Link className="audiocall__close" to="/">
         <Close className="audiocall__close-icon" />
       </Link>
-      <Controllers allWords={currentWords} />
+      <Controllers allWords={currentWords} nextWord={nextWord} />
     </div>
   );
 };
