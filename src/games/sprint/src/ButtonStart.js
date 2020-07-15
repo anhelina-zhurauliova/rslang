@@ -4,9 +4,9 @@ import gear from '../../../assets/svg/gear.svg';
 import exit from '../../../assets/svg/exit.svg';
 
 const propTypes = {
-  settingsClick: PropTypes.settingsClick,
-  fetchNewWords: PropTypes.fetchNewWords,
-  closeGame: PropTypes.closeGame,
+  settingsClick: PropTypes.func,
+  fetchNewWords: PropTypes.func,
+  closeGame: PropTypes.func,
 };
 
 class ButtonStart extends PureComponent {

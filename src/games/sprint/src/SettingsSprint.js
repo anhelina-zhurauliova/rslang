@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import exit from '../../../assets/svg/exit.svg';
 
 const propTypes = {
-  closeSettings: PropTypes.closeSettings,
-  radioButtonClick0: PropTypes.radioButtonClick0,
-  radioButtonClick1: PropTypes.radioButtonClick1,
-  radioButtonClick2: PropTypes.radioButtonClick2,
-  radioButtonClick3: PropTypes.radioButtonClick3,
-  radioButtonClick4: PropTypes.radioButtonClick4,
-  radioButtonClick5: PropTypes.radioButtonClick5,
+  closeSettings: PropTypes.func,
+  radioButtonClick0: PropTypes.func,
+  radioButtonClick1: PropTypes.func,
+  radioButtonClick2: PropTypes.func,
+  radioButtonClick3: PropTypes.func,
+  radioButtonClick4: PropTypes.func,
+  radioButtonClick5: PropTypes.func,
 };
 
 class SettingsSprint extends PureComponent {

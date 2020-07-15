@@ -2,12 +2,11 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  trueAnser: PropTypes.trueAnser,
-  failAnswer: PropTypes.failAnswer,
-  gamePoints: PropTypes.gamePoints,
-  fetchNewWords: PropTypes.fetchNewWords,
+  trueAnser: PropTypes.number,
+  failAnswer: PropTypes.number,
+  gamePoints: PropTypes.func,
+  fetchNewWords: PropTypes.func,
 };
-
 class StatisticsSprint extends PureComponent {
   render() {
     const { trueAnser, failAnswer, gamePoints, fetchNewWords } = this.props;
