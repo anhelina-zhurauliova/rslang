@@ -6,15 +6,14 @@ import exit from '../../../assets/svg/exit.svg';
 const propTypes = {
   settingsClick: PropTypes.func,
   fetchNewWords: PropTypes.func,
-  closeGame: PropTypes.func,
 };
 
 class ButtonStart extends PureComponent {
   render() {
-    const { settingsClick, fetchNewWords, closeGame } = this.props;
+    const { settingsClick, fetchNewWords } = this.props;
     return (
       <>
-        <button type="button" onClick={closeGame} onKeyDown={closeGame}>
+        <button type="button">
           <img src={exit} alt="Exit" id="exit" className="exitButton" />
         </button>
         <button type="button" onClick={settingsClick} onKeyDown={settingsClick}>
