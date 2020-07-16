@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { CONSTANTS } from '../../shared/constants';
+import { ReactComponent as Close } from '../../assets/svg/close.svg';
 import { Controllers } from './Controllers';
 
 export const Game = props => {
@@ -56,10 +58,13 @@ export const Game = props => {
         setCurrentWords(words);
       });
     }
-  }, []);
+  }, [globalWords.length, trainWord]);
 
   return (
     <div className="audiocall container d-flex justify-content-center">
+      <Link className="audiocall__close" to="/">
+        <Close className="audiocall__close-icon" />
+      </Link>
       <Controllers allWords={currentWords} />
     </div>
   );
