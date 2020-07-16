@@ -1,169 +1,283 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-console */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
-import './settings.scss';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+// eslint-disable-next-line no-return-assign
+
+import React, { useState, useEffect, useRef } from 'react';
 import { useCookies } from 'react-cookie';
-import { CONSTANTS } from '../../shared/constants';
+import './settings.scss';
+import { onError } from '../../libs/errorLib';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Settings = () => {
-  const [settings, setSettings] = useState(null);
+  const defaultSettings = {
+    optional: {
+      basicGame: {
+        isImage: true,
+        isTranslation: true,
+        isTranscription: true,
+        isSentenceExample: true,
+        isTranslateSentenceExample: true,
+        isWordMeaning: true,
+        isTranslateWordmeaning: true,
+        showAnswer: true,
+        deleteButton: true,
+        hardWordButton: true,
+        cardsForDay: '50',
+      },
+    },
+    wordsPerDay: '50',
+  };
+  const [currentSettings, setCurrentSettings] = useState();
+  const [settingsFromBack, setSettingsFromBack] = useState({});
   const [cookies] = useCookies(['authState']);
-  const defaultQuery = 'settings';
+  const [numberOfWords, setNumberOfWords] = useState(null);
+  const cardLimit = useRef();
+  const wordLimit = useRef();
 
-  const token = cookies.authStateauthState.user.userId;
-  const userId = cookies.authStateauthState.user.token;
-  const settingsUrl = `${CONSTANTS.URL.API}/${userId}/${defaultQuery}`;
+  const { token, userId } = cookies.authState.user;
+
+  const upsertUserSettings = (tokenUser, idUser, settings) => {
+    const url = `https://afternoon-falls-25894.herokuapp.com/users/${idUser}/settings`;
+
+    fetch(url, {
+      method: 'PUT',
+      body: JSON.stringify(settings),
+      headers: {
+        Authorization: `Bearer ${tokenUser}`,
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+  };
+
+  const fetchUserSettings = async (tokenUser, idUser) => {
+    const url = `https://afternoon-falls-25894.herokuapp.com/users/${idUser}/settings`;
+    try {
+      const rawResponse = await fetch(url, {
+        method: 'GET',
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${tokenUser}`,
+          Accept: 'application/json',
+        },
+      });
+      const dataUser = await rawResponse.json();
+      return dataUser;
+    } catch (error) {
+      return onError(error.message);
+    }
+  };
+  const getSettings = async () => {
+    const settings = await fetchUserSettings(token, userId);
+
+    if (settings?.optional?.basicGame) {
+      setCurrentSettings(settings);
+      setNumberOfWords(settings.wordsPerDay);
+      setSettingsFromBack(settings.optional.basicGame);
+    } else {
+      setSettingsFromBack(defaultSettings);
+      setCurrentSettings(defaultSettings.optional.basicGame);
+      setNumberOfWords(defaultSettings.wordsPerDay);
+    }
+  };
 
   useEffect(() => {
-    fetch(settingsUrl, {
-      method: 'GET',
-      headers: {
-        Authorization: `${token}`,
-        'Content-Type': 'application/json',
+    if (userId) {
+      getSettings();
+    }
+  }, [userId]);
+
+  const onSubmithandler = e => {
+    e.preventDefault();
+    upsertUserSettings(token, userId, {
+      wordsPerDay: '1',
+      optional: {
+        ...settingsFromBack.optional,
+        basicGame: currentSettings,
       },
-      body: JSON.stringify({ settings }),
-    })
-      .then(response => setSettings(response))
-      .catch(() => {
-        // TODO: Show some notification
-        // console.log(error);
-      });
-  });
+    });
+  };
 
-  if (!settings) {
-    return <h2>Loading...</h2>;
-  }
+  return currentSettings ? (
+    <form>
+      <div className="settings__container">
+        <h2 className="page__title">Параметры страницы</h2>
 
-  return (
-    <div>
-      <h1>Anywhere in your app!</h1>
-      <Formik
-        initialValues={settings}
-        validate={values => {
-          const errors = {};
-          if (!values.wordsLimit) {
-            errors.wordsLimit = 'Required';
-          }
-          if (!values.cardsLimit) {
-            errors.cardsLimit = 'Required';
-          }
-          if (values.wordsLimit < 10 || values.wordsLimit > 200) {
-            errors.wordsLimit = 'Invalid words limit';
-          }
-          if (values.cardsLimit < 10 || values.cardsLimit > 200) {
-            errors.cardsLimit = 'Invalid cards limit';
-          }
-          if (values.wordsLimit > values.cardsLimit) {
-            errors.cardsLimit = 'Cards limit should be more than words limit';
-          }
-          return errors;
-        }}
-        onSubmit={(values, { setSubmitting }) => {
-          setSubmitting(true);
-
-          fetch(settingsUrl, {
-            method: 'PUT',
-            headers: {
-              Authorization: `${token}`,
-              'Content-Type': 'application/json',
-            },
-          })
-            .then(response => response.json())
-            .catch(() => {
-              // TODO: Handle errors with some notifications or toasters
-              //   console.error('Error:', error);
-            })
-            .finally(() => setSubmitting(false));
-        }}
-      >
-        {({ isSubmitting }) => (
-          <div className="container">
-            <Form>
-              <div className="input-group input-group-sm mb-3">
-                <div className="input-group-prepend">
-                  <span className="input-group-text "> Ваше имя</span>
-                </div>
-                <Field className="form-control has-error" type="text" name="userName" />
-              </div>
-              <ErrorMessage className="is-invalid" name="nameValid" component="div" />
-              <div className="input-group input-group-sm mb-3">
-                <div className="input-group-prepend">
-                  <span className="input-group-text ">Лимит слов в день</span>
-                </div>
-                <Field className="form-control has-error" type="number" name="wordsLimit" />
-              </div>
-              <ErrorMessage className="is-invalid" name="wordsLimit" component="div" />
-              <div className="input-group input-group-sm mb-3">
-                <div className="input-group-prepend">
-                  <span className="input-group-text">Лимит карточек в день</span>
-                </div>
-                <Field className="form-control has-error" type="number" name="cardsLimit" />
-              </div>
-              <ErrorMessage className="is-invalid" name="cardsLimit" component="div" />
-              <div className="form-group form-check">
-                <Field className="form-check-input" type="checkbox" name="translate" />
-                <label className="form-check-label" htmlFor="exampleCheck1">
-                  Перевод
-                </label>
-              </div>
-              <ErrorMessage className="is-invalid" name="translate" component="div" />
-              <div className="form-group form-check">
-                <Field className="form-check-input" type="checkbox" name="transcription" />
-                <label className="form-check-label" htmlFor="exampleCheck1">
-                  Транскрипция
-                </label>
-              </div>
-              <ErrorMessage className="is-invalid" name="transcription" component="div" />
-              <div className="form-group form-check">
-                <Field className="form-check-input" type="checkbox" name="image" />
-                <label className="form-check-label" htmlFor="exampleCheck1">
-                  Картинка
-                </label>
-              </div>
-              <ErrorMessage className="is-invalid" name="image" component="div" />
-              <div className="form-group form-check">
-                <Field className="form-check-input" type="checkbox" name="sentenceUnderstanding" />
-                <label className="form-check-label" htmlFor="exampleCheck1">
-                  Значение слова
-                </label>
-              </div>
-              <ErrorMessage className="is-invalid" name="sentenceUnderstanding" component="div" />
-              <div className="form-group form-check">
-                <Field className="form-check-input" type="checkbox" name="sentenceExample" />
-                <label className="form-check-label" htmlFor="exampleCheck1">
-                  Пример использования слова
-                </label>
-              </div>
-              <ErrorMessage className="is-invalid" name="sentenceExample" component="div" />
-              <div className="form-group form-check">
-                <Field className="form-check-input" type="checkbox" name="deleteWords" />
-                <label className="form-check-label" htmlFor="exampleCheck1">
-                  Удалить
-                </label>
-              </div>
-              <ErrorMessage className="is-invalid" name="deleteWords" component="div" />
-              <div className="form-group form-check">
-                <Field className="form-check-input" type="checkbox" name="difficultWords" />
-                <label className="form-check-label" htmlFor="exampleCheck1">
-                  Сложные слова
-                </label>
-              </div>
-              <ErrorMessage className="is-invalid" name="difficultWords" component="div" />
-              <div className="form-group form-check">
-                <Field className="form-check-input" type="checkbox" name="complexity" />
-                <label className="form-check-label" htmlFor="exampleCheck1">
-                  Составные слова
-                </label>
-              </div>
-              <ErrorMessage className="is-invalid" name="complexity" component="div" />
-              <button type="submit" disabled={isSubmitting}>
-                Сохранить настройки
-              </button>
-            </Form>
+        <div className="settings_learned__words">
+          <h3 className="settings__secondary-title">Настройки изучаемых слов:</h3>
+          <div className="words__limit">
+            <p className="settings__info">1. Количество новых слов в день:</p>
+            <button
+              className="form__button"
+              type="button"
+              onClick={() => {
+                const numWordLimit = Number(wordLimit.current.value);
+                if (numWordLimit > 10) {
+                  return (wordLimit.current.value = numWordLimit - 1);
+                }
+                return (wordLimit.current.value = numWordLimit);
+              }}
+            >
+              -
+            </button>
+            <input
+              ref={wordLimit}
+              className="plus-minus__input"
+              value={numberOfWords}
+              type="number"
+              min={10}
+              max={200}
+            />
+            <button
+              className="form__button"
+              type="button"
+              onClick={() => {
+                const numWordLimit = Number(wordLimit.current.value);
+                if (numWordLimit > 10) {
+                  return (wordLimit.current.value = numWordLimit + 1);
+                }
+                return (wordLimit.current.value = numWordLimit);
+              }}
+            >
+              +
+            </button>
           </div>
-        )}
-      </Formik>
-    </div>
+          <div className="cards__limit">
+            <p className="settings__info">2. Максимальное количество карточек в день:</p>
+            <button
+              className="form__button"
+              type="button"
+              onClick={() => {
+                const num = Number(cardLimit.current.value);
+                if (num > 10) {
+                  cardLimit.current.value = num - 1;
+                } else {
+                  cardLimit.current.value = num;
+                }
+                setCurrentSettings(prevSettings => ({
+                  ...prevSettings,
+                  cardsForDay: cardLimit.current.value,
+                }));
+              }}
+            >
+              -
+            </button>
+            <input
+              ref={cardLimit}
+              className="plus-minus__input"
+              value={currentSettings.cardsForDay}
+              type="number"
+              min={10}
+              max={200}
+            />
+            <button
+              className="form__button"
+              type="button"
+              onClick={() => {
+                const numCardLimit = Number(cardLimit.current.value);
+                if (numCardLimit < 200) {
+                  cardLimit.current.value = numCardLimit + 1;
+                }
+              }}
+            >
+              +
+            </button>
+          </div>
+        </div>
+
+        <div className="settings_info_cards">
+          <h3 className="settings__secondary-title">Отображение информации на карточках:</h3>
+          <div className="settings__info__container">
+            <div className="info__card">
+              <input
+                className="settings__checkbox"
+                type="checkbox"
+                checked={currentSettings.isTranslation}
+              />
+              <p className="settings__info">Показывать перевод слова</p>
+            </div>
+            <div className="info__card">
+              <input
+                className="settings__checkbox"
+                type="checkbox"
+                checked={currentSettings.isWordMeaning}
+              />
+              <p className="settings__info">Показывать предложение с объяснением значения слова</p>
+            </div>
+            <div className="info__card">
+              <input
+                className="settings__checkbox"
+                type="checkbox"
+                checked={currentSettings.isWordMeaning}
+              />
+              <p className="settings__info">
+                Показывать перевод предложения с объяснением значения слова
+              </p>
+            </div>
+            <div className="info__card">
+              <input
+                className="settings__checkbox"
+                type="checkbox"
+                checked={currentSettings.isSentenceExample}
+              />
+              <p className="settings__info">
+                Показывать предложение с примером использования слова
+              </p>
+            </div>
+            <div className="info__card">
+              <input
+                className="settings__checkbox"
+                type="checkbox"
+                checked={currentSettings.isTranslateSentenceExample}
+              />
+              <p className="settings__info">
+                Показывать перевод предложения с примером использования слова
+              </p>
+            </div>
+            <div className="info__card">
+              <input
+                className="settings__checkbox"
+                type="checkbox"
+                checked={currentSettings.isTranscription}
+              />
+              <p className="settings__info">Показывать транскрипцию слова</p>
+            </div>
+            <div className="info__card">
+              <input
+                className="settings__checkbox"
+                type="checkbox"
+                checked={currentSettings.isImage}
+              />
+              <p className="settings__info">Показывать картинку-ассоциацию к слову</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="settings__button-on-page">
+          <h3 className="settings__secondary-title">Отображение кнопок на странице:</h3>
+          <div className="settings__info__container">
+            <div className="info__card">
+              <input className="settings__checkbox" type="checkbox" />
+              <p className="settings__info">Добавить кнопку </p>
+              <span className="button__imitation">Показать ответ</span>
+            </div>
+            <div className="info__card">
+              <input className="settings__checkbox" type="checkbox" />
+              <p className="settings__info">Добавить кнопку </p>
+              <span className="button__imitation">Удалить</span>
+            </div>
+            <div className="info__card">
+              <input className="settings__checkbox" type="checkbox" />
+              <p className="settings__info">Добавить кнопку </p>
+              <span className="button__imitation">Сложное слово</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button className="submit__settings_button" type="submit" onClick={onSubmithandler}>
+        Сохранить
+      </button>
+    </form>
+  ) : (
+    <h1>LOAD</h1>
   );
 };
