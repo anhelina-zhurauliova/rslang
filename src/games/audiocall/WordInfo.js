@@ -43,7 +43,7 @@ export const WordInfo = props => {
       <div className="audiocall__row">
         <button
           type="button"
-          className="audiocall__voice-btn btn"
+          className="audiocall__voice-btn-answered btn"
           onClick={() => {
             playWord();
           }}

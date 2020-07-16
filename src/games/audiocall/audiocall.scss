@@ -49,6 +49,9 @@ $bottom-margin: 10vh;
 
   &__voice-btn {
     align-self: center;
+    &-answered {
+      height: 77px;
+    }
   }
 
   &__icon {
