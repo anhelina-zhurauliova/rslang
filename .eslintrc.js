@@ -16,7 +16,7 @@ module.exports = {
   },
   rules: {
     'linebreak-style': 'off',
-
+  
     'arrow-parens': 'off',
     'object-curly-newline': 'off',
     'no-mixed-operators': 'off',
@@ -37,7 +37,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': 'off',
 
     'prefer-destructuring': 'off',
     'jsx-a11y/label-has-associated-control': 'off',

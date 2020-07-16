@@ -41,6 +41,7 @@ export const Controllers = props => {
   const dontKnow = e => {
     e.preventDefault();
     setView({ isAnswered: true });
+    onGameItemClick(e);
   };
 
   useEffect(() => {

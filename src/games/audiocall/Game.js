@@ -65,8 +65,8 @@ export const Game = props => {
   }, []);
 
   return (
-    <div className="audiocall container d-flex justify-content-center">
-      <Link className="audiocall__close" to="/">
+    <div className="audiocall d-flex justify-content-center">
+      <Link className="audiocall__close" to="/games">
         <Close className="audiocall__close-icon" />
       </Link>
       <Controllers allWords={currentWords} nextWord={nextWord} />

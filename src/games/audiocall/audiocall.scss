@@ -6,7 +6,7 @@ $bottom-margin: 10vh;
 
 .audiocall {
   height: 100vh;
-  max-width: unset;
+  max-width: 100%;
   background: $background no-repeat center center fixed;
   background-size: cover;
   color: $text-color;
@@ -120,10 +120,6 @@ $bottom-margin: 10vh;
   }
 }
 
-.container {
-  max-width: 100%;
-}
-
 @media only screen and (max-width: 767px) {
   $margin: 5vh;
   .audiocall {
@@ -149,8 +145,8 @@ $bottom-margin: 10vh;
     align-items: center;
     justify-content: center;
 
-    &-item:last-child {
-      padding-right: 24px;
+    &-item {
+      padding-right: 0;
     }
   }
 

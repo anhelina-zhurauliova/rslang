@@ -22,7 +22,7 @@ export function TeamPage() {
       </svg>
       <div className="person-card">
         <div className="person-photo">
-          <img className="astronaut" src={cosmoperson} />
+          <img className="astronaut" src={cosmoperson} alt="person" />
         </div>
         <div className="person-info">
           <div className="person-name">
@@ -31,29 +31,36 @@ export function TeamPage() {
           <div className="person-contribution">
             <ul className="ckeck-list">
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Занималась настройкой проекта
+                <span className="symbol-color">&#9733;</span>
+                Занималась настройкой проекта
               </li>
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Организовывала работу команды
+                <span className="symbol-color">&#9733;</span>
+                Организовывала работу команды
               </li>
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Занималась организацией созвонов
+                <span className="symbol-color">&#9733;</span>
+                Занималась организацией созвонов
               </li>
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Распределяла задачи между участниками
-                команды
+                <span className="symbol-color">&#9733;</span>
+                Распределяла задачи между участникам команды
               </li>
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Делала ревью кода
+                <span className="symbol-color">&#9733;</span>
+                Делала ревью кода
               </li>
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Занималась созданием страницы с играми
+                <span className="symbol-color">&#9733;</span>
+                Занималась созданием страницы с играми
               </li>
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Разработала базовую игру
+                <span className="symbol-color">&#9733;</span>
+                Разработала базовую игру
               </li>
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Сделала header и footer
+                <span className="symbol-color">&#9733;</span>
+                Сделала header и footer
               </li>
             </ul>
           </div>
@@ -67,33 +74,39 @@ export function TeamPage() {
           <div className="person-contribution-even">
             <ul className="ckeck-list">
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Сделала макет в Figma
+                <span className="symbol-color">&#9733;</span>
+                Сделала макет в Figma
               </li>
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Внесла все базовые стили
+                <span className="symbol-color">&#9733;</span>
+                Внесла все базовые стили
               </li>
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Придумала идею для дизайна
+                <span className="symbol-color">&#9733;</span>
+                Придумала идею для дизайна
               </li>
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Написала эту страницу
+                <span className="symbol-color">&#9733;</span>
+                Написала эту страницу
               </li>
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Написала таймер
+                <span className="symbol-color">&#9733;</span>
+                Написала таймер
               </li>
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Разработала игру Rocket Resque
+                <span className="symbol-color">&#9733;</span>
+                Разработала игру Rocket Resque
               </li>
             </ul>
           </div>
         </div>
         <div className="person-photo">
-          <img className="astronaut-even" src={cosmoperson} />
+          <img className="astronaut-even" src={cosmoperson} alt="person" />
         </div>
       </div>
       <div className="person-card">
         <div className="person-photo">
-          <img className="astronaut" src={cosmoperson} />
+          <img className="astronaut" src={cosmoperson} alt="person" />
         </div>
         <div className="person-info">
           <div className="person-name">
@@ -102,16 +115,20 @@ export function TeamPage() {
           <div className="person-contribution">
             <ul className="ckeck-list">
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Сделала авторизацию на сайте
+                <span className="symbol-color">&#9733;</span>
+                Сделала авторизацию на сайте
               </li>
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Занималась написанием игры Chaos
+                <span className="symbol-color">&#9733;</span>
+                Занималась написанием игры Chaos
               </li>
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Помогала с настройками роутинга
+                <span className="symbol-color">&#9733;</span>
+                Помогала с настройками роутинга
               </li>
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Создала privateRoutes
+                <span className="symbol-color">&#9733;</span>
+                Создала privateRoutes
               </li>
             </ul>
           </div>
@@ -125,18 +142,19 @@ export function TeamPage() {
           <div className="person-contribution-even">
             <ul className="ckeck-list">
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Занимался написанием игры Audiocall
+                <span className="symbol-color">&#9733;</span>
+                Занимался написанием игры Audiocall
               </li>
             </ul>
           </div>
         </div>
         <div className="person-photo">
-          <img className="astronaut-even" src={cosmoperson} />
+          <img className="astronaut-even" src={cosmoperson} alt="person" />
         </div>
       </div>
       <div className="person-card">
         <div className="person-photo">
-          <img className="astronaut" src={cosmoperson} />
+          <img className="astronaut" src={cosmoperson} alt="person" />
         </div>
         <div className="person-info">
           <div className="person-name">
@@ -145,8 +163,8 @@ export function TeamPage() {
           <div className="person-contribution">
             <ul className="ckeck-list">
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Занимался написанием игры Astronaut's
-                speech
+                <span className="symbol-color">&#9733;</span>
+                Занимался написанием игры Astronaut&apos;s speech
               </li>
             </ul>
           </div>
@@ -160,14 +178,14 @@ export function TeamPage() {
           <div className="person-contribution-even">
             <ul className="ckeck-list">
               <li className="ckeck-point">
-                <span className="symbol-color">&#9733;</span> Занимался написанием игры Cosmic
-                Velocity
+                <span className="symbol-color">&#9733;</span>
+                Занимался написанием игры Cosmic Velocity
               </li>
             </ul>
           </div>
         </div>
         <div className="person-photo">
-          <img className="astronaut-even" src={cosmoperson} />
+          <img className="astronaut-even" src={cosmoperson} alt="person" />
         </div>
       </div>
     </div>
