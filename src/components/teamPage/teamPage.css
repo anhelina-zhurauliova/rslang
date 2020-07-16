@@ -1,0 +1,209 @@
+* {
+  list-style: none;
+  padding: 0;
+}
+body {
+  overflow: visible;
+}
+.container {
+  max-width: 80%;
+  margin: auto;
+}
+svg {
+  display: block;
+  font: 8em 'Montserrat';
+  margin: 0 auto;
+  margin-bottom: 60px;
+}
+.text-copy {
+  fill: none;
+  stroke: white;
+  stroke-dasharray: 6% 29%;
+  stroke-width: 3px;
+  stroke-dashoffset: 0%;
+  animation: stroke-offset 5.5s infinite linear;
+}
+.text-copy:nth-child(1) {
+  stroke: #4d163d;
+  animation-delay: -1s;
+}
+.text-copy:nth-child(2) {
+  stroke: #4e162e;
+  animation-delay: -2s;
+}
+.text-copy:nth-child(3) {
+  stroke: #2a3576;
+  animation-delay: -3s;
+}
+.text-copy:nth-child(4) {
+  stroke: rgb(196, 12, 12);
+  animation-delay: -4s;
+}
+.text-copy:nth-child(5) {
+  stroke: #6b528b;
+  animation-delay: -5s;
+}
+.text-copy:nth-child(6) {
+  stroke: rgb(255, 255, 255);
+  animation-delay: -6s;
+}
+@keyframes stroke-offset {
+  100% {
+    stroke-dashoffset: -35%;
+  }
+}
+.person-card {
+  width: 100%;
+  min-height: 300px;
+  background-color: #fff;
+  display: flex;
+  border-radius: 16px;
+  position: relative;
+  margin-bottom: 40px;
+}
+.person-info {
+  width: 100%;
+}
+.person-name,
+.person-name-even {
+  padding: 10px 0;
+  text-align: center;
+  font-size: 24px;
+  letter-spacing: 4px;
+  font-weight: bold;
+  width: 100%;
+  text-shadow: 2px 1px 0px #fff, 1px 4px 0px rgba(0, 0, 0, 0.15);
+}
+.person-name {
+  background-image: linear-gradient(
+    to right,
+    rgb(255, 255, 255),
+    rgb(248, 241, 251),
+    rgb(242, 228, 246),
+    rgb(235, 214, 242),
+    rgb(229, 201, 238),
+    rgb(222, 187, 233),
+    rgb(216, 174, 229),
+    rgb(209, 160, 224),
+    rgb(203, 147, 220),
+    rgb(196, 133, 216),
+    rgb(190, 120, 211),
+    rgb(183, 106, 207)
+  );
+}
+.person-name-even {
+  background-image: linear-gradient(
+    to left,
+    rgb(255, 255, 255),
+    rgb(248, 241, 251),
+    rgb(242, 228, 246),
+    rgb(235, 214, 242),
+    rgb(229, 201, 238),
+    rgb(222, 187, 233),
+    rgb(216, 174, 229),
+    rgb(209, 160, 224),
+    rgb(203, 147, 220),
+    rgb(196, 133, 216),
+    rgb(190, 120, 211),
+    rgb(183, 106, 207)
+  );
+}
+.person-contribution {
+  width: 100%;
+  padding-left: 230px;
+}
+.person-contribution-even {
+  width: 100%;
+  padding-right: 250px;
+  padding-left: 40px;
+}
+.astronaut {
+  max-width: 20em;
+  margin-top: -70px;
+  margin-left: -100px;
+  position: absolute;
+}
+.astronaut-even {
+  max-width: 20em;
+  margin-top: -70px;
+  margin-left: -250px;
+  position: absolute;
+}
+.ckeck-list {
+  margin-top: 10px;
+}
+.ckeck-point {
+  letter-spacing: 2px;
+}
+.symbol-color {
+  color: rgb(255, 0, 0);
+}
+@media (max-width: 830px) {
+  .container {
+    width: 70%;
+  }
+  .astronaut {
+    max-width: 15em;
+    margin-top: -40px;
+  }
+  .astronaut-even {
+    max-width: 15em;
+    margin-top: -40px;
+    margin-left: -150px;
+  }
+  .person-contribution {
+    width: 100%;
+    padding-left: 150px;
+    padding-right: 10px;
+  }
+  .person-contribution-even {
+    padding-right: 140px;
+  }
+}
+@media (max-width: 720px) {
+  .container {
+    width: 80%;
+  }
+  .astronaut {
+    max-width: 6em;
+    margin-top: -40px;
+    margin-left: 20px;
+  }
+  .astronaut-even {
+    max-width: 6em;
+    margin-top: -40px;
+    margin-left: -130px;
+  }
+  .person-contribution {
+    width: 100%;
+    padding-left: 10px;
+    padding-left: 40px;
+  }
+  .person-contribution-even {
+    padding-right: 10px;
+  }
+  .person-name,
+  .person-name-even {
+    text-align: right;
+    padding-right: 10px;
+  }
+  .person-name-even {
+    text-align: left;
+    padding-left: 10px;
+  }
+}
+@media (max-width: 420px) {
+  .container {
+    width: 80%;
+  }
+  .astronaut,
+  .astronaut-even {
+    display: none;
+  }
+  .person-name,
+  .person-name-even {
+    text-align: center;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
