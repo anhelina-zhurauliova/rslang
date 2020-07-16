@@ -2,102 +2,38 @@
 /* eslint-disable no-console */
 // eslint-disable-next-line no-return-assign
 
-import React, { useState, useEffect, useRef } from 'react';
-import { useCookies } from 'react-cookie';
+import React, { useRef } from 'react';
+// import { useCookies } from 'react-cookie';
 import './settings.scss';
-import { onError } from '../../libs/errorLib';
+// import { onError } from '../../libs/errorLib';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const Settings = () => {
-  const defaultSettings = {
-    optional: {
-      basicGame: {
-        isImage: true,
-        isTranslation: true,
-        isTranscription: true,
-        isSentenceExample: true,
-        isTranslateSentenceExample: true,
-        isWordMeaning: true,
-        isTranslateWordmeaning: true,
-        showAnswer: true,
-        deleteButton: true,
-        hardWordButton: true,
-        cardsForDay: '50',
-      },
-    },
-    wordsPerDay: '50',
+  const basicGameSettings = {
+    isImage: true,
+    isTranslation: true,
+    isTranscription: true,
+    isSentenceExample: true,
+    isTranslateSentenceExample: true,
+    isWordMeaning: true,
+    isTranslateWordmeaning: true,
+    showAnswer: true,
+    deleteButton: true,
+    hardWordButton: true,
+    wordsPerDay: 50,
+    cardsPerDay: 50,
   };
-  const [currentSettings, setCurrentSettings] = useState();
-  const [settingsFromBack, setSettingsFromBack] = useState({});
-  const [cookies] = useCookies(['authState']);
-  const [numberOfWords, setNumberOfWords] = useState(null);
+  const setToLocalStorage = () => {
+    localStorage.setItem('basicGame', JSON.stringify(basicGameSettings));
+  };
+  if (!localStorage.getItem('basicGame')) setToLocalStorage();
+
+  const gottenBasicSettings = JSON.parse(localStorage.getItem('basicGame'));
+
   const cardLimit = useRef();
   const wordLimit = useRef();
 
-  const { token, userId } = cookies.authState.user;
-
-  const upsertUserSettings = (tokenUser, idUser, settings) => {
-    const url = `https://afternoon-falls-25894.herokuapp.com/users/${idUser}/settings`;
-
-    fetch(url, {
-      method: 'PUT',
-      body: JSON.stringify(settings),
-      headers: {
-        Authorization: `Bearer ${tokenUser}`,
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    });
-  };
-
-  const fetchUserSettings = async (tokenUser, idUser) => {
-    const url = `https://afternoon-falls-25894.herokuapp.com/users/${idUser}/settings`;
-    try {
-      const rawResponse = await fetch(url, {
-        method: 'GET',
-        withCredentials: true,
-        headers: {
-          Authorization: `Bearer ${tokenUser}`,
-          Accept: 'application/json',
-        },
-      });
-      const dataUser = await rawResponse.json();
-      return dataUser;
-    } catch (error) {
-      return onError(error.message);
-    }
-  };
-  const getSettings = async () => {
-    const settings = await fetchUserSettings(token, userId);
-
-    if (settings?.optional?.basicGame) {
-      setCurrentSettings(settings);
-      setNumberOfWords(settings.wordsPerDay);
-      setSettingsFromBack(settings.optional.basicGame);
-    } else {
-      setSettingsFromBack(defaultSettings);
-      setCurrentSettings(defaultSettings.optional.basicGame);
-      setNumberOfWords(defaultSettings.wordsPerDay);
-    }
-  };
-
-  useEffect(() => {
-    if (userId) {
-      getSettings();
-    }
-  }, [userId]);
-
-  const onSubmithandler = e => {
-    e.preventDefault();
-    upsertUserSettings(token, userId, {
-      wordsPerDay: '1',
-      optional: {
-        ...settingsFromBack.optional,
-        basicGame: currentSettings,
-      },
-    });
-  };
-
-  return currentSettings ? (
+  return (
     <form>
       <div className="settings__container">
         <h2 className="page__title">Параметры страницы</h2>
@@ -122,7 +58,7 @@ export const Settings = () => {
             <input
               ref={wordLimit}
               className="plus-minus__input"
-              value={numberOfWords}
+              value={gottenBasicSettings.wordsPerDay}
               type="number"
               min={10}
               max={200}
@@ -153,10 +89,6 @@ export const Settings = () => {
                 } else {
                   cardLimit.current.value = num;
                 }
-                setCurrentSettings(prevSettings => ({
-                  ...prevSettings,
-                  cardsForDay: cardLimit.current.value,
-                }));
               }}
             >
               -
@@ -164,7 +96,7 @@ export const Settings = () => {
             <input
               ref={cardLimit}
               className="plus-minus__input"
-              value={currentSettings.cardsForDay}
+              value={gottenBasicSettings.cardsPerDay}
               type="number"
               min={10}
               max={200}
@@ -191,7 +123,7 @@ export const Settings = () => {
               <input
                 className="settings__checkbox"
                 type="checkbox"
-                checked={currentSettings.isTranslation}
+                checked={gottenBasicSettings.isTranslation}
               />
               <p className="settings__info">Показывать перевод слова</p>
             </div>
@@ -199,7 +131,7 @@ export const Settings = () => {
               <input
                 className="settings__checkbox"
                 type="checkbox"
-                checked={currentSettings.isWordMeaning}
+                checked={gottenBasicSettings.isWordMeaning}
               />
               <p className="settings__info">Показывать предложение с объяснением значения слова</p>
             </div>
@@ -207,7 +139,7 @@ export const Settings = () => {
               <input
                 className="settings__checkbox"
                 type="checkbox"
-                checked={currentSettings.isWordMeaning}
+                checked={gottenBasicSettings.isWordMeaning}
               />
               <p className="settings__info">
                 Показывать перевод предложения с объяснением значения слова
@@ -217,7 +149,7 @@ export const Settings = () => {
               <input
                 className="settings__checkbox"
                 type="checkbox"
-                checked={currentSettings.isSentenceExample}
+                checked={gottenBasicSettings.isSentenceExample}
               />
               <p className="settings__info">
                 Показывать предложение с примером использования слова
@@ -227,7 +159,7 @@ export const Settings = () => {
               <input
                 className="settings__checkbox"
                 type="checkbox"
-                checked={currentSettings.isTranslateSentenceExample}
+                checked={gottenBasicSettings.isTranslateSentenceExample}
               />
               <p className="settings__info">
                 Показывать перевод предложения с примером использования слова
@@ -237,7 +169,7 @@ export const Settings = () => {
               <input
                 className="settings__checkbox"
                 type="checkbox"
-                checked={currentSettings.isTranscription}
+                checked={gottenBasicSettings.isTranscription}
               />
               <p className="settings__info">Показывать транскрипцию слова</p>
             </div>
@@ -245,7 +177,7 @@ export const Settings = () => {
               <input
                 className="settings__checkbox"
                 type="checkbox"
-                checked={currentSettings.isImage}
+                checked={gottenBasicSettings.isImage}
               />
               <p className="settings__info">Показывать картинку-ассоциацию к слову</p>
             </div>
@@ -273,11 +205,9 @@ export const Settings = () => {
           </div>
         </div>
       </div>
-      <button className="submit__settings_button" type="submit" onClick={onSubmithandler}>
+      <button className="submit__settings_button" type="submit">
         Сохранить
       </button>
     </form>
-  ) : (
-    <h1>LOAD</h1>
   );
 };
