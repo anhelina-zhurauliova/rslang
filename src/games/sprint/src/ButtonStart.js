@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import gear from '../../../assets/svg/gear.svg';
 import { Link, BrowserRouter } from 'react-router-dom';
+import gear from '../../../assets/svg/gear.svg';
 import { ReactComponent as Close } from '../../../assets/svg/exit.svg';
 
 const propTypes = {
@@ -14,10 +14,10 @@ class ButtonStart extends PureComponent {
     const { settingsClick, fetchNewWords } = this.props;
     return (
       <>
-        <BrowserRouter >
-        <Link to='/' >
-          <Close  className="exitButton" />
-        </Link>
+        <BrowserRouter>
+          <Link to="/">
+            <Close className="exitButton" />
+          </Link>
         </BrowserRouter>
         <button type="button" onClick={settingsClick} onKeyDown={settingsClick}>
           <img src={gear} alt="Settings" id="settings" className="gearButton" />

@@ -44,6 +44,8 @@ const propTypes = {
   playWord: PropTypes.func,
   bonusPoints: PropTypes.number,
   gamePoints: PropTypes.number,
+  audible: PropTypes.bool,
+  noaudible: PropTypes.bool,
 };
 
 class SprintBase extends PureComponent {
@@ -74,6 +76,8 @@ class SprintBase extends PureComponent {
       falseButton,
       trueButton,
       bonusPoints,
+      audible,
+      noaudible,
     } = this.props;
     const img = `https://raw.githubusercontent.com/irinainina/rslang/rslang-data/data/${gameImage}`;
     return (
@@ -97,14 +101,26 @@ class SprintBase extends PureComponent {
             >
               <img src={voice} alt="Voice" id="voice" className="voiceImage" />
             </button>
-            <button
-              type="button"
-              onClick={listenClick}
-              onKeyDown={listenClick}
-              className="button-background"
-            >
-              <img src={music} alt="Listen" className="listenPictures" />
-            </button>
+            {noaudible && (
+              <button
+                type="button"
+                onClick={listenClick}
+                onKeyDown={listenClick}
+                className="voice-off"
+              >
+                <img src={music} alt="Listen" className="listenPictures" />
+              </button>
+            )}
+            {audible && (
+              <button
+                type="button"
+                onClick={listenClick}
+                onKeyDown={listenClick}
+                className="voice-on"
+              >
+                <img src={music} alt="Listen" className="listenPictures" />
+              </button>
+            )}
           </div>
           <span id="gamePoints">
             Ваши очки:

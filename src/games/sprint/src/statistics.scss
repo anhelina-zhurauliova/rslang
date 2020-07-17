@@ -1,0 +1,25 @@
+body {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+// .sprint-game{
+//     padding: 40px;
+// // }
+
+ .stat {
+ height: 80vh;
+ justify-content: flex-start;
+ overflow-y: auto;
+ }
+
+
+ .train {
+    display: contents;
+    justify-content: center;
+    width: 100vw;
+ }
+.train-button{
+position: absolute;
+bottom: 10px;
+}
