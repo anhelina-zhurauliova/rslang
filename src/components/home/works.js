@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import speakIt from '../../assets/backgrounds/speakit.jpg';
 import basicGame from '../../assets/baseGame.png';
-import Audiocall from '../../assets/audiocall-background.jpeg';
+import Audiocall from '../../assets/backgrounds/audiocall.jpeg';
 import Savannah from '../../assets/savannah.jpg';
 import Sprint from '../../assets/sprint.jpeg';
 import EnglishPuzzle from '../../assets/englishpuzzle.jpeg';
@@ -25,7 +25,7 @@ export const Games = [
   },
   {
     id: 'g-3',
-    title: 'Сhaos',
+    title: 'Heavenly  Сhaos',
     screenshot: EnglishPuzzle,
     description:
       'Остановите хаос путем верного составления предложений! В данной мини-игре вы не только сможете закрепить, как правильно строить предложения, но и познакомитесь с шедеврами классиков изобразительного искусства ',
@@ -36,12 +36,12 @@ export const Games = [
     title: 'Rocket resque',
     screenshot: Savannah,
     description:
-      'Наберите как можно больше правильных ответов, чтобы собрать необходимое количество топлива для спасения ракеты! ',
+      'Наберите как можно больше правильных ответов, чтобы собрать необходимое количество топлива и запустить ракету в космос! ',
     link: '/games/savannah',
   },
   {
     id: 'g-5',
-    title: 'Audiocall',
+    title: 'Space Station',
     screenshot: Audiocall,
     description:
       'Проверьте навыки аудирования, ведь важно не только правильно говорить, но и верно понимать своего собеседника!',
@@ -52,7 +52,7 @@ export const Games = [
     title: 'Cosmic velocity',
     screenshot: Sprint,
     description:
-      'Развейте настоящую космическую скорость в данной игре, чем больше верных ответов, тем выше ваш результат.',
+      'Развейте настоящую космическую скорость в данной игре, чем больше верных ответов, тем выше ваш результат!',
     link: '/games/sprint',
   },
 ];
