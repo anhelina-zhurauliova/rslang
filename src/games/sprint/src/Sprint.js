@@ -346,11 +346,10 @@ export class Sprint extends Component {
     setTimeout(() => {
       this.setState(() => ({
         gameVisible: false,
-        // buttonStartVisible: true,
         statisticsVisible: true,
         gameTimerVisible: false,
       }));
-    }, 6700);
+    }, 67200);
     const { words } = this.state;
     return words;
   };
