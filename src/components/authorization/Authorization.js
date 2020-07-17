@@ -13,6 +13,7 @@ export const Authorization = () => {
   // eslint-disable-next-line no-unused-vars
   const [cookies, setCookies] = useCookies(['authState']);
   const { userHasAuthenticated } = useAppContext();
+  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const signIn = async values => {
@@ -40,7 +41,6 @@ export const Authorization = () => {
       setIsLoading(false);
     }
   };
-
   return (
     <div className="authenticated container p-4 mt-5 justify-content-center">
       <h3 className="text-center">Авторизация</h3>

@@ -1,6 +1,11 @@
-@import "./shared/styles/vendor/vendor.scss";
+@import './shared/styles/vendor/vendor.scss';
 
-@import "./shared/styles/colors.scss";
-@import "./shared/styles/fonts.scss";
-@import "./shared/styles/stacks.scss";
-@import "./shared/styles/typography.scss";
+@import './shared/styles/colors.scss';
+@import './shared/styles/fonts.scss';
+@import './shared/styles/stacks.scss';
+@import './shared/styles/typography.scss';
+
+body {
+  background: url(./assets/mountain.png) no-repeat center center fixed;
+  background-size: cover;
+}

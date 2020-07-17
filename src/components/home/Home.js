@@ -5,7 +5,7 @@ import './home.scss';
 
 export const Home = () => {
   return (
-    <div className="home__content conteiner mt-5">
+    <div className="home__content">
       <div className="card-deck">
         {Games.map(game => (
           <Card

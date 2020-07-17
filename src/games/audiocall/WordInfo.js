@@ -17,37 +17,41 @@ export const WordInfo = props => {
       setInfo({ image: `${CONSTANTS.URL.FILES}/${word[0].image}`, word: word[0].word });
       playWord();
     }
-  }, [word.length]);
+  }, [word]);
 
-  if (answered) {
+  if (!answered) {
     return (
       <div className="audiocall__hint d-flex justify-content-center">
         <button
           type="button"
-          className="audiocall__voice-btn col-md-3 btn"
+          className="audiocall__voice-btn btn"
           onClick={() => {
             playWord();
           }}
         >
-          <Megaphone className="audiocall__icon" />
+          <Megaphone className="audiocall__icon-large" />
         </button>
       </div>
     );
   }
 
   return (
-    <div className="audiocall__hint d-flex justify-content-center">
-      <img src={info.image} className="rounded-circle img-thumbnail" alt="descriptive" />
-      <button
-        type="button"
-        className="audiocall__voice-btn col-md-3 btn"
-        onClick={() => {
-          playWord();
-        }}
-      >
-        <Megaphone className="audiocall__icon" />
-      </button>
-      <h2>{info.word}</h2>
+    <div className="audiocall__hint">
+      <div className="audiocall__image-circular">
+        <img src={info.image} className="audiocall__image" alt="descriptive" />
+      </div>
+      <div className="audiocall__row">
+        <button
+          type="button"
+          className="audiocall__voice-btn-answered btn"
+          onClick={() => {
+            playWord();
+          }}
+        >
+          <Megaphone className="audiocall__icon" />
+        </button>
+        <h2>{info.word}</h2>
+      </div>
     </div>
   );
 };

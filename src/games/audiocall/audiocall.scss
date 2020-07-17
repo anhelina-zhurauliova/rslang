@@ -1,12 +1,12 @@
 @import 'start';
 
-$background: url('../../assets/audiocall-background.jpeg');
+$background: url('../../assets/backgrounds/audiocall.jpeg');
 $text-color: white;
-$bottom-margin: 80px;
+$bottom-margin: 10vh;
 
 .audiocall {
   height: 100vh;
-  max-width: unset;
+  max-width: 100%;
   background: $background no-repeat center center fixed;
   background-size: cover;
   color: $text-color;
@@ -19,21 +19,54 @@ $bottom-margin: 80px;
 
   &__hint {
     margin-bottom: $bottom-margin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  &__image {
+    width: auto;
+    height: 100%;
+    margin-left: -50px;
+    &-circular {
+      display: inline-block;
+      position: relative;
+      width: 170px;
+      height: 170px;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+  }
+
+  &__row {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10vh;
   }
 
   &__voice-btn {
     align-self: center;
+    &-answered {
+      height: 77px;
+    }
   }
 
   &__icon {
-    max-width: 100%;
+    max-width: 5vw;
     height: auto;
+    &-large {
+      max-width: 17vw;
+      height: auto;
+    }
   }
 
   &__list {
     align-self: normal;
     margin-bottom: $bottom-margin;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
 
   &__list-item {
@@ -42,6 +75,12 @@ $bottom-margin: 80px;
 
     &:last-child {
       padding-right: 0;
+    }
+    &-answer {
+      list-style-image: url(../../assets/svg/tick.svg);
+    }
+    &-neutral {
+      color: gray;
     }
   }
 
@@ -54,16 +93,51 @@ $bottom-margin: 80px;
     padding: 8px 16px 8px 16px;
     align-self: center;
   }
+
+  &__close {
+    position: fixed;
+    right: 2vh;
+    top: 1vw;
+    &-icon {
+      height: 5vh;
+      width: auto;
+    }
+  }
 }
 
 .word__btn {
   vertical-align: baseline;
   color: $text-color;
+
+  &-answer {
+    color: white;
+  }
+
+  &-false {
+    color: gray;
+    text-decoration: line-through;
+  }
+
+  &-neutral {
+    color: gray;
+  }
 }
 
 @media only screen and (max-width: 767px) {
-  .audiocall__icon {
-    max-width: 30%;
+  $margin: 5vh;
+  .audiocall {
+    &__icon {
+      max-width: 12vw;
+    }
+    &__list {
+      margin-bottom: $margin;
+    }
+    &__hint {
+      margin-bottom: $margin;
+    }
+    &__row {
+      margin-top: $margin;
+    }
   }
 }
 
@@ -74,8 +148,27 @@ $bottom-margin: 80px;
     align-items: center;
     justify-content: center;
 
-    &-item:last-child {
-      padding-right: 24px;
+    &-item {
+      padding-right: 0;
+    }
+  }
+
+  $margin: 3vh;
+  .audiocall {
+    &__icon {
+      max-width: 16vw;
+      &-large {
+        max-width: 24vw;
+      }
+    }
+    &__list {
+      margin-bottom: $margin;
+    }
+    &__hint {
+      margin-bottom: $margin;
+    }
+    &__row {
+      margin-top: $margin;
     }
   }
 }

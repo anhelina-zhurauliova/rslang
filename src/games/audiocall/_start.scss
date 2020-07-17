@@ -1,7 +1,12 @@
-$bottom-margin: 80px; 
+$bottom-margin: 80px;
 
-.audiocall__header, .audiocall__text {
+.audiocall__header,
+.audiocall__text {
   margin-bottom: $bottom-margin;
+}
+
+.audiocall__text {
+  text-align: center;
 }
 
 .audiocall__header {
