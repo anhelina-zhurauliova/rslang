@@ -1,14 +1,44 @@
-$bottom-margin: 80px;
-
 .audiocall__header,
 .audiocall__text {
-  margin-bottom: $bottom-margin;
-}
-
-.audiocall__text {
   text-align: center;
+  color: #ffffff;
+  font-family: serif;
 }
 
 .audiocall__header {
   text-transform: uppercase;
+  font-size: 56px;
+  font-weight: 900;
+  letter-spacing: 2vw;
+  text-shadow: 2px 3px 2px #8f7575;
+}
+
+.audiocall__text {
+  font-size: 24px;
+  width: 100%;
+  margin: 20px 0 40px 0;
+}
+
+.hint {
+  font-family: serif;
+  position: fixed;
+  max-width: 565px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  bottom: 0;
+  margin: auto;
+
+  &__icon {
+    margin: 0;
+    width: 5vw;
+    height: auto;
+  }
+
+  &__text {
+    font-size: 16px;
+    text-align: center;
+    max-width: 20vw;
+  }
 }
