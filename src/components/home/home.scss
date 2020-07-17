@@ -1,47 +1,87 @@
 .game__screenshot {
   object-fit: cover;
-  width: 280px;
-  height: 280px;
-  margin: 10px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
+  border: 10px solid white;
+  position: absolute;
+  margin-left: 50px;
+  margin-top: -100px;
 }
 .card-deck {
   display: flex;
   justify-content: center;
+  margin: auto;
+  width: 90%;
+  margin: 30px auto;
+  justify-items: center;
+  flex-wrap: wrap;
 }
 .game_card__container {
-  margin-right: 16px;
-  margin-top: 20px;
+  margin: 120px 20px 0 20px;
   display: flex;
-  width: 70%;
-  flex-basis: 60%;
-  height: 300px;
+  width: 300px;
+  min-height: 450px;
   background-color: white;
-  border-radius: 50px;
-
-  &:last-child {
-    margin-bottom: 86px;
-  }
+  border-radius: 16px;
 }
 .info__container {
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-left: 40px;
-  margin-top: 20px;
   width: 100%;
   text-align: center;
-  margin-right: 40px;
 }
 .game__title {
-  font-size: 40px;
+  text-align: center;
+  font-size: 35px;
+  letter-spacing: 4px;
+  font-weight: bold;
+  width: 100%;
+  text-shadow: 2px 1px 0px #fff, 1px 4px 0px rgba(0, 0, 0, 0.15);
+  margin-top: 10px;
+  text-transform: uppercase;
+  position: inherit;
+  margin-top: 100px;
+  background-color: #d8aee5;
+  min-height: 84px;
+  box-shadow: 0px 0px 15px;
+}
+.one-string {
+  padding-top: 20px;
+}
+.description {
+  padding: 10px;
 }
 .card-link {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
+  padding: 5px 32px;
+  outline: none;
+  background-color: #d8aee58a;
+  letter-spacing: 4px;
+  border: 1px solid #642777;
+  color:black;
+  margin: 10px auto 0;
+}
+.card-link:hover {
+  background-color: #ab669a;
+  color:white;
+  border-radius: 16px;
+  transition: 0.5s;
+  font-weight: bold;
+}
+.card-link:not(:hover){
+  transition: 1s;
 }
 body {
   background: url(../../assets/mountain.png) no-repeat center center fixed;
   background-size: cover;
+}
+@media (max-width: 390px) {
+  .card-deck {
+    width:100%; 
+  }
+  .game_card__container {
+    margin-right: 0;
+    margin-left: 0;
+  }
 }
