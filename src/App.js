@@ -75,7 +75,7 @@ function App() {
                 <Speakit />
               </Route>
               <Route exact path="/games">
-                <Header />
+                {/* <Header /> */}
                 <Home />
                 <Footer />
               </Route>
