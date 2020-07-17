@@ -7,7 +7,7 @@ const propTypes = {
   trueAnser: PropTypes.number,
   failAnswer: PropTypes.number,
   gamePoints: PropTypes.number,
-  fetchNewWords: PropTypes.func,
+  trainGame: PropTypes.func,
   closeGame: PropTypes.func,
   idiomaticReactList1: PropTypes.func,
   idiomaticReactList2: PropTypes.func,
@@ -18,7 +18,7 @@ class StatisticsSprint extends PureComponent {
       trueAnser,
       failAnswer,
       gamePoints,
-      fetchNewWords,
+      trainGame,
       closeGame,
       idiomaticReactList1,
       idiomaticReactList2,
@@ -55,7 +55,7 @@ class StatisticsSprint extends PureComponent {
             type="button"
             className="btn btn-danger train-button "
             id="btn-fail"
-            onClick={fetchNewWords}
+            onClick={trainGame}
           >
             Тренироваться еще
           </button>

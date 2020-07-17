@@ -108,7 +108,35 @@ export class Sprint extends Component {
     this.errorVoice = this.errorVoice.bind(this);
     this.idiomaticReactList1 = this.idiomaticReactList1.bind(this);
     this.idiomaticReactList2 = this.idiomaticReactList2.bind(this);
+    this.wordForGame = this.wordForGame.bind(this);
+    this.trainGame = this.trainGame.bind(this);
   }
+
+  trainGame = () => {
+    this.setState(() => ({
+      bonusPoints: 10,
+      gamePoints: 0,
+      parrot1Visible: false,
+      parrot2Visible: false,
+      parrot3Visible: false,
+      parrot4Visible: false,
+      correct1Answer: false,
+      correct2Answer: false,
+      correct3Answer: false,
+      false1Answer: true,
+      false2Answer: true,
+      false3Answer: true,
+      answerTrue: false,
+      helpVisible: false,
+      helpSrc: question,
+      trueAnser: 0,
+      failAnswer: 0,
+      statisticsVisible: false,
+      correctWords: [],
+      failWords: [],
+    }));
+    this.fetchNewWords();
+  };
 
   playWord = () => {
     const { gameAudio } = this.state;
@@ -145,12 +173,10 @@ export class Sprint extends Component {
       correctWords,
     } = this.state;
 
-    // this.correctWords.push(gameWord);
     this.setState(state => ({
       gamePoints: gamePoints + bonusPoints,
       successAnswer: state.successAnswer++,
       correctWords: [...correctWords, gameWord],
-      wordPosition: state.wordPosition++,
       gameWord: wordsGame[state.wordPosition],
       gameAudio: wordsAudio[state.wordPosition],
       gameImage: wordsImage[state.wordPosition],
@@ -294,24 +320,12 @@ export class Sprint extends Component {
     words.forEach(word => wordsAudio.push(word.audio));
     words.forEach(word => wordsAudioMeaning.push(word.audioMeaning));
     words.forEach(word => wordsImage.push(word.image));
-
-    const randomValue = Math.random();
-    if (randomValue >= 0.5) {
-      this.setState(() => ({
-        gameTranslate: wordsTranslate[wordPosition],
-        trueWord: true,
-      }));
-    } else {
-      this.setState(() => ({
-        gameTranslate: wordsTranslate[Math.round(randomValue * 20)],
-        trueWord: false,
-      }));
-    }
     this.setState(() => ({
       gameWord: wordsGame[wordPosition],
       gameAudio: wordsAudio[wordPosition],
       gameImage: wordsImage[wordPosition],
     }));
+    this.wordForGame();
   };
 
   help = () => {
@@ -377,6 +391,8 @@ export class Sprint extends Component {
       trueAnser: 0,
       failAnswer: 0,
       statisticsVisible: false,
+      correctWords: [],
+      failWords: [],
     }));
   };
 
@@ -422,7 +438,6 @@ export class Sprint extends Component {
         false3Answer: true,
         answerTrue: false,
         failWords: [...failWords, gameWord],
-        wordPosition: state.wordPosition++,
         gameWord: state.wordsGame[state.wordPosition],
         gameAudio: state.wordsAudio[state.wordPosition],
         gameImage: state.wordsImage[state.wordPosition],
@@ -431,18 +446,24 @@ export class Sprint extends Component {
         failAnswer: state.failAnswer++,
       }));
     }
+    this.wordForGame();
+  };
+
+  wordForGame = () => {
     const randomValue1 = Math.random();
     if (randomValue1 >= 0.5) {
       const { wordsTranslate, wordPosition } = this.state;
-      this.setState(() => ({
+      this.setState(state => ({
         gameTranslate: wordsTranslate[wordPosition],
         trueWord: true,
+        wordPosition: state.wordPosition++,
       }));
     } else {
       const { wordsTranslate } = this.state;
-      this.setState(() => ({
-        gameTranslate: wordsTranslate[Math.round(randomValue1 * 20)],
+      this.setState(state => ({
+        gameTranslate: wordsTranslate[Math.round(randomValue1 * 19)],
         trueWord: false,
+        wordPosition: state.wordPosition++,
       }));
     }
   };
@@ -487,7 +508,6 @@ export class Sprint extends Component {
         false2Answer: true,
         false3Answer: true,
         answerTrue: false,
-        wordPosition: state.wordPosition++,
         failWords: [...failWords, gameWord],
         gameWord: state.wordsGame[state.wordPosition],
         gameAudio: state.wordsAudio[state.wordPosition],
@@ -497,19 +517,7 @@ export class Sprint extends Component {
         failAnswer: state.failAnswer++,
       }));
     }
-    const { wordPosition, wordsTranslate } = this.state;
-    const randomValue2 = Math.random();
-    if (randomValue2 >= 0.5) {
-      this.setState(() => ({
-        gameTranslate: wordsTranslate[wordPosition],
-        trueWord: true,
-      }));
-    } else {
-      this.setState(() => ({
-        gameTranslate: wordsTranslate[Math.round(randomValue2 * 20)],
-        trueWord: false,
-      }));
-    }
+    this.wordForGame();
   };
 
   settingsClick = () => {
@@ -703,7 +711,7 @@ export class Sprint extends Component {
               gamePoints={gamePoints}
               trueAnser={trueAnser}
               failAnswer={failAnswer}
-              fetchNewWords={this.fetchNewWords}
+              trainGame={this.trainGame}
               closeGame={this.closeGame}
               idiomaticReactList1={this.idiomaticReactList1}
               idiomaticReactList2={this.idiomaticReactList2}
