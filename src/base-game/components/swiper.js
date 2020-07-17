@@ -16,6 +16,7 @@ const SimpleSwiperWithParams = ({ words, token, userId, createUserWord, shouldTu
   const [completed, setCompleted] = useState(0);
   const [shouldShowInput, setShowInput] = useState({});
   const [shouldShowStudiedWord, setShowStudiedWord] = useState({});
+  const [seriesOfCorrectAnswers, setSeries] = useState(0);
   const slider = useRef(null);
 
   const getInputValue = value => {
@@ -79,14 +80,16 @@ const SimpleSwiperWithParams = ({ words, token, userId, createUserWord, shouldTu
       setInputValue('');
       setShowStudiedWord(prevState => ({ ...prevState, [currentCard]: true }));
       setShowInput(prevState => ({ ...prevState, [currentCard]: true }));
+      if (seriesOfCorrectAnswers > 0) setSeries(0);
     } else {
       setCompleted(completed + 100 / 40);
-      goNext();
       setShowStudiedWord(prevState => ({ ...prevState, [currentCard]: false }));
       setShowInput(prevState => ({ ...prevState, [currentCard]: false }));
       setLastStudiedCard(currentCard);
       setInputValue('');
       playAudioWord(currentCard);
+      goNext();
+      setSeries(prevState => prevState + 1);
     }
   };
   const handleSlideChange = currentSlide => {
