@@ -2,6 +2,7 @@
 /* eslint-disable */
 
 import React from 'react';
+import Media, { useMedia } from 'react-media';
 
 const myStyle = {
   position: 'relative',
@@ -15,6 +16,13 @@ const activeLink = {
   borderBottom: '2px solid rgb(229,180,225)',
 };
 
+const GLOBAL_MEDIA_QUERIES = {
+  small: "(max-width: 599px)",
+  medium: "(min-width: 600px) and (max-width: 1199px)",
+  large: "(min-width: 1200px)"
+};
+
+
 const Button = ({
   value,
   setWords,
@@ -25,8 +33,10 @@ const Button = ({
   setIsClicked,
   setAnswered,
 }) => {
-  let styles;
 
+  const matches = useMedia({ queries: GLOBAL_MEDIA_QUERIES });
+  let styles;
+  let text;
   const getWords = async (group, page) => {
     const url = `https://afternoon-falls-25894.herokuapp.com/words?group=${group}&page=${page}`;
     const res = await fetch(url);
@@ -53,7 +63,7 @@ const Button = ({
       onClick={() =>
         getWords(value.substring(6, 7) - 1, Math.floor(Math.random() * Math.floor(29)))}
     >
-      {value}
+      {text = matches.small ? id : value}
     </div>
   );
 };
