@@ -46,12 +46,12 @@ export const AudioCall = () => {
     if (!words.length) {
       getWords().then(array => setWords(array));
     }
-  }, [getWords, words.length]);
+  }, [words.length]);
 
   if (!screen.isStarted) {
     return (
-      <div className="audiocall container d-flex justify-content-center">
-        <Link className="audiocall__close" to="/">
+      <div className="audiocall d-flex justify-content-center">
+        <Link className="audiocall__close" to="/games">
           <Close className="audiocall__close-icon" />
         </Link>
         <div className="audiocall__content col-lg-8 col-md-10 container flex-column">
@@ -61,6 +61,7 @@ export const AudioCall = () => {
             className="audiocall__btn btn"
             type="button"
             onClick={() => setScreen({ isStarted: true })}
+            disabled={!words.length}
           >
             Начать
           </button>

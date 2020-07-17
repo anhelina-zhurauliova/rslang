@@ -6,7 +6,7 @@ $bottom-margin: 10vh;
 
 .audiocall {
   height: 100vh;
-  max-width: unset;
+  max-width: 100%;
   background: $background no-repeat center center fixed;
   background-size: cover;
   color: $text-color;
@@ -49,6 +49,9 @@ $bottom-margin: 10vh;
 
   &__voice-btn {
     align-self: center;
+    &-answered {
+      height: 77px;
+    }
   }
 
   &__icon {
@@ -73,6 +76,12 @@ $bottom-margin: 10vh;
     &:last-child {
       padding-right: 0;
     }
+    &-answer {
+      list-style-image: url(../../assets/svg/tick.svg);
+    }
+    &-neutral {
+      color: gray;
+    }
   }
 
   &__btn {
@@ -90,7 +99,6 @@ $bottom-margin: 10vh;
     right: 2vh;
     top: 1vw;
     &-icon {
-      filter: invert(95%) sepia(5%) saturate(0%) hue-rotate(320deg) brightness(104%) contrast(106%);
       height: 5vh;
       width: auto;
     }
@@ -100,6 +108,19 @@ $bottom-margin: 10vh;
 .word__btn {
   vertical-align: baseline;
   color: $text-color;
+
+  &-answer {
+    color: white;
+  }
+
+  &-false {
+    color: gray;
+    text-decoration: line-through;
+  }
+
+  &-neutral {
+    color: gray;
+  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -127,8 +148,8 @@ $bottom-margin: 10vh;
     align-items: center;
     justify-content: center;
 
-    &-item:last-child {
-      padding-right: 24px;
+    &-item {
+      padding-right: 0;
     }
   }
 
