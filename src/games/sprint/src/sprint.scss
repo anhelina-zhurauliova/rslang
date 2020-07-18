@@ -46,17 +46,31 @@ body {
   flex-direction: column;
   overflow: hidden;
   position: absolute;
-  width: 50vw;
-  border: solid;
-  border-radius: 3%;
+  // width: 50vw;
+  // border: solid;
+  // border-radius: 3%;
   color: $text-color;
-  background: pink;
+  // background: pink;
 }
-
-.container {
+.sprint-game {
+  background-color: #ffffffb9;
+  border-radius: 16px;
+}
+.sprint-info {
+  color:white;
+}
+.zzz {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  margin-left: -18px;
+}
+.sprint-container {
   @include position(center);
   width: 100vw;
   height: 100vh;
+  margin-top: 40px;
 }
 
 .wrapper2 {
@@ -72,18 +86,33 @@ body {
   top: 35px;
   z-index: 2;
 }
-
-.sprint {
-  display: inline-block;
-  position: relative;
-  letter-spacing: 0.05em;
-  text-shadow: 1px 1px mediumturquoise, -1px 1px mediumturquoise, -1px -1px mediumturquoise,
-    1px -1px mediumturquoise;
-  color: white;
-  transition: all 1s;
+h1 {
+  font-size: 56px;
+  letter-spacing: 20px;
+  color: #ffffff;
+  text-shadow: 2px 3px 2px #8f7575;
+  display: flex;
+  align-items: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
 }
-.sprint:hover {
-  color: lemonchiffon;
+.sprint {
+  // display: inline-block;
+  // position: relative;
+  // letter-spacing: 0.05em;
+  // text-shadow: 1px 1px mediumturquoise, -1px 1px mediumturquoise, -1px -1px mediumturquoise,
+  //   1px -1px mediumturquoise;
+  // color: white;
+  // transition: all 1s;
+  font-size: 56px;
+  letter-spacing: 20px;
+  color: #ffffff;
+  text-shadow: 2px 3px 2px #8f7575;
+  display: flex;
+  align-items: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  margin-right: 40px;
 }
 
 .settingsText {
@@ -93,7 +122,7 @@ body {
 .keyboard-inform {
   position: absolute;
   bottom: 15px;
-  color: $text-color;
+  color: white;
 }
 
 @media only screen and (max-width: 967px) {
@@ -166,12 +195,14 @@ body {
     width: 75vw;
   }
 }
-
-@media only screen and (max-width: 375px) {
-  h1,
-  .h1 {
-    font-size: 1.8rem;
+@media only screen and (max-width: 480px) {
+  h1, .sprint {
+    font-size: 24px;
+    margin-right: 0;
   }
+}
+@media only screen and (max-width: 375px) {
+
   html,
   body {
     font-size: 16px;

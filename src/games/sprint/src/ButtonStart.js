@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link, BrowserRouter } from 'react-router-dom';
 import gear from '../../../assets/svg/gear.svg';
 import { ReactComponent as Close } from '../../../assets/svg/exit.svg';
+import letterO from './letterO.png';
 
 const propTypes = {
   settingsClick: PropTypes.func,
@@ -15,7 +16,7 @@ class ButtonStart extends PureComponent {
     return (
       <>
         <BrowserRouter>
-          <Link to="/">
+          <Link to="/games">
             <Close className="exitButton" />
           </Link>
         </BrowserRouter>
@@ -23,14 +24,15 @@ class ButtonStart extends PureComponent {
           <img src={gear} alt="Settings" id="settings" className="gearButton" />
         </button>
         <div className="sprint-start">
-          <h1 className="sprint">СПРИНТ</h1>
+          <h1 className="sprint">C<img src={letterO} class="zzz"></img>SMIC </h1>
+          <h1>VELOCITY</h1>
           <div className="sprint-info">
             Знаешь много слов на английском,но без понятия:что они означают?Разберись с переводом
             слов в увлекательной игре Спринт!
           </div>
           <button
             type="button"
-            className="btn btn-success button-start"
+            className="button-start"
             id="btn-success"
             onClick={fetchNewWords}
             onKeyDown={fetchNewWords}
