@@ -6,60 +6,85 @@ body {
 
 .page__title {
   text-align: center;
-  color: white;
+  color: black;
+  margin: 20px 0px;
+  padding: 10px;
+  text-align: center;
+  font-size: 35px;
+  letter-spacing: 4px;
+  font-weight: bold;
+  width: 100%;
+  text-shadow: 2px 1px 0px #fff, 1px 4px 0px rgba(0, 0, 0, 0.15);
+  text-transform: uppercase;
+  position: inherit;
+  background-color: #d8aee5;
+  // min-height: 84px;
+  box-shadow: 0px 0px 15px;
+}
+.settings_learned__words, .settings_info_cards, .settings__button-on-page {
+background-color: #ffffffab;
+border-radius: 16px;
+padding: 20px;
+padding-top: 0;
+display: flex;
+flex-direction: column;
+margin-bottom: 20px;
 }
 .settings__container {
-  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin:auto;
 }
-.settings__info {
+.settings__info, .settings__info-last-block {
   margin-right: 20px;
   font-style: normal;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 28px;
-  color: #ffffff;
+  color: black;
 }
 .settings__secondary-title {
   display: inline;
   font-family: Inter;
   width: 100%;
-  height: 40px;
-  color: black;
-  padding: 2px 17px;
+  // height: 40px;
+  color: white;
+  padding: 5px 17px;
   font-style: normal;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 22px;
   text-align: center;
-  background: #ffe9f2;
+  background: #8a74be;
   border-radius: 16px;
+  margin: 20px 0;
 }
 .form__button {
-  width: 32px;
-  height: 32px;
+  width: 25px;
+  height: 30px;
   background: #ffffff;
   border-radius: 4px;
   border: none;
   outline: none;
   margin-right: 16px;
 }
-.words__limit {
+.words__limit, .cards__limit, .level__limit {
   display: flex;
+  flex-wrap: wrap;
 }
-.cards__limit {
-  display: flex;
-}
+
 .plus-minus__input {
   width: 64px;
-  height: 40px;
+  height: 30px;
   margin-right: 16px;
-
   background: #8a74be;
   border-radius: 8px;
   color: white;
   text-align: center;
   border: none;
   outline: none;
+  margin-bottom: 5px;
 
 }
 .info__card {
@@ -71,14 +96,15 @@ body {
   border: 2px solid #555770;
 }
 .settings__info__container {
-  margin-top: 20px;
+  // margin-top: 20px;
 }
 .button__imitation {
   border: 2px solid #5c496d;
-  padding: 4px 16px;
+  padding: 0px 16px;
   text-align: center;
   margin-bottom: 10px;
   color: #5c496d;
+  font-size: 16px;
 }
 body {
   overflow: visible;
@@ -92,4 +118,23 @@ body {
   color: white;
   font-size: 20px;
   margin-left: 45%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  outline:none;
+}
+@media (max-width: 740px) {
+  .settings__info {
+    width: 100%;
+  }
+}
+@media (max-width: 470px) {
+  .settings__info-last-block {
+    width: 100%;
+  }
+  .info__card {
+    flex-wrap: wrap;
+  }
+  .page__title {
+    font-size: 32px;
+  }
 }
