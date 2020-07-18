@@ -7,7 +7,8 @@ import '../baseGame.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTurnOnSound }) => {
+export const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTurnOnSound }) => {
+  console.log(1);
   const [inputValue, setInputValue] = useState('');
   const [studiedWord, setStudiedWord] = useState([]);
   const [userMistakes, setUserMistakes] = useState([]);
@@ -154,6 +155,7 @@ const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTurnOnSou
     <div>
       <button type="button" className="slider__button slider__prev" onClick={goPrev}>
         <svg
+          className="slider__svg"
           width="18"
           height="18"
           viewBox="0 0 18 18"
@@ -165,7 +167,7 @@ const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTurnOnSou
             stroke="#5C496D"
             strokeWidth="2"
             strokeLinecap="round"
-            strokeLineJoin="round"
+            strokeLinejoin="round"
           />
         </svg>
       </button>
@@ -194,6 +196,7 @@ const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTurnOnSou
       </Slider>
       <button type="button" className="slider__button slider__next" onClick={goNext}>
         <svg
+          className="slider__svg"
           width="18"
           height="18"
           viewBox="0 0 18 18"
@@ -205,7 +208,7 @@ const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTurnOnSou
             stroke="#5C496D"
             strokeWidth="2"
             strokeLinecap="round"
-            strokeLineJoin="round"
+            strokeLinejoin="round"
           />
         </svg>
       </button>
@@ -217,16 +220,16 @@ const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTurnOnSou
         </div>
       </div>
       <div className="buttons_control__container">
-        <button className="button" type="button">
+        <button className="base__game_button" type="button">
           Удалить
         </button>
-        <button className="button" type="button" onClick={handleHardWords}>
+        <button className="base__game_button" type="button" onClick={handleHardWords}>
           Сложное слово
         </button>
-        <button className="button" type="submit" onClick={checkInput}>
+        <button className="base__game_button" type="submit" onClick={checkInput}>
           Дальше
         </button>
-        <button className="button" type="submit" onClick={goNext}>
+        <button className="base__game_button" type="submit" onClick={goNext}>
           Показать ответ
         </button>
       </div>
@@ -241,5 +244,3 @@ SimpleSwiperWithParams.propTypes = {
   userId: PropTypes.string,
   shouldTurnOnSound: PropTypes.bool,
 };
-
-export default SimpleSwiperWithParams;

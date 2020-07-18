@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import SimpleSwiperWithParams from './components/swiper';
+import { SimpleSwiperWithParams } from './components/swiper';
 import './baseGame.scss';
 
 export const BaseGame = () => {
@@ -59,8 +59,8 @@ export const BaseGame = () => {
   };
 
   return (
-    <div className="wrapper">
-      <div className="card__container">
+    <div className="base__game_wrapper ">
+      <div className="base__game_card__container">
         <div className="button-switch">
           <p className="button-switch__text">Автовоспроизведение аудио</p>
           <label className="switch">

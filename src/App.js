@@ -17,6 +17,7 @@ import { PrivateRoute } from './components/authorization/PrivateRoute';
 import { Footer } from './components/footer/footer';
 import { BaseGame } from './base-game/BaseGame';
 import { TeamPage } from './components/teamPage/teamPage';
+import { Sprint } from './games/sprint/src/Sprint';
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -48,6 +49,15 @@ function App() {
                 <Authorization />
                 <Footer />
               </Route>
+              <Route exact path="/games/ourTeam">
+                <TeamPage />
+                <Footer />
+              </Route>
+              <Route exact path="/games">
+                {/* <Header /> */}
+                <Home />
+                <Footer />
+              </Route>
               <Route exact path="/games/main">
                 <BaseGame />
               </Route>
@@ -75,13 +85,9 @@ function App() {
               <Route exact path="/games/speakIt">
                 <Speakit />
               </Route>
-
-              <Route exact path="/games">
-                {/* <Header /> */}
-                <Home />
-                <Footer />
+              <Route exact path="/games/sprint">
+                <Sprint />
               </Route>
-
               <Route exact path="/games/englishPuzzle">
                 {/* <EnglishPuzzle /> */}
               </Route>

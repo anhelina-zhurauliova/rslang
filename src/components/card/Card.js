@@ -50,19 +50,19 @@ export const Card = ({
   });
 
   return words[сardNumber] ? (
-    <div className="card__container">
+    <div className="base__game_card__container ">
       {settings.isImage ? (
-        <div className="card-image__container">
+        <div className="base__game_card-image__container">
           <img
-            className="card__image"
+            className="base__game_card__image"
             src={`https://raw.githubusercontent.com/irinainina/rslang-data/master/${words[сardNumber].image}`}
             alt=""
           />
         </div>
       ) : null}
-      <div className="card">
-        <div className="card-info__container">
-          <div className="card-info">
+      <div className="base_game__card">
+        <div className="base__game_card-info__container">
+          <div className="base__game_card-info">
             {' '}
             <Task
               sentence={words[сardNumber].textExample}
@@ -79,23 +79,27 @@ export const Card = ({
             />
           </div>
           {isCorrectAnswer ? (
-            <p className="card-info sentense-meaning">{words[сardNumber].textExampleTranslate}</p>
+            <p className="base__game_card-info sentense-meaning">
+              {words[сardNumber].textExampleTranslate}
+            </p>
           ) : null}
           {settings.isWordMeaning ? (
-            <p className="card-info sentense-meaning">
+            <p className="base__game_card-info sentense-meaning">
               {isCorrectAnswer ? ifAnswered.join(' ') : ifNotAnswered.join(' ')}
             </p>
           ) : null}
           {settings.isWordMeaning && isCorrectAnswer ? (
-            <p className="card-info sentense-meaning">{words[сardNumber].textMeaningTranslate}</p>
+            <p className="base__game_card-info sentense-meaning">
+              {words[сardNumber].textMeaningTranslate}
+            </p>
           ) : null}
           {settings.isTranscription ? (
-            <p className="card-info transcription">{words[сardNumber].transcription}</p>
+            <p className="base__game_card-info transcription">{words[сardNumber].transcription}</p>
           ) : null}
           {settings.isTranslation && isCorrectAnswer ? (
             <div className="translation__container">
               <div className="separator" />
-              <p className="card-info translation">{words[сardNumber].wordTranslate}</p>
+              <p className="base__game_card-info translation">{words[сardNumber].wordTranslate}</p>
             </div>
           ) : null}
         </div>

@@ -52,6 +52,7 @@
 }
 .description {
   padding: 10px;
+  color: black;
 }
 .card-link {
   padding: 5px 32px;
@@ -59,17 +60,17 @@
   background-color: #d8aee58a;
   letter-spacing: 4px;
   border: 1px solid #642777;
-  color:black;
+  color: black;
   margin: 10px auto 0;
 }
 .card-link:hover {
   background-color: #ab669a;
-  color:white;
+  color: white;
   border-radius: 16px;
   transition: 0.5s;
   font-weight: bold;
 }
-.card-link:not(:hover){
+.card-link:not(:hover) {
   transition: 1s;
 }
 body {
@@ -78,7 +79,7 @@ body {
 }
 @media (max-width: 390px) {
   .card-deck {
-    width:100%; 
+    width: 100%;
   }
   .game_card__container {
     margin-right: 0;

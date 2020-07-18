@@ -67,7 +67,7 @@ input:checked + .slider:before {
   margin-top: 56px;
   flex-wrap: wrap;
 }
-.button {
+.base__game_button {
   font-family: 'Inter';
   width: 140px;
   height: 32px;
@@ -131,4 +131,7 @@ input:checked + .slider:before {
   right: 200px;
   top: 50%;
   bottom: 0px;
+}
+.slider__svg {
+  margin-bottom: 0px;
 }

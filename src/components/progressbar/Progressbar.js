@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ProgressBar = ({ bgcolor, completed }) => {
   const containerStyles = {
-    height: 20,
+    height: 30,
     width: '100%',
     backgroundColor: '#e0e0de',
     borderRadius: 50,
