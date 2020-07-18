@@ -68,7 +68,7 @@ body {
     flex-direction: column;
     top: 0px;
     right: -47px;
-    width: 225px;
+    width: 300px;
     height: 100vh;
     background-color: #e198cc;
     z-index: 3;
@@ -87,6 +87,8 @@ body {
   @media (max-width: 1100px) {
     flex-direction: column;
     margin-top: 100px;
+    margin-top: 100px;
+    margin-left: 64px;
   }
 }
 .navigation__link > a {
@@ -100,6 +102,9 @@ body {
   color: white;
   @media (max-width: 1300px) {
     padding: 5px;
+  }
+  @media (max-width: 1100px) {
+    color: black;
   }
 }
 .navigation__link {
