@@ -253,7 +253,7 @@ export const Settings = () => {
                 onChange={() => onChangeCheckboxHandler('isShowAnswerButton')}
               />
 
-              <p className="settings__info">Добавить кнопку </p>
+              <p className="settings__info-last-block">Добавить кнопку </p>
               <span className="button__imitation">Показать ответ</span>
             </div>
             <div className="info__card">
@@ -264,7 +264,7 @@ export const Settings = () => {
                 onChange={() => onChangeCheckboxHandler('isHardButton')}
               />
 
-              <p className="settings__info">Добавить кнопку </p>
+              <p className="settings__info-last-block">Добавить кнопку </p>
               <span className="button__imitation">Удалить</span>
             </div>
             <div className="info__card">
@@ -275,16 +275,17 @@ export const Settings = () => {
                 onChange={() => onChangeCheckboxHandler('isDeleteButton')}
               />
 
-              <p className="settings__info">Добавить кнопку </p>
+              <p className="settings__info-last-block">Добавить кнопку </p>
               <span className="button__imitation">Сложное слово</span>
             </div>
           </div>
         </div>
-      </div>
-
-      <button className="submit__settings_button" type="button" onClick={onSubmitHandler}>
+        <button className="submit__settings_button" type="button" onClick={onSubmitHandler}>
         Сохранить
       </button>
+      </div>
+
+      
     </form>
   ) : null;
 };

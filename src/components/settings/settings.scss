@@ -21,7 +21,7 @@ body {
   // min-height: 84px;
   box-shadow: 0px 0px 15px;
 }
-.settings_learned__words {
+.settings_learned__words, .settings_info_cards, .settings__button-on-page {
 background-color: #ffffffab;
 border-radius: 16px;
 padding: 20px;
@@ -31,11 +31,12 @@ flex-direction: column;
 margin-bottom: 20px;
 }
 .settings__container {
-  // margin-left: 30px;
+  display: flex;
+  flex-direction: column;
   width: 80%;
   margin:auto;
 }
-.settings__info {
+.settings__info, .settings__info-last-block {
   margin-right: 20px;
   font-style: normal;
   font-weight: 600;
@@ -70,19 +71,20 @@ margin-bottom: 20px;
 }
 .words__limit, .cards__limit, .level__limit {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .plus-minus__input {
   width: 64px;
   height: 30px;
   margin-right: 16px;
-
   background: #8a74be;
   border-radius: 8px;
   color: white;
   text-align: center;
   border: none;
   outline: none;
+  margin-bottom: 5px;
 
 }
 .info__card {
@@ -94,14 +96,15 @@ margin-bottom: 20px;
   border: 2px solid #555770;
 }
 .settings__info__container {
-  margin-top: 20px;
+  // margin-top: 20px;
 }
 .button__imitation {
   border: 2px solid #5c496d;
-  padding: 4px 16px;
+  padding: 0px 16px;
   text-align: center;
   margin-bottom: 10px;
   color: #5c496d;
+  font-size: 16px;
 }
 body {
   overflow: visible;
@@ -115,4 +118,23 @@ body {
   color: white;
   font-size: 20px;
   margin-left: 45%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  outline:none;
+}
+@media (max-width: 740px) {
+  .settings__info {
+    width: 100%;
+  }
+}
+@media (max-width: 470px) {
+  .settings__info-last-block {
+    width: 100%;
+  }
+  .info__card {
+    flex-wrap: wrap;
+  }
+  .page__title {
+    font-size: 32px;
+  }
 }
