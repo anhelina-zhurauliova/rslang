@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { CONSTANTS } from '../../shared/constants';
+import { ReactComponent as Close } from '../../assets/svg/close.svg';
 import { Controllers } from './Controllers';
 
 export const Game = props => {
@@ -50,17 +52,24 @@ export const Game = props => {
     return shuffle(result);
   };
 
-  useEffect(() => {
+  const nextWord = () => {
     if (globalWords.length > 0) {
       trainWord().then(words => {
         setCurrentWords(words);
       });
     }
-  }, [globalWords.length, trainWord]);
+  };
+
+  useEffect(() => {
+    nextWord();
+  }, []);
 
   return (
-    <div className="audiocall container d-flex justify-content-center">
-      <Controllers allWords={currentWords} />
+    <div className="audiocall">
+      <Link className="audiocall__close" to="/games">
+        <Close className="audiocall__close-icon" />
+      </Link>
+      <Controllers allWords={currentWords} nextWord={nextWord} />
     </div>
   );
 };

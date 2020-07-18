@@ -1,12 +1,14 @@
 @import 'start';
 
-$background: url('../../assets/audiocall-background.jpeg');
+$background: url('../../assets/backgrounds/audiocall.jpeg');
 $text-color: white;
-$bottom-margin: 80px;
+$bottom-margin: 10vh;
 
 .audiocall {
   height: 100vh;
-  max-width: unset;
+  max-width: 100%;
+  justify-content: center;
+  display: flex;
   background: $background no-repeat center center fixed;
   background-size: cover;
   color: $text-color;
@@ -19,21 +21,61 @@ $bottom-margin: 80px;
 
   &__hint {
     margin-bottom: $bottom-margin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  &__o {
+    width: 15vh;
+    margin-left: -2vw;
+  }
+
+  &__image {
+    width: auto;
+    height: 100%;
+    margin-left: -50px;
+    &-circular {
+      display: inline-block;
+      position: relative;
+      width: 170px;
+      height: 170px;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+  }
+
+  &__row {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10vh;
   }
 
   &__voice-btn {
     align-self: center;
+    &-answered {
+      height: 77px;
+    }
   }
 
   &__icon {
-    max-width: 100%;
+    max-width: 5vw;
     height: auto;
+    border-radius: 50%;
+    &-large {
+      max-width: 17vw;
+      height: auto;
+      border-radius: 50%;
+    }
   }
 
   &__list {
     align-self: normal;
     margin-bottom: $bottom-margin;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
 
   &__list-item {
@@ -43,27 +85,97 @@ $bottom-margin: 80px;
     &:last-child {
       padding-right: 0;
     }
+    &-answer {
+      list-style-image: url(../../assets/svg/tick.svg);
+    }
+    &-neutral {
+      color: gray;
+    }
   }
 
   &__btn {
-    color: $text-color;
+    background-color: #ffffffb9;
+    color: black;
     text-transform: uppercase;
     width: fit-content;
-    border-color: $text-color;
-    border-radius: 0;
-    padding: 8px 16px 8px 16px;
+    border-radius: 16px 0 16px 0;
+    font-size: 24px;
+    padding: 8px 30px;
     align-self: center;
+    transition: all 0.5 ease-out;
+  }
+
+  &__btn:hover {
+    box-shadow: 0 0 20px 0;
+    border: 3px solid white;
+    border-bottom: 3px solid black;
+    border-top: none;
+    border-right: none;
+    font-size: 32px;
+  }
+
+  &__close {
+    position: fixed;
+    right: 2vh;
+    top: 1vw;
+    &-icon {
+      height: 5vh;
+      width: auto;
+    }
   }
 }
 
 .word__btn {
   vertical-align: baseline;
-  color: $text-color;
+  background-color: #ffffffb9;
+  color: black;
+  border-radius: 16px 0 16px 0;
+
+  &:hover {
+    box-shadow: 0 0 20px 0;
+    border: 3px solid white;
+    border-bottom: 3px solid black;
+    border-top: none;
+    border-right: none;
+  }
+
+  &-answer {
+    color: black;
+    border-radius: 16px 0 16px 0;
+    background-color: rgb(99, 179, 19);
+    animation: bounce 1s;
+  }
+
+  &-false {
+    color: black;
+    animation: mistake 0.3s;
+    border-radius: 16px 0 16px 0;
+    background-color: rgb(99, 179, 19);
+    background-color: rgb(209, 21, 21);
+  }
+
+  &-neutral {
+    background-color: #ffffffb9;
+    color: black;
+    border-radius: 16px 0 16px 0;
+  }
 }
 
 @media only screen and (max-width: 767px) {
-  .audiocall__icon {
-    max-width: 30%;
+  $margin: 5vh;
+  .audiocall {
+    &__icon {
+      max-width: 12vw;
+    }
+    &__list {
+      margin-bottom: $margin;
+    }
+    &__hint {
+      margin-bottom: $margin;
+    }
+    &__row {
+      margin-top: $margin;
+    }
   }
 }
 
@@ -74,8 +186,68 @@ $bottom-margin: 80px;
     align-items: center;
     justify-content: center;
 
-    &-item:last-child {
-      padding-right: 24px;
+    &-item {
+      padding-right: 0;
     }
+  }
+
+  .hint {
+    display: none;
+  }
+
+  .word {
+    margin-bottom: 1vh;
+  }
+
+  $margin: 3vh;
+  .audiocall {
+    &__icon {
+      max-width: 16vw;
+      &-large {
+        max-width: 24vw;
+      }
+    }
+    &__list {
+      margin-bottom: $margin;
+    }
+    &__hint {
+      margin-bottom: $margin;
+    }
+    &__row {
+      margin-top: $margin;
+    }
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  60%,
+  100% {
+    transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+
+  80% {
+    transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes mistake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
   }
 }

@@ -16,12 +16,12 @@ import { AudioCall } from './games/audiocall/AudioCall';
 import { PrivateRoute } from './components/authorization/PrivateRoute';
 import { Footer } from './components/footer/footer';
 import { BaseGame } from './base-game/BaseGame';
+import { TeamPage } from './components/teamPage/teamPage';
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true); // сессия пользователя
   const [cookies, setCookies] = useCookies(['authState']);
-
   useEffect(() => {
     try {
       if (!Object.keys(cookies).length) {
@@ -35,7 +35,7 @@ function App() {
       onError(e.message);
     }
     setIsAuthenticating(false);
-  }, [cookies, setCookies]);
+  }, []);
 
   return (
     !isAuthenticating && (
@@ -45,56 +45,46 @@ function App() {
             <div className="App">
               <Route path="/signin">
                 <Header />
-                <div className="main__wrapper">
-                  <Authorization />
-                </div>
+                <Authorization />
                 <Footer />
+              </Route>
+              <Route exact path="/games/main">
+                <BaseGame />
               </Route>
               <Route exact path="/login">
                 <Header />
-                <div className="main__wrapper">
-                  <Registration />
-                </div>
+                <Registration />
                 <Footer />
               </Route>
               <PrivateRoute exact path="/vocabulary">
                 <Header />
-                <div className="main__wrapper">
-                  <Vocabulary />
-                </div>
+                <Vocabulary />
                 <Footer />
               </PrivateRoute>
               <PrivateRoute exact path="/settings">
                 <Header />
-                <div className="main__wrapper">
-                  <Settings />
-                </div>
+                <Settings />
                 <Footer />
               </PrivateRoute>
               <Route exact path="/games/audiocall">
                 <AudioCall />
               </Route>
               <Route exact path="/">
-                <Header />
                 {/* <Promo /> */}
-                <Footer />
               </Route>
               <Route exact path="/games/speakIt">
                 <Speakit />
               </Route>
+
               <Route exact path="/games">
-                <Header />
-                <div className="main__wrapper">
-                  <Home />
-                </div>
+                {/* <Header /> */}
+                <Home />
                 <Footer />
               </Route>
-              <Route exact path="/games/main">
-                <BaseGame />
-              </Route>
-              <PrivateRoute exact path="/games/englishPuzzle">
+
+              <Route exact path="/games/englishPuzzle">
                 {/* <EnglishPuzzle /> */}
-              </PrivateRoute>
+              </Route>
             </div>
           </Router>
         </AppContext.Provider>

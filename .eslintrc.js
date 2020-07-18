@@ -16,7 +16,7 @@ module.exports = {
   },
   rules: {
     'linebreak-style': 'off',
-
+  
     'arrow-parens': 'off',
     'object-curly-newline': 'off',
     'no-mixed-operators': 'off',
@@ -37,14 +37,20 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': 'off',
 
     'prefer-destructuring': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
 
     'jsx-a11y/anchor-is-valid': ['error', { components: ['Link'], specialLink: ['to'] }],
+    'jsx-a11y/label-has-associated-control': [ 2, {
+      labelComponents: [],
+      labelAttributes: [],
+      controlComponents: [],
+      assert: 'either',
+      depth: 3,
+    }],
     'jsx-a11y/label-has-for': 'off',
-
     'prettier/prettier': ['error'],
   },
 };

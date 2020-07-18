@@ -6,13 +6,14 @@ const myStyle = {
   display: 'flex',
   cursor: 'pointer',
   lineHeight: '50px',
+  flexWrap: 'wrap',
 };
 const text = {
   margin: '0 20px',
 };
 const volume = {
   height: 20,
-  padding: '16px 0',
+  marginTop: 17,
 };
 
 const StatisticsWord = ({ word }) => {

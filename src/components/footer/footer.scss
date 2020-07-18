@@ -1,13 +1,15 @@
+p {
+  margin: 0;
+}
 .footer {
   background-color: #ab669a;
-  position: absolute;
   bottom: 0px;
-  height: 66px;
   flex: 0 0 auto;
   display: flex;
   width: 100%;
-  padding: 0rem 5rem;
+  padding: 0.5rem 2rem;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .footer__wrapper {
   display: flex;
@@ -17,19 +19,25 @@
   justify-content: space-between;
 }
 .team-mate {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   width: 48px;
   height: 48px;
   border-radius: 50px;
   background-size: cover;
-  margin-right: 50px;
-  &:last-child {
-    margin-right: 0px;
-  }
+  margin: 10px;
+  transition: all 0.2s ease-out;
+}
+.team-mate:hover {
+  box-shadow: 0px 0px 20px white;
 }
 .team-mate__container {
   display: flex;
-  margin-top: 7px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 50%;
 }
 .footer-info {
   font-family: Inter;
@@ -38,8 +46,8 @@
   font-size: 16px;
   line-height: 22px;
   text-align: center;
-  margin-top: 20px;
   color: white;
+  margin: auto;
 }
 .anhelina {
   background-image: url(https://avatars3.githubusercontent.com/u/56220481?s=460&u=8064a11e3c29f947d4d521aace2c2ccb535714f7&v=4);
@@ -59,6 +67,16 @@
 .artiem {
   background-image: url(https://avatars1.githubusercontent.com/u/55196488?s=460&v=4);
 }
+
 body {
   overflow: hidden;
+}
+@media (max-width: 890px) {
+  .footer-info {
+    padding-top: 10px;
+    width: 100%;
+  }
+  .team-mate__container {
+    width: 100%;
+  }
 }

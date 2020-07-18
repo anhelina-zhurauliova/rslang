@@ -14,6 +14,8 @@ export const Task = ({
   shouldShowInput,
   inputValue,
   shouldShowStudiedWord,
+  // isCorrect,
+  // сardNumber,
 }) => {
   const [wordWithoutTags, setWordWithoutTags] = useState('');
   const [arrayFromSentence, setArrayFromSentence] = useState([]);
@@ -47,7 +49,7 @@ export const Task = ({
 
   const studiedWordClass = classNames({
     'studied-word__container': true,
-    hidden: !shouldShowStudiedWord || !shouldShowWordOnFocus,
+    hidden: shouldShowStudiedWord === false || !shouldShowWordOnFocus,
   });
   const wordToShow = classNames({
     'studied-word-to-show': true,

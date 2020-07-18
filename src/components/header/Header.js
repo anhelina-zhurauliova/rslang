@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useAppContext } from '../../libs/contextLib';
+
 import './header.scss';
 
 export const Header = () => {
@@ -15,7 +16,6 @@ export const Header = () => {
     history.push('/');
     userHasAuthenticated(false);
   }
-
   useEffect(() => {}, []);
 
   return (

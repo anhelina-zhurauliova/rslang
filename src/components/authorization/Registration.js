@@ -118,6 +118,9 @@ export const Registration = () => {
                   </label>
                   <div>
                     <div className="input-group">
+                      <span className="input-group-addon">
+                        <i className="glyphicon glyphicon-envelope" />
+                      </span>
                       <Field
                         name="email"
                         type="text"
@@ -139,6 +142,9 @@ export const Registration = () => {
                   </label>
                   <div>
                     <div className="input-group">
+                      <span className="input-group-addon">
+                        <i className="glyphicon glyphicon-lock" />
+                      </span>
                       <Field
                         name="password"
                         type="password"
@@ -159,6 +165,9 @@ export const Registration = () => {
                   </label>
                   <div>
                     <div className="input-group">
+                      <span className="input-group-addon">
+                        <i className="glyphicon glyphicon-lock" />
+                      </span>
                       <Field
                         name="rpassword"
                         type="password"
