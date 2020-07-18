@@ -281,11 +281,9 @@ export const Settings = () => {
           </div>
         </div>
         <button className="submit__settings_button" type="button" onClick={onSubmitHandler}>
-        Сохранить
-      </button>
+          Сохранить
+        </button>
       </div>
-
-      
     </form>
   ) : null;
 };
