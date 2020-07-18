@@ -50,6 +50,7 @@ function App() {
                 <Footer />
               </Route>
               <Route exact path="/teampage">
+                <Header />
                 <TeamPage />
                 <Footer />
               </Route>
@@ -58,7 +59,6 @@ function App() {
                 <Home />
                 <Footer />
               </Route>
-
               <Route exact path="/login">
                 <Header />
                 <Registration />
