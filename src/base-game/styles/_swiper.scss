@@ -9,6 +9,12 @@
   flex-wrap: wrap;
   margin-top: 50px;
   position: relative;
+  @media (max-width: 561px) {
+    width: 400px;
+  }
+  @media (max-width: 461px) {
+    width: 300px;
+  }
 }
 
 .end-value,

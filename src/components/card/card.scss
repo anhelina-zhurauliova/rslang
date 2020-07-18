@@ -11,17 +11,19 @@
   box-shadow: 0px 8px 16px rgba(96, 97, 112, 0.16), 0px 2px 4px rgba(40, 41, 61, 0.04);
   border-radius: 8px;
   margin-top: 167px;
+  position: relative;
   @media (max-width: 800px) {
-    margin-top: 137px;
+    margin-top: 50px;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
     width: 400px;
-    height: 700px;
+    height: 600px;
     background: #ffffff;
     box-shadow: 0px 8px 16px rgba(96, 97, 112, 0.16), 0px 2px 4px rgba(40, 41, 61, 0.04);
     border-radius: 8px;
-    margin-top: 167px;
+  }
+  @media (max-width: 400px) {
+    width: 300px;
+    height: 650px;
   }
 }
 .base__game_card-image__container {
@@ -29,13 +31,17 @@
   z-index: 3;
   width: 240px;
   height: 168px;
-  left: 42.7%;
-  right: 33.7%;
+  left: 275px;
   top: -84px;
   box-shadow: 0px 4px 8px rgba(96, 97, 112, 0.16), 0px 0px 2px rgba(40, 41, 61, 0.04);
   border-radius: 8px;
   @media (max-width: 800px) {
     top: 5px;
+    left: 77px;
+  }
+  @media (max-width: 400px) {
+    top: 5px;
+    left: 27px;
   }
 }
 .base__game_card__image {
@@ -51,6 +57,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media (max-width: 800px) {
+    padding-top: 185px;
+  }
 }
 .base__game_card-info {
   font-family: 'Inter';
@@ -72,4 +81,7 @@
   margin-top: 17px;
   bottom: 5px;
   width: 100%;
+  @media (max-width: 800px) {
+    margin-top: 45px;
+  }
 }

@@ -66,6 +66,9 @@ input:checked + .slider:before {
   justify-content: center;
   margin-top: 56px;
   flex-wrap: wrap;
+  @media (max-width: 800px) {
+    margin-top: 28px;
+  }
 }
 .base__game_button {
   font-family: 'Inter';
@@ -85,10 +88,14 @@ input:checked + .slider:before {
 }
 .button-switch {
   position: absolute;
-  right: 23.5%;
+  right: calc((100vw - 768px) / 2);
   top: 126px;
   display: flex;
   z-index: 100;
+  @media (max-width: 800px) {
+    right: calc((100vw - 300px) / 2);
+    top: 10px;
+  }
 }
 .input__container {
   display: inline-block;

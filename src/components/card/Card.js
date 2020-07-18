@@ -51,16 +51,16 @@ export const Card = ({
 
   return words[сardNumber] ? (
     <div className="base__game_card__container ">
-      {settings.isImage ? (
-        <div className="base__game_card-image__container">
-          <img
-            className="base__game_card__image"
-            src={`https://raw.githubusercontent.com/irinainina/rslang-data/master/${words[сardNumber].image}`}
-            alt=""
-          />
-        </div>
-      ) : null}
       <div className="base_game__card">
+        {settings.isImage ? (
+          <div className="base__game_card-image__container">
+            <img
+              className="base__game_card__image"
+              src={`https://raw.githubusercontent.com/irinainina/rslang-data/master/${words[сardNumber].image}`}
+              alt=""
+            />
+          </div>
+        ) : null}
         <div className="base__game_card-info__container">
           <div className="base__game_card-info">
             {' '}
