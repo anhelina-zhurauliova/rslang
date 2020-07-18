@@ -65,7 +65,7 @@ export const Game = props => {
   }, []);
 
   return (
-    <div className="audiocall d-flex justify-content-center">
+    <div className="audiocall">
       <Link className="audiocall__close" to="/games">
         <Close className="audiocall__close-icon" />
       </Link>

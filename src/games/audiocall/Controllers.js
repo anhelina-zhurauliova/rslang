@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import useEventListener from '@use-it/event-listener';
 import { WordInfo } from './WordInfo';
 import { WordsList } from './WordsList';
 
@@ -11,13 +12,11 @@ export const Controllers = props => {
   const getCurrent = () => allWords.filter(x => x.answer === true);
   const getClicked = text => allWords.filter(x => text === x.wordTranslate)[0];
 
-  const onGameItemClick = e => {
-    e.preventDefault();
-    const clicked = getClicked(e.target.innerText);
-    const clickedIndex = allWords.indexOf(clicked);
+  const handleChoice = index => {
+    // console.log(index);
     const currentIndex = allWords.indexOf(word[0]);
-    setView({ isAnswered: true });
-    if (currentIndex === clickedIndex) {
+    const clicked = allWords[index];
+    if (currentIndex === index) {
       allWords.forEach(w => {
         if (w === word[0]) {
           w.right = true;
@@ -36,6 +35,23 @@ export const Controllers = props => {
         }
       });
     }
+    setView({ isAnswered: true });
+  };
+
+  const onKeyPress = ({ key }) => {
+    const keys = ['1', '2', '3', '4', '5'];
+    if (keys.includes(key)) {
+      handleChoice(+key - 1);
+    }
+  };
+
+  useEventListener('keydown', onKeyPress);
+
+  const onGameItemClick = e => {
+    e.preventDefault();
+    const clicked = getClicked(e.target.innerText);
+    const clickedIndex = allWords.indexOf(clicked);
+    handleChoice(clickedIndex);
   };
 
   const dontKnow = e => {

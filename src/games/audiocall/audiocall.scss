@@ -7,6 +7,8 @@ $bottom-margin: 10vh;
 .audiocall {
   height: 100vh;
   max-width: 100%;
+  justify-content: center;
+  display: flex;
   background: $background no-repeat center center fixed;
   background-size: cover;
   color: $text-color;
@@ -24,6 +26,11 @@ $bottom-margin: 10vh;
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
+  }
+
+  &__o {
+    width: 15vh;
+    margin-left: -2vw;
   }
 
   &__image {
@@ -57,9 +64,11 @@ $bottom-margin: 10vh;
   &__icon {
     max-width: 5vw;
     height: auto;
+    border-radius: 50%;
     &-large {
       max-width: 17vw;
       height: auto;
+      border-radius: 50%;
     }
   }
 
@@ -85,13 +94,24 @@ $bottom-margin: 10vh;
   }
 
   &__btn {
-    color: $text-color;
+    background-color: #ffffffb9;
+    color: black;
     text-transform: uppercase;
     width: fit-content;
-    border-color: $text-color;
-    border-radius: 0;
-    padding: 8px 16px 8px 16px;
+    border-radius: 16px 0 16px 0;
+    font-size: 24px;
+    padding: 8px 30px;
     align-self: center;
+    transition: all 0.5 ease-out;
+  }
+
+  &__btn:hover {
+    box-shadow: 0 0 20px 0;
+    border: 3px solid white;
+    border-bottom: 3px solid black;
+    border-top: none;
+    border-right: none;
+    font-size: 32px;
   }
 
   &__close {
@@ -107,19 +127,37 @@ $bottom-margin: 10vh;
 
 .word__btn {
   vertical-align: baseline;
-  color: $text-color;
+  background-color: #ffffffb9;
+  color: black;
+  border-radius: 16px 0 16px 0;
+
+  &:hover {
+    box-shadow: 0 0 20px 0;
+    border: 3px solid white;
+    border-bottom: 3px solid black;
+    border-top: none;
+    border-right: none;
+  }
 
   &-answer {
-    color: white;
+    color: black;
+    border-radius: 16px 0 16px 0;
+    background-color: rgb(99, 179, 19);
+    animation: bounce 1s;
   }
 
   &-false {
-    color: gray;
-    text-decoration: line-through;
+    color: black;
+    animation: mistake 0.3s;
+    border-radius: 16px 0 16px 0;
+    background-color: rgb(99, 179, 19);
+    background-color: rgb(209, 21, 21);
   }
 
   &-neutral {
-    color: gray;
+    background-color: #ffffffb9;
+    color: black;
+    border-radius: 16px 0 16px 0;
   }
 }
 
@@ -153,6 +191,14 @@ $bottom-margin: 10vh;
     }
   }
 
+  .hint {
+    display: none;
+  }
+
+  .word {
+    margin-bottom: 1vh;
+  }
+
   $margin: 3vh;
   .audiocall {
     &__icon {
@@ -170,5 +216,38 @@ $bottom-margin: 10vh;
     &__row {
       margin-top: $margin;
     }
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  60%,
+  100% {
+    transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+
+  80% {
+    transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes mistake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
   }
 }
