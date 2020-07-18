@@ -14,10 +14,12 @@ const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTurnOnSou
   const [lastStudiedCard, setLastStudiedCard] = useState(0);
   const [currentCard, setCurrentCard] = useState(0);
   const [completed, setCompleted] = useState(0);
+
   const [shouldShowInput, setShowInput] = useState(true);
   const [shouldShowStudiedWord, setShowStudiedWord] = useState(false);
   const [isCorrect, setIsCorrect] = useState({});
   const [settings, setSettings] = useState();
+
   const slider = useRef(null);
 
   const getInputValue = value => {
@@ -92,6 +94,7 @@ const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTurnOnSou
 
   const checkInput = () => {
     setUserMistakes([]);
+
     if (inputValue) {
       if (inputValue !== studiedWord) {
         const arr = inputValue.split('');
@@ -116,6 +119,7 @@ const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTurnOnSou
         playAudioWord(currentCard);
         // goNext();
       }
+
     }
   };
   const handleSlideChange = currentSlide => {

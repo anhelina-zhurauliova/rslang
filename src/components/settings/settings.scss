@@ -1,3 +1,9 @@
+
+body {
+  background: url(../../assets/mountain.png) no-repeat center center fixed;
+  background-size: cover;
+}
+
 .page__title {
   text-align: center;
   color: white;
@@ -47,12 +53,14 @@
   width: 64px;
   height: 40px;
   margin-right: 16px;
+
   background: #8a74be;
   border-radius: 8px;
   color: white;
   text-align: center;
   border: none;
   outline: none;
+
 }
 .info__card {
   display: flex;

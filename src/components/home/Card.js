@@ -7,16 +7,14 @@ export const Card = props => {
   const { id, title, screenshot, description, link } = props;
 
   return (
-    <div key={id} className="card text-center">
-      <img className="game__screenshot card-img-top" src={screenshot} alt={title} />
-      <div className="card-body">
-        <h4 className="card-title">{title}</h4>
-        <p className="card-text">{description}</p>
-      </div>
-      <div className="card-body">
+    <div key={id} className="game_card__container">    
+      <div className="info__container">
+      <img className="game__screenshot" src={screenshot} alt={title} />
+        <h4 className="game__title">{title}</h4>
         <Link className="card-link" to={link}>
-          Go
+          START GAME
         </Link>
+        <p className="description">{description}</p>
       </div>
     </div>
   );

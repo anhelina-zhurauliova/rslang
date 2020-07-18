@@ -16,6 +16,7 @@ import { AudioCall } from './games/audiocall/AudioCall';
 import { PrivateRoute } from './components/authorization/PrivateRoute';
 import { Footer } from './components/footer/footer';
 import { BaseGame } from './base-game/BaseGame';
+import { TeamPage } from './components/teamPage/teamPage';
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -34,7 +35,7 @@ function App() {
       onError(e.message);
     }
     setIsAuthenticating(false);
-  }, [cookies, setCookies]);
+  }, []);
 
   return (
     !isAuthenticating && (
@@ -76,7 +77,7 @@ function App() {
               </Route>
 
               <Route exact path="/games">
-                <Header />
+                {/* <Header /> */}
                 <Home />
                 <Footer />
               </Route>

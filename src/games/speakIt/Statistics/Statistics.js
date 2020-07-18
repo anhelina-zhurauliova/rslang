@@ -1,14 +1,25 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
+import { useMedia } from 'react-media';
 import StatisticsWord from './StatisticsWord';
 
-const myStyle = {
+const GLOBAL_MEDIA_QUERIES = {
+  small: '(max-width: 599px)',
+  medium: '(min-width: 600px) and (max-width: 1199px)',
+  large: '(min-width: 1200px)',
+};
+
+const statistics = {
+  minWidth: 320,
   width: 600,
   padding: 40,
   margin: '0 auto',
   fontSize: 25,
   backgroundColor: 'whitesmoke',
   boxShadow: '0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)',
+};
+const responsiveStatistics = {
+  width: '100%',
 };
 const numberOfCorrect = {
   backgroundColor: 'lightgreen',
@@ -44,6 +55,8 @@ const button = {
   transitionDuration: '0.5s',
 };
 const Statistics = ({ words, setShowStatistics, setWords, answered, setAnswered }) => {
+  const matches = useMedia({ queries: GLOBAL_MEDIA_QUERIES });
+  let myStyle;
   const getWords = async () => {
     const url = `https://afternoon-falls-25894.herokuapp.com/words?group=${0}&page=${Math.floor(
       Math.random() * Math.floor(29),
@@ -65,6 +78,12 @@ const Statistics = ({ words, setShowStatistics, setWords, answered, setAnswered 
     setShowStatistics(false);
   };
   answered = [...new Set(answered)];
+
+  if (matches.small) {
+    myStyle = { ...statistics, ...responsiveStatistics };
+  } else {
+    myStyle = statistics;
+  }
 
   return (
     <div style={myStyle}>

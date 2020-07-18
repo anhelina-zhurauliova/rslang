@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 // eslint-disable-next-line no-return-assign
 
+
 import React, { useRef, useState, useEffect } from 'react';
 import './settings.scss';
 import 'react-toastify/dist/ReactToastify.css';
@@ -61,11 +62,106 @@ export const Settings = () => {
   const wordLimit = useRef();
   const groupLimit = useRef();
 
-  return settings ? (
+return settings ? (
+import React, { useState, useEffect, useRef } from 'react';
+import { useCookies } from 'react-cookie';
+import './settings.scss';
+import { onError } from '../../libs/errorLib';
+import 'react-toastify/dist/ReactToastify.css';
+
+export const Settings = () => {
+  const defaultSettings = {
+    optional: {
+      basicGame: {
+        isImage: true,
+        isTranslation: true,
+        isTranscription: true,
+        isSentenceExample: true,
+        isTranslateSentenceExample: true,
+        isWordMeaning: true,
+        isTranslateWordmeaning: true,
+        showAnswer: true,
+        deleteButton: true,
+        hardWordButton: true,
+        cardsForDay: '50',
+      },
+    },
+    wordsPerDay: '50',
+  };
+  const [currentSettings, setCurrentSettings] = useState();
+  const [settingsFromBack, setSettingsFromBack] = useState({});
+  const [cookies] = useCookies(['authState']);
+  const [numberOfWords, setNumberOfWords] = useState(null);
+  const cardLimit = useRef();
+  const wordLimit = useRef();
+
+  const { token, userId } = cookies.authState.user;
+
+  const upsertUserSettings = (tokenUser, idUser, settings) => {
+    const url = `https://afternoon-falls-25894.herokuapp.com/users/${idUser}/settings`;
+
+    fetch(url, {
+      method: 'PUT',
+      body: JSON.stringify(settings),
+      headers: {
+        Authorization: `Bearer ${tokenUser}`,
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+  };
+
+  const fetchUserSettings = async (tokenUser, idUser) => {
+    const url = `https://afternoon-falls-25894.herokuapp.com/users/${idUser}/settings`;
+    try {
+      const rawResponse = await fetch(url, {
+        method: 'GET',
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${tokenUser}`,
+          Accept: 'application/json',
+        },
+      });
+      const dataUser = await rawResponse.json();
+      return dataUser;
+    } catch (error) {
+      return onError(error.message);
+    }
+  };
+  const getSettings = async () => {
+    const settings = await fetchUserSettings(token, userId);
+
+    if (settings?.optional?.basicGame) {
+      setCurrentSettings(settings);
+      setNumberOfWords(settings.wordsPerDay);
+      setSettingsFromBack(settings.optional.basicGame);
+    } else {
+      setSettingsFromBack(defaultSettings);
+      setCurrentSettings(defaultSettings.optional.basicGame);
+      setNumberOfWords(defaultSettings.wordsPerDay);
+    }
+  };
+
+  useEffect(() => {
+    if (userId) {
+      getSettings();
+    }
+  }, [userId]);
+
+  const onSubmithandler = e => {
+    e.preventDefault();
+    upsertUserSettings(token, userId, {
+      wordsPerDay: '1',
+      optional: {
+        ...settingsFromBack.optional,
+        basicGame: currentSettings,
+      },
+    });
+  };
+
+  return currentSettings ? (
     <form>
       <div className="settings__container">
         <h2 className="page__title">Параметры страницы</h2>
-
         <div className="settings_learned__words">
           <h3 className="settings__secondary-title">Настройки изучаемых слов:</h3>
           <div className="words__limit">
@@ -75,6 +171,7 @@ export const Settings = () => {
               type="button"
               onClick={() => {
                 gottenBasicSettings.wordsPerDay = `${Number(settings.wordsPerDay) - 1}`;
+
                 const numWordLimit = Number(wordLimit.current.value);
                 if (numWordLimit > 10) {
                   return (wordLimit.current.value = numWordLimit - 1);
@@ -139,7 +236,6 @@ export const Settings = () => {
               type="button"
               onClick={() => {
                 gottenBasicSettings.cardsPerDay = `${Number(settings.cardsPerDay) + 1}`;
-
                 const numCardLimit = Number(cardLimit.current.value);
                 if (numCardLimit < 200) {
                   cardLimit.current.value = numCardLimit + 1;
@@ -149,6 +245,7 @@ export const Settings = () => {
               +
             </button>
           </div>
+
           <div className="level__limit">
             <p className="settings__info">3. Выберите уровень сложности от 0 до 5:</p>
             <button
@@ -197,8 +294,10 @@ export const Settings = () => {
               <input
                 className="settings__checkbox"
                 type="checkbox"
+
                 checked={settings.isTranslation}
                 onChange={() => onChangeCheckboxHandler('isTranslation')}
+
               />
               <p className="settings__info">Показывать перевод слова</p>
             </div>
@@ -206,6 +305,7 @@ export const Settings = () => {
               <input
                 className="settings__checkbox"
                 type="checkbox"
+
                 checked={settings.isWordMeaning}
                 onChange={() => onChangeCheckboxHandler('isWordMeaning')}
               />
@@ -216,8 +316,10 @@ export const Settings = () => {
               <input
                 className="settings__checkbox"
                 type="checkbox"
+
                 checked={settings.isSentenceExample}
                 onChange={() => onChangeCheckboxHandler('isSentenceExample')}
+
               />
               <p className="settings__info">
                 Показывать предложение с примером использования слова
@@ -227,9 +329,10 @@ export const Settings = () => {
             <div className="info__card">
               <input
                 className="settings__checkbox"
-                type="checkbox"
+
                 checked={settings.isTranscription}
                 onChange={() => onChangeCheckboxHandler('isTranscription')}
+
               />
               <p className="settings__info">Показывать транскрипцию слова</p>
             </div>
@@ -237,49 +340,59 @@ export const Settings = () => {
               <input
                 className="settings__checkbox"
                 type="checkbox"
+
                 checked={settings.isImage}
                 onChange={() => onChangeCheckboxHandler('isImage')}
+
               />
               <p className="settings__info">Показывать картинку-ассоциацию к слову</p>
             </div>
           </div>
         </div>
+
         <div className="settings__button-on-page">
           <h3 className="settings__secondary-title">Отображение кнопок на странице:</h3>
           <div className="settings__info__container">
             <div className="info__card">
+
               <input
                 className="settings__checkbox"
                 type="checkbox"
                 checked={settings.isShowAnswerButton}
                 onChange={() => onChangeCheckboxHandler('isShowAnswerButton')}
               />
+
               <p className="settings__info">Добавить кнопку </p>
               <span className="button__imitation">Показать ответ</span>
             </div>
             <div className="info__card">
+
               <input
                 className="settings__checkbox"
                 type="checkbox"
                 checked={settings.isHardButton}
                 onChange={() => onChangeCheckboxHandler('isHardButton')}
               />
+
               <p className="settings__info">Добавить кнопку </p>
               <span className="button__imitation">Удалить</span>
             </div>
             <div className="info__card">
+
               <input
                 className="settings__checkbox"
                 type="checkbox"
                 checked={settings.isDeleteButton}
                 onChange={() => onChangeCheckboxHandler('isDeleteButton')}
               />
+
               <p className="settings__info">Добавить кнопку </p>
               <span className="button__imitation">Сложное слово</span>
             </div>
           </div>
         </div>
       </div>
+
       <button className="submit__settings_button" type="button" onClick={onSubmitHandler}>
         Сохранить
       </button>
