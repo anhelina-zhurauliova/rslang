@@ -4,7 +4,10 @@
 
   background-size: cover;
 }
-body {
-  background: url(../../assets/baseGame.png) no-repeat center center fixed;
+
+.base__game__container {
+  width: 100vw;
+  background: url(../../assets/backgrounds/2247177.png) no-repeat center center fixed;
   background-size: cover;
+  height: 100vh;
 }

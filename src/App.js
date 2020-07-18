@@ -23,9 +23,6 @@ function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true); // сессия пользователя
   const [cookies, setCookies] = useCookies(['authState']);
-  // alert(
-  //   'Пожалуйста, проверьте нашу работу после 10 вечера. Просим прощение на неудобство, часть функционала есть, но проблемы со стилями.',
-  // );
   useEffect(() => {
     try {
       if (!Object.keys(cookies).length) {
@@ -57,7 +54,7 @@ function App() {
                 <Footer />
               </Route>
               <Route exact path="/games">
-                {/* <Header /> */}
+                <Header />
                 <Home />
                 <Footer />
               </Route>

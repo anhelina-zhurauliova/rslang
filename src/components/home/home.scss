@@ -74,7 +74,7 @@
   transition: 1s;
 }
 body {
-  background: url(../../assets/mountain.png) no-repeat center center fixed;
+  background: url('../../assets/mountain.png') no-repeat center center fixed !important;
   background-size: cover;
 }
 @media (max-width: 390px) {

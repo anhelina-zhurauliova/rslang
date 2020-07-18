@@ -19,7 +19,7 @@ export const BaseGame = () => {
 
   const getWords = async () => {
     if (settings) {
-      const wordsNew = await fetchWords(0, settings.wordsPerDay);
+      const wordsNew = await fetchWords(settings.group, settings.wordsPerDay);
       setWords(wordsNew);
     }
   };
@@ -59,22 +59,24 @@ export const BaseGame = () => {
   };
 
   return (
-    <div className="base__game_wrapper ">
-      <div className="base__game_card__container">
-        <div className="button-switch">
-          <p className="button-switch__text">Автовоспроизведение аудио</p>
-          <label className="switch">
-            <input type="checkbox" onClick={handleSwitchButtonClick} />
-            <span className="slider round" />
-          </label>
+    <div className="base__game__container">
+      <div className="base__game_wrapper">
+        <div className="base__game_card__container">
+          <div className="button-switch">
+            <p className="button-switch__text">Автовоспроизведение аудио</p>
+            <label className="switch">
+              <input type="checkbox" onClick={handleSwitchButtonClick} />
+              <span className="slider round" />
+            </label>
+          </div>
+          <SimpleSwiperWithParams
+            words={words}
+            token={token}
+            userId={userId}
+            createUserWord={createUserWord}
+            shouldTurnOnSound={shouldTurnOnSound}
+          />
         </div>
-        <SimpleSwiperWithParams
-          words={words}
-          token={token}
-          userId={userId}
-          createUserWord={createUserWord}
-          shouldTurnOnSound={shouldTurnOnSound}
-        />
       </div>
     </div>
   );
