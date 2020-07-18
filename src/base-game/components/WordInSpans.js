@@ -9,7 +9,6 @@ export const StudiedWordInSpans = ({ word, userMistakes }) => {
   return arr.map((letter, i) => {
     if (userMistakes.length > 0) {
       if (userMistakes.includes(i)) {
-        // console.log(111);
         return (
           <span key={i} className="letter red">
             {letter}

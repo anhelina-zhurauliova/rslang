@@ -9,24 +9,36 @@ export const BaseGame = () => {
   const [words, setWords] = useState([]);
   const [cookies] = useCookies(['authState']);
   const [shouldTurnOnSound, setShouldTurnOnSound] = useState(false);
+  const [settings, setSettings] = useState();
   // console.log(shouldTurnOnSound);
 
-  const fetchWords = async (page, group, wordsAmount) => {
+  const fetchWords = async (group, wordsAmount) => {
     const rawResponse = await fetch(
-      `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${group}&wordsPerPage=${wordsAmount}`,
+      `https://afternoon-falls-25894.herokuapp.com/words?&group=${group}&page=&wordsPerPage=${wordsAmount}`,
     );
     const content = await rawResponse.json();
     return content;
   };
+
   const getWords = async () => {
-    const wordsNew = await fetchWords(0, 0, 60);
+    const wordsNew = await fetchWords(0, settings.wordsPerPages);
     setWords(wordsNew);
   };
+
   useEffect(() => {
     if (!words.length) {
       getWords();
     }
   }, [getWords, words.length]);
+
+  const basicSettings = JSON.parse(localStorage.getItem('basicGame'));
+
+  useEffect(() => {
+    if (settings === undefined) {
+      setSettings(basicSettings);
+    }
+  }, [settings]);
+
   const { token, userId } = cookies.authState.user;
 
   const createUserWord = async ({ idUser, wordId, word }) => {
