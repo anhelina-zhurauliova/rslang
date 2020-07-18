@@ -11,9 +11,15 @@ export const Card = props => {
       <div className="info__container">
         <img className="game__screenshot" src={screenshot} alt={title} />
         <h4 className="game__title">{title}</h4>
-        <Link className="card-link" to={link}>
-          START GAME
-        </Link>
+        {link === '/games/savannah' ? (
+          <a className="card-link" href="https://rslang-team70-anhelina-zhurauliowa.netlify.app/">
+            START GAME
+          </a>
+        ) : (
+          <Link className="card-link" to={link}>
+            START GAME
+          </Link>
+        )}
         <p className="description">{description}</p>
       </div>
     </div>

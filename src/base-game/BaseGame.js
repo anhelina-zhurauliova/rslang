@@ -7,7 +7,7 @@ export const BaseGame = () => {
   const [words, setWords] = useState([]);
   const [cookies] = useCookies(['authState']);
   const [shouldTurnOnSound, setShouldTurnOnSound] = useState(false);
-  const [settings, setSettings] = useState();
+  const [settings, setSettings] = useState({});
 
   const fetchWords = async (group, wordsAmount) => {
     const rawResponse = await fetch(
@@ -24,15 +24,33 @@ export const BaseGame = () => {
     }
   };
 
+  const basicGameSettings = {
+    isImage: true,
+    isTranslation: true,
+    isTranscription: true,
+    isSentenceExample: true,
+    isWordMeaning: true,
+    showAnswer: true,
+    deleteButton: true,
+    hardWordButton: true,
+    isShowAnswerButton: true,
+    isHardButton: true,
+    isDeleteButton: true,
+    wordsPerDay: 50,
+    cardsPerDay: 50,
+    group: 0,
+  };
+
   useEffect(() => {
-    if (settings === undefined) {
-      const basicSettings = JSON.parse(localStorage.getItem('basicGame'));
-      setSettings(basicSettings);
-    }
-    if (!words.length) {
+    if (!words.length || settings.isImage) {
+      if (!localStorage.getItem('basicGame')) {
+        setSettings(basicGameSettings);
+      } else {
+        setSettings(JSON.parse(localStorage.getItem('basicGame')));
+      }
       getWords();
     }
-  }, [words.length, settings]);
+  }, [words.length, settings.isImage]);
 
   const { token, userId } = cookies.authState.user;
 
@@ -59,24 +77,22 @@ export const BaseGame = () => {
   };
 
   return (
-    <div className="base__game__container">
-      <div className="base__game_wrapper">
-        <div className="base__game_card__container">
-          <div className="button-switch">
-            <p className="button-switch__text">Автовоспроизведение аудио</p>
-            <label className="switch">
-              <input type="checkbox" onClick={handleSwitchButtonClick} />
-              <span className="slider round" />
-            </label>
-          </div>
-          <SimpleSwiperWithParams
-            words={words}
-            token={token}
-            userId={userId}
-            createUserWord={createUserWord}
-            shouldTurnOnSound={shouldTurnOnSound}
-          />
+    <div className="base__game_wrapper">
+      <div className="base__game_card__container">
+        <div className="button-switch">
+          <p className="button-switch__text">Автовоспроизведение аудио</p>
+          <label className="switch">
+            <input type="checkbox" onClick={handleSwitchButtonClick} />
+            <span className="slider round" />
+          </label>
         </div>
+        <SimpleSwiperWithParams
+          words={words}
+          token={token}
+          userId={userId}
+          createUserWord={createUserWord}
+          shouldTurnOnSound={shouldTurnOnSound}
+        />
       </div>
     </div>
   );

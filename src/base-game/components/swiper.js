@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { Card } from '../../components/card/Card';
 import ProgressBar from '../../components/progressbar/Progressbar';
 import '../baseGame.scss';
@@ -9,7 +8,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 export const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTurnOnSound }) => {
-  console.log(1);
   const [inputValue, setInputValue] = useState('');
   const [studiedWord, setStudiedWord] = useState([]);
   const [userMistakes, setUserMistakes] = useState([]);
@@ -28,11 +26,29 @@ export const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTu
     setInputValue(value);
   };
 
-  const basicSettings = JSON.parse(localStorage.getItem('basicGame'));
-
+  const basicSettings = {
+    isImage: true,
+    isTranslation: true,
+    isTranscription: true,
+    isSentenceExample: true,
+    isWordMeaning: true,
+    showAnswer: true,
+    deleteButton: true,
+    hardWordButton: true,
+    isShowAnswerButton: true,
+    isHardButton: true,
+    isDeleteButton: true,
+    wordsPerDay: 50,
+    cardsPerDay: 50,
+    group: 0,
+  };
   useEffect(() => {
     if (settings === undefined) {
-      setSettings(basicSettings);
+      if (!localStorage.getItem('basicGame')) {
+        setSettings(basicSettings);
+      } else {
+        setSettings(JSON.parse(localStorage.getItem('basicGame')));
+      }
     }
   }, [settings]);
 

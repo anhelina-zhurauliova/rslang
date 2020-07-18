@@ -18,7 +18,6 @@ body {
   background-image: $background;
   background-repeat: no-repeat;
   background-size: cover;
-  
 }
 
 * {
@@ -57,7 +56,7 @@ body {
   border-radius: 16px;
 }
 .sprint-info {
-  color:white;
+  color: white;
 }
 .zzz {
   display: inline-block;
@@ -86,7 +85,7 @@ body {
   top: 35px;
   z-index: 2;
 }
-h1 {
+.h1 {
   font-size: 56px;
   letter-spacing: 20px;
   color: #ffffff;
@@ -196,28 +195,28 @@ h1 {
   }
 }
 @media only screen and (max-width: 480px) {
-  h1, .sprint {
+  .h1,
+  .sprint {
     font-size: 24px;
     margin-right: 0;
   }
 }
 @media only screen and (max-width: 375px) {
-
   html,
   body {
     font-size: 16px;
   }
 }
 
-
-.circleBar{
+.circleBar {
   widows: 100%;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.circleSucess, .circle{
+.circleSucess,
+.circle {
   width: 5vw;
   padding: 5px;
 }

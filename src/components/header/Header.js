@@ -69,7 +69,7 @@ export const Header = () => {
     <div className="wrapper__header">
       <header className="header__container">
         <span className="logo" />
-        <h1 className="text__logo">RocketEnglish</h1>
+        <h1 className="header__text__logo">RocketEnglish</h1>
         <nav className={navContainerClass}>
           <ul className="navigation-links__container">
             {isAuthenticated ? (

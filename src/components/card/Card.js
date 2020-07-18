@@ -97,7 +97,7 @@ export const Card = ({
             <p className="base__game_card-info transcription">{words[сardNumber].transcription}</p>
           ) : null}
           {settings.isTranslation && isCorrectAnswer ? (
-            <div className="translation__container">
+            <div className="base__game_translation__container">
               <div className="base__game_separator" />
               <p className="base__game_card-info translation">{words[сardNumber].wordTranslate}</p>
             </div>

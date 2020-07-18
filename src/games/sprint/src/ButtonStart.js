@@ -24,8 +24,10 @@ class ButtonStart extends PureComponent {
           <img src={gear} alt="Settings" id="settings" className="gearButton" />
         </button>
         <div className="sprint-start">
-          <h1 className="sprint">C<img src={letterO} class="zzz"></img>SMIC </h1>
-          <h1>VELOCITY</h1>
+          <h1 className="sprint">
+            C<img src={letterO} class="zzz"></img>SMIC{' '}
+          </h1>
+          <h1 className="h1">VELOCITY</h1>
           <div className="sprint-info">
             Знаешь много слов на английском,но без понятия:что они означают?Разберись с переводом
             слов в увлекательной игре Спринт!
