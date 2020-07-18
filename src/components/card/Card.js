@@ -53,13 +53,11 @@ export const Card = ({
     <div className="card__container">
       {settings.isImage ? (
         <div className="card-image__container">
-          (
           <img
             className="card__image"
             src={`https://raw.githubusercontent.com/irinainina/rslang-data/master/${words[сardNumber].image}`}
             alt=""
           />
-          )
         </div>
       ) : null}
       <div className="card">
