@@ -7,7 +7,7 @@ export const WordsList = props => {
   if (word.false) {
     return (
       <li key={word._id} className="audiocall__list-item-false word">
-        <button type="button" className="word__btn-false btn" onClick={e => onGameItemClick(e)}>
+        <button type="button" className="word__btn-false btn">
           {word.wordTranslate}
         </button>
       </li>
@@ -17,7 +17,7 @@ export const WordsList = props => {
   if (word.right) {
     return (
       <li key={word._id} className="audiocall__list-item-answer word">
-        <button type="button" className="word__btn-answer btn" onClick={e => onGameItemClick(e)}>
+        <button type="button" className="word__btn-answer btn">
           {word.wordTranslate}
         </button>
       </li>
@@ -26,7 +26,7 @@ export const WordsList = props => {
   if (word.neutral) {
     return (
       <li key={word._id} className="audiocall__list-item word">
-        <button type="button" className="word__btn-neutral btn" onClick={e => onGameItemClick(e)}>
+        <button type="button" className="word__btn-neutral btn">
           {word.wordTranslate}
         </button>
       </li>
