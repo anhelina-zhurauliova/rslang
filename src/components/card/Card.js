@@ -14,16 +14,54 @@ export const Card = ({
   shouldShowInput,
   inputValue,
   shouldShowStudiedWord,
+  settings,
+  isCorrectAnswer,
 }) => {
+  const sentenceMeaning = words[сardNumber].textMeaning;
+  const sentenceMeaningArray = sentenceMeaning.split(' ');
+  let studiedWord;
+  let studiedWordIndex;
+  sentenceMeaningArray.forEach((el, i) => {
+    if (el.includes('<')) {
+      studiedWordIndex = i;
+      studiedWord = el;
+    }
+  });
+
+  const withoutTags = studiedWord.replace('<i>', '').replace('</i>', '');
+
+  const starsWord = [];
+  for (let i = 0; i < withoutTags.length; i += 1) {
+    starsWord.push('*');
+  }
+
+  const ifNotAnswered = sentenceMeaningArray.map((el, i) => {
+    if (i === studiedWordIndex) {
+      el = starsWord.join('');
+    }
+    return el;
+  });
+
+  const ifAnswered = sentenceMeaningArray.map((el, i) => {
+    if (i === studiedWordIndex) {
+      el = withoutTags;
+    }
+    return el;
+  });
+
   return words[сardNumber] ? (
     <div className="card__container">
-      <div className="card-image__container">
-        <img
-          className="card__image"
-          src={`https://raw.githubusercontent.com/irinainina/rslang-data/master/${words[сardNumber].image}`}
-          alt=""
-        />
-      </div>
+      {settings.isImage ? (
+        <div className="card-image__container">
+          (
+          <img
+            className="card__image"
+            src={`https://raw.githubusercontent.com/irinainina/rslang-data/master/${words[сardNumber].image}`}
+            alt=""
+          />
+          )
+        </div>
+      ) : null}
       <div className="card">
         <div className="card-info__container">
           <div className="card-info">
@@ -38,14 +76,30 @@ export const Card = ({
               shouldShowInput={shouldShowInput}
               inputValue={inputValue}
               shouldShowStudiedWord={shouldShowStudiedWord}
+              isCorrect={isCorrectAnswer === true}
+              сardNumber={сardNumber}
             />
           </div>
-          <p className="card-info sentense-meaning">{words[сardNumber].textMeaning}</p>
-          <p className="card-info transcription">{words[сardNumber].transcription}</p>
-          <div className="translation__container">
-            <div className="separator" />
-            <p className="card-info translation">{words[сardNumber].wordTranslate}</p>
-          </div>
+          {isCorrectAnswer ? (
+            <p className="card-info sentense-meaning">{words[сardNumber].textExampleTranslate}</p>
+          ) : null}
+          {settings.isWordMeaning ? (
+            <p className="card-info sentense-meaning">
+              {isCorrectAnswer ? ifAnswered.join(' ') : ifNotAnswered.join(' ')}
+            </p>
+          ) : null}
+          {settings.isWordMeaning && isCorrectAnswer ? (
+            <p className="card-info sentense-meaning">{words[сardNumber].textMeaningTranslate}</p>
+          ) : null}
+          {settings.isTranscription ? (
+            <p className="card-info transcription">{words[сardNumber].transcription}</p>
+          ) : null}
+          {settings.isTranslation && isCorrectAnswer ? (
+            <div className="translation__container">
+              <div className="separator" />
+              <p className="card-info translation">{words[сardNumber].wordTranslate}</p>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
@@ -63,6 +117,8 @@ Card.propTypes = {
       textExample: PropTypes.string,
       wordTranslate: PropTypes.string,
       transcription: PropTypes.string,
+      textMeaningTranslate: PropTypes.string,
+      textExampleTranslate: PropTypes.string,
     }),
   ),
   getInputValue: PropTypes.func,
@@ -72,4 +128,10 @@ Card.propTypes = {
   shouldShowInput: PropTypes.bool,
   shouldShowStudiedWord: PropTypes.bool,
   inputValue: PropTypes.string,
+  isCorrectAnswer: PropTypes.bool,
+  settings: PropTypes.objectOf(
+    PropTypes.shape({
+      isImage: PropTypes.bool,
+    }),
+  ),
 };

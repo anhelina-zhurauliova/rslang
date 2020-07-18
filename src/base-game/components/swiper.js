@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import { Card } from '../../components/card/Card';
@@ -7,42 +7,67 @@ import '../baseGame.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const SimpleSwiperWithParams = ({ words, token, userId, createUserWord, shouldTurnOnSound }) => {
+const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTurnOnSound }) => {
   const [inputValue, setInputValue] = useState('');
   const [studiedWord, setStudiedWord] = useState([]);
   const [userMistakes, setUserMistakes] = useState([]);
   const [lastStudiedCard, setLastStudiedCard] = useState(0);
   const [currentCard, setCurrentCard] = useState(0);
   const [completed, setCompleted] = useState(0);
-  const [shouldShowInput, setShowInput] = useState({});
-  const [shouldShowStudiedWord, setShowStudiedWord] = useState({});
+  const [shouldShowInput, setShowInput] = useState(true);
+  const [shouldShowStudiedWord, setShowStudiedWord] = useState(false);
+  const [isCorrect, setIsCorrect] = useState({});
+  const [settings, setSettings] = useState();
   const slider = useRef(null);
 
   const getInputValue = value => {
     setInputValue(value);
   };
 
+  const basicSettings = JSON.parse(localStorage.getItem('basicGame'));
+
+  useEffect(() => {
+    if (settings === undefined) {
+      setSettings(basicSettings);
+    }
+  }, [settings]);
+
   const getStudiedWord = value => {
     setStudiedWord(value);
   };
 
   const goNext = () => {
-    slider.current.slickNext();
+    if (isCorrect[currentCard]) {
+      slider.current.slickNext();
+      setShowInput(true);
+      setShowStudiedWord(false);
+    } else {
+      setShowInput(true);
+      setShowStudiedWord(true);
+    }
   };
 
   const goPrev = () => {
     slider.current.slickPrev();
+    setShowInput(false);
+    setShowStudiedWord(false);
   };
+
   const playAudioMeaning = idx => {
-    if (shouldTurnOnSound) {
+    if (shouldTurnOnSound && settings.isWordMeaning === true) {
       const audioWordMeaning = new Audio(
         `https://raw.githubusercontent.com/irinainina/rslang-data/master/${words[idx].audioMeaning}`,
       );
       audioWordMeaning.play();
+      audioWordMeaning.onend = () => {
+        goNext();
+      };
+      goNext();
     }
   };
+
   const playAudioExample = idx => {
-    if (shouldTurnOnSound) {
+    if (shouldTurnOnSound && settings.isSentenceExample === true) {
       const audioWordExample = new Audio(
         `https://raw.githubusercontent.com/irinainina/rslang-data/master/${words[idx].audioExample}`,
       );
@@ -52,6 +77,7 @@ const SimpleSwiperWithParams = ({ words, token, userId, createUserWord, shouldTu
       };
     }
   };
+
   const playAudioWord = idx => {
     if (shouldTurnOnSound) {
       const audioWord = new Audio(
@@ -66,27 +92,30 @@ const SimpleSwiperWithParams = ({ words, token, userId, createUserWord, shouldTu
 
   const checkInput = () => {
     setUserMistakes([]);
-    if (inputValue !== studiedWord) {
-      const arr = inputValue.split('');
-      studiedWord.split('');
-      arr.forEach((el, i) => {
-        if (el !== studiedWord[i]) {
-          setUserMistakes(prevState => [...prevState, i]);
-        } else if (arr.length < studiedWord.length) {
-          setUserMistakes(prevState => [...prevState, i + arr.length]);
-        }
-      });
-      setInputValue('');
-      setShowStudiedWord(prevState => ({ ...prevState, [currentCard]: true }));
-      setShowInput(prevState => ({ ...prevState, [currentCard]: true }));
-    } else {
-      setCompleted(completed + 100 / 40);
-      goNext();
-      setShowStudiedWord(prevState => ({ ...prevState, [currentCard]: false }));
-      setShowInput(prevState => ({ ...prevState, [currentCard]: false }));
-      setLastStudiedCard(currentCard);
-      setInputValue('');
-      playAudioWord(currentCard);
+    if (inputValue) {
+      if (inputValue !== studiedWord) {
+        const arr = inputValue.split('');
+        studiedWord.split('').forEach((el, i) => {
+          if (el !== arr[i]) {
+            setUserMistakes(prevState => [...prevState, i]);
+          } else if (arr.length < studiedWord.length) {
+            setUserMistakes(prevState => [...prevState, i + arr.length]);
+          }
+        });
+        setInputValue('');
+        setShowStudiedWord(true);
+        setShowInput(true);
+        setIsCorrect(prevState => ({ ...prevState, [currentCard]: false }));
+      } else {
+        setCompleted(completed + 100 / settings.wordsPerDay);
+        setShowStudiedWord(false);
+        setShowInput(false);
+        setIsCorrect(prevState => ({ ...prevState, [currentCard]: true }));
+        setLastStudiedCard(currentCard);
+        setInputValue('');
+        playAudioWord(currentCard);
+        // goNext();
+      }
     }
   };
   const handleSlideChange = currentSlide => {
@@ -100,22 +129,11 @@ const SimpleSwiperWithParams = ({ words, token, userId, createUserWord, shouldTu
       word: { difficulty: 'hard' },
     });
   };
-  // eslint-disable-next-line no-unused-vars
-  const getHardWords = async id => {
-    const rawResponse = await fetch(
-      `https://afternoon-falls-25894.herokuapp.com/users/${id}/aggreg`,
-      {
-        method: 'GET',
-        withCredentials: true,
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-        },
-      },
-    );
-    const content = await rawResponse.json();
-    return content;
+
+  const onEndHandler = () => {
+    // console.log('end!');
   };
+  // eslint-disable-next-line no-unused-vars
 
   const settingsSlider = {
     speed: 500,
@@ -124,10 +142,12 @@ const SimpleSwiperWithParams = ({ words, token, userId, createUserWord, shouldTu
     arrows: false,
     swipe: false,
     draggable: false,
+    infinite: false,
     afterChange: handleSlideChange,
+    onEnd: onEndHandler,
   };
 
-  return (
+  return settings ? (
     <div>
       <button type="button" className="slider__button slider__prev" onClick={goPrev}>
         <svg
@@ -148,7 +168,7 @@ const SimpleSwiperWithParams = ({ words, token, userId, createUserWord, shouldTu
       </button>
       <Slider ref={slider} {...settingsSlider}>
         {words.map((word, i) => {
-          return shouldShowInput[i] === false || shouldShowStudiedWord[i] === true ? (
+          return (
             <Card
               сardNumber={i}
               words={words}
@@ -158,25 +178,13 @@ const SimpleSwiperWithParams = ({ words, token, userId, createUserWord, shouldTu
               userMistakes={userMistakes}
               lastStudiedCard={lastStudiedCard}
               currentCard={currentCard}
-              shouldShowInput={shouldShowInput[i]}
+              shouldShowInput={shouldShowInput}
               inputValue={inputValue}
-              shouldShowStudiedWord={shouldShowStudiedWord[i]}
+              shouldShowStudiedWord={shouldShowStudiedWord}
               shouldTurnOnSound={shouldTurnOnSound}
-            />
-          ) : (
-            <Card
-              сardNumber={i}
-              words={words}
-              key={word.id}
-              getInputValue={getInputValue}
-              getStudiedWord={getStudiedWord}
-              userMistakes={userMistakes}
-              lastStudiedCard={lastStudiedCard}
-              currentCard={currentCard}
-              shouldShowInput
-              inputValue={inputValue}
-              shouldShowStudiedWord={false}
-              shouldTurnOnSound={shouldTurnOnSound}
+              settings={settings}
+              isCorrectAnswer={isCorrect[i] === true}
+              isFirstCard
             />
           );
         })}
@@ -202,7 +210,7 @@ const SimpleSwiperWithParams = ({ words, token, userId, createUserWord, shouldTu
         <ProgressBar bgcolor="#5C496D" completed={completed} />
         <div className="progressbar__values">
           <span className="start-value">0</span>
-          <span className="end-value">40</span>
+          <span className="end-value">{settings.wordsPerDay}</span>
         </div>
       </div>
       <div className="buttons_control__container">
@@ -212,16 +220,17 @@ const SimpleSwiperWithParams = ({ words, token, userId, createUserWord, shouldTu
         <button className="button" type="button" onClick={handleHardWords}>
           Сложное слово
         </button>
-        <button className="button" type="submit" onClick={goNext}>
+        <button className="button" type="submit" onClick={checkInput}>
           Дальше
         </button>
-        <button className="button" type="submit" onClick={checkInput}>
+        <button className="button" type="submit" onClick={goNext}>
           Показать ответ
         </button>
       </div>
     </div>
-  );
+  ) : null;
 };
+
 SimpleSwiperWithParams.propTypes = {
   words: PropTypes.array,
   createUserWord: PropTypes.func,

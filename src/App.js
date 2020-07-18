@@ -44,10 +44,11 @@ function App() {
             <div className="App">
               <Route path="/signin">
                 <Header />
-                <div className="main__wrapper">
-                  <Authorization />
-                </div>
+                <Authorization />
                 <Footer />
+              </Route>
+              <Route exact path="/games/main">
+                <BaseGame />
               </Route>
               <Route exact path="/login">
                 <Header />
@@ -73,14 +74,13 @@ function App() {
               <Route exact path="/games/speakIt">
                 <Speakit />
               </Route>
+
               <Route exact path="/games">
                 <Header />
                 <Home />
                 <Footer />
               </Route>
-              <Route exact path="/games/main">
-                <BaseGame />
-              </Route>
+
               <Route exact path="/games/englishPuzzle">
                 {/* <EnglishPuzzle /> */}
               </Route>
