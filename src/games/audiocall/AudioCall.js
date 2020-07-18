@@ -25,11 +25,15 @@ export const AudioCall = () => {
     ],
   };
 
+  function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
+
   const fetchWords = async () => {
     const { token, userId } = cookies.authState.user;
     url.pathname = `users/${userId}/aggregatedWords`;
     url.searchParams.append('userId', JSON.stringify(userId));
-    url.searchParams.append('wordsPerPage', JSON.stringify(10));
+    url.searchParams.append('wordsPerPage', JSON.stringify(50));
     url.searchParams.append('filter', JSON.stringify(filter));
     const headers = new Headers();
     headers.append('Authorization', `Bearer ${token}`);
@@ -41,7 +45,7 @@ export const AudioCall = () => {
 
   const getWords = async () => {
     const wordsNew = await fetchWords();
-    return wordsNew;
+    return shuffle(wordsNew);
   };
 
   useEffect(() => {

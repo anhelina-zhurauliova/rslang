@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import useEventListener from '@use-it/event-listener';
 import { WordInfo } from './WordInfo';
 import { WordsList } from './WordsList';
+import Correct from '../../assets/audio/correct.mp3';
+import Error from '../../assets/audio/error.mp3';
 
 export const Controllers = props => {
   const { allWords, nextWord } = props;
@@ -12,11 +14,18 @@ export const Controllers = props => {
   const getCurrent = () => allWords.filter(x => x.answer === true);
   const getClicked = text => allWords.filter(x => text === x.wordTranslate)[0];
 
+  const makeVoice = bool => {
+    const link = bool ? Correct : Error;
+    const voice = new Audio(link);
+    voice.play();
+  };
+
   const handleChoice = index => {
     // console.log(index);
     const currentIndex = allWords.indexOf(word[0]);
     const clicked = allWords[index];
     if (currentIndex === index) {
+      makeVoice(true);
       allWords.forEach(w => {
         if (w === word[0]) {
           w.right = true;
@@ -27,6 +36,7 @@ export const Controllers = props => {
     } else {
       allWords.forEach(w => {
         if (w === clicked) {
+          makeVoice(false);
           w.false = true;
         } else if (w === word[0]) {
           w.right = true;
