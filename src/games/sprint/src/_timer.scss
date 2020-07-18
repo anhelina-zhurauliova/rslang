@@ -1,0 +1,115 @@
+.timer, .timer2 {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0px 0px 40px #fff;
+}
+.timer:before, .timer2:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 3;
+  background-color: #fff;
+  animation: mask_left 6s steps(1, end) forwards;
+}
+
+.timer2:before{
+    animation: mask_left 60s steps(1, end) forwards;
+}
+.timer:after,.timer2:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 3;
+  background-color: #8b003f;
+  animation: mask_right 6s steps(1, end) forwards;
+}
+
+.timer2:after{
+    animation: mask_right 60s steps(1, end) forwards;
+}
+.timer__line,.timer__line2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: line 6s linear forwards;
+  z-index: 2;
+}
+.timer__line2{
+    animation: line 60s linear forwards;
+}
+
+.timer__line:after, .timer__line2:after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #8b003f;
+}
+.timer__body,.timer__body2 {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #071c71;
+  text-align: center;
+  overflow: hidden;
+  z-index: 4;
+}
+.timer__counter{
+    animation: counter 10s steps(9, end) forwards;
+}
+.timer__counter span , .timer__counter2 span{
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+@keyframes counter {
+  0% {
+  }
+  100% {
+    transform: translate(0px, -900px);
+  }
+}
+@keyframes line {
+  0% {
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes mask_left {
+  0% {
+    visibility: visible;
+  }
+  50%,
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes mask_right {
+  0% {
+    visibility: hidden;
+  }
+  50%,
+  100% {
+    visibility: visible;
+  }
+}
