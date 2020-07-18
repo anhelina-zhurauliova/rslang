@@ -21,7 +21,6 @@ export const Controllers = props => {
   };
 
   const handleChoice = index => {
-    // console.log(index);
     const currentIndex = allWords.indexOf(word[0]);
     const clicked = allWords[index];
     if (currentIndex === index) {
