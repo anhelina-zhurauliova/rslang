@@ -6,7 +6,7 @@ body {
   overflow: visible;
 }
 .team_page__container {
-  max-width: 80%;
+  width: 80%;
   margin: auto;
 }
 svg {
@@ -61,20 +61,21 @@ svg {
   position: relative;
   margin-bottom: 40px;
 }
-.person-info {
+.team__page-person-info {
   width: 100%;
 }
-.person-name,
-.person-name-even {
+.team-page__person-name,
+.team-page__person-name-even {
   padding: 10px 0;
   text-align: center;
   font-size: 24px;
   letter-spacing: 4px;
   font-weight: bold;
   width: 100%;
+  color:black;
   text-shadow: 2px 1px 0px #fff, 1px 4px 0px rgba(0, 0, 0, 0.15);
 }
-.person-name {
+.team-page__person-name {
   background-image: linear-gradient(
     to right,
     rgb(255, 255, 255),
@@ -91,7 +92,7 @@ svg {
     rgb(183, 106, 207)
   );
 }
-.person-name-even {
+.team-page__person-name-even {
   background-image: linear-gradient(
     to left,
     rgb(255, 255, 255),
@@ -110,7 +111,7 @@ svg {
 }
 .person-contribution {
   width: 100%;
-  padding-left: 230px;
+  padding-left: 260px;
 }
 .person-contribution-even {
   width: 100%;
@@ -118,14 +119,14 @@ svg {
   padding-left: 40px;
 }
 .astronaut {
-  max-width: 20em;
-  margin-top: -70px;
+  max-width:350px;
+  margin-top: -80px;
   margin-left: -100px;
   position: absolute;
 }
 .astronaut-even {
-  max-width: 20em;
-  margin-top: -70px;
+  max-width: 350px;
+  margin-top: -80px;
   margin-left: -250px;
   position: absolute;
 }
@@ -140,15 +141,15 @@ svg {
   color: rgb(255, 0, 0);
 }
 @media (max-width: 830px) {
-  .container {
+  .team_page__container{
     width: 70%;
   }
   .astronaut {
-    max-width: 15em;
+    max-width: 12em;
     margin-top: -40px;
   }
   .astronaut-even {
-    max-width: 15em;
+    max-width: 12em;
     margin-top: -40px;
     margin-left: -150px;
   }
@@ -162,17 +163,17 @@ svg {
   }
 }
 @media (max-width: 720px) {
-  .container {
+  .team_page__container {
     width: 80%;
   }
   .astronaut {
     max-width: 6em;
-    margin-top: -40px;
+    margin-top: -65px;
     margin-left: 20px;
   }
   .astronaut-even {
     max-width: 6em;
-    margin-top: -40px;
+    margin-top: -65px;
     margin-left: -130px;
   }
   .person-contribution {
@@ -183,26 +184,26 @@ svg {
   .person-contribution-even {
     padding-right: 10px;
   }
-  .person-name,
-  .person-name-even {
+  .team-page__person-name,
+  .team-page__person-name-even {
     text-align: right;
     padding-right: 10px;
   }
-  .person-name-even {
+  .team-page__person-name-even {
     text-align: left;
     padding-left: 10px;
   }
 }
 @media (max-width: 420px) {
-  .container {
+  .team_page__container {
     width: 80%;
   }
   .astronaut,
   .astronaut-even {
     display: none;
   }
-  .person-name,
-  .person-name-even {
+  .team-page__person-name,
+  .team-page__person-name-even {
     text-align: center;
     padding-right: 0;
     padding-left: 0;
