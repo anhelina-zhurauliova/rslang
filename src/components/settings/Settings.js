@@ -223,6 +223,7 @@ export const Settings = () => {
 
             <div className="info__card">
               <input
+                type="checkbox"
                 className="settings__checkbox"
                 checked={settings.isTranscription}
                 onChange={() => onChangeCheckboxHandler('isTranscription')}

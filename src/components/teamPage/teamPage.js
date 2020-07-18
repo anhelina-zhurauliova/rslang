@@ -4,7 +4,7 @@ import cosmoperson from './images/cosmo-person.png';
 
 export function TeamPage() {
   return (
-    <div className="container">
+    <div className="team_page__container">
       <svg viewBox="0 0 960 150">
         <symbol id="s-text">
           <text textAnchor="middle" x="50%" y="80%">
@@ -30,35 +30,35 @@ export function TeamPage() {
           </div>
           <div className="person-contribution">
             <ul className="ckeck-list">
-              <li className="ckeck-point">
+              <li className="team__page_ckeck-point">
                 <span className="symbol-color">&#9733;</span>
                 Занималась настройкой проекта
               </li>
-              <li className="ckeck-point">
+              <li className="team__page_ckeck-point">
                 <span className="symbol-color">&#9733;</span>
                 Организовывала работу команды
               </li>
-              <li className="ckeck-point">
+              <li className="team__page_ckeck-pointt">
                 <span className="symbol-color">&#9733;</span>
                 Занималась организацией созвонов
               </li>
-              <li className="ckeck-point">
+              <li className="team__page_ckeck-pointt">
                 <span className="symbol-color">&#9733;</span>
                 Распределяла задачи между участникам команды
               </li>
-              <li className="ckeck-point">
+              <li className="team__page_ckeck-point">
                 <span className="symbol-color">&#9733;</span>
                 Делала ревью кода
               </li>
-              <li className="ckeck-point">
+              <li className="team__page_ckeck-point">
                 <span className="symbol-color">&#9733;</span>
                 Занималась созданием страницы с играми
               </li>
-              <li className="ckeck-point">
+              <li className="team__page_ckeck-point">
                 <span className="symbol-color">&#9733;</span>
                 Разработала базовую игру
               </li>
-              <li className="ckeck-point">
+              <li className="team__page_ckeck-point">
                 <span className="symbol-color">&#9733;</span>
                 Сделала header и footer
               </li>

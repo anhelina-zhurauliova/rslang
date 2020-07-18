@@ -38,7 +38,7 @@ export const Header = () => {
                   </Link>
                 </li>
                 <li className="navigation__link">
-                  <Link className="nav-link" to="/ourTeam">
+                  <Link className="nav-link" to="/teampage">
                     Наша команда
                   </Link>
                 </li>

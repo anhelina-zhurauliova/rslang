@@ -41,7 +41,7 @@ export const Authorization = () => {
     }
   };
   return (
-    <div className="authenticated container p-4 mt-5 justify-content-center">
+    <div className="authenticated authorization__container p-4 mt-5 justify-content-center">
       <h3 className="text-center">Авторизация</h3>
       <div id="signin">
         <p className="authenticated__content mt-3 mb-3 text-justify">

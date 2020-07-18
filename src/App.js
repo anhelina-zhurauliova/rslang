@@ -23,6 +23,9 @@ function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true); // сессия пользователя
   const [cookies, setCookies] = useCookies(['authState']);
+  // alert(
+  //   'Пожалуйста, проверьте нашу работу после 10 вечера. Просим прощение на неудобство, часть функционала есть, но проблемы со стилями.',
+  // );
   useEffect(() => {
     try {
       if (!Object.keys(cookies).length) {
@@ -49,7 +52,7 @@ function App() {
                 <Authorization />
                 <Footer />
               </Route>
-              <Route exact path="/games/ourTeam">
+              <Route exact path="/teampage">
                 <TeamPage />
                 <Footer />
               </Route>
@@ -58,9 +61,7 @@ function App() {
                 <Home />
                 <Footer />
               </Route>
-              <Route exact path="/games/main">
-                <BaseGame />
-              </Route>
+
               <Route exact path="/login">
                 <Header />
                 <Registration />
@@ -80,7 +81,9 @@ function App() {
                 <AudioCall />
               </Route>
               <Route exact path="/">
-                {/* <Promo /> */}
+                <Header />
+                <Registration />
+                <Footer />
               </Route>
               <Route exact path="/games/speakIt">
                 <Speakit />
@@ -90,6 +93,9 @@ function App() {
               </Route>
               <Route exact path="/games/englishPuzzle">
                 {/* <EnglishPuzzle /> */}
+              </Route>
+              <Route exact path="/games/main">
+                <BaseGame />
               </Route>
             </div>
           </Router>
