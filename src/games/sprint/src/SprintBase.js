@@ -154,10 +154,10 @@ class SprintBase extends PureComponent {
             {correct3Answer && <CircleSucess />}
           </div>
           <div id="btn-status" className="sprint-buttons">
-            <button type="button" className="btn btn-danger" id="btn-fail" onClick={falseButton}>
+            <button type="button" className="sprint-error-button" id="btn-fail" onClick={falseButton}>
               Неверно
             </button>
-            <button type="button" className="btn btn-success" id="btn-success" onClick={trueButton}>
+            <button type="button" className="sprint-correct-button" id="btn-success" onClick={trueButton}>
               Верно
             </button>
           </div>

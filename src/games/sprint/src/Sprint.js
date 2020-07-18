@@ -669,7 +669,7 @@ export class Sprint extends Component {
       <>
         {ComponentTrue}
         {ComponentFalse}
-        <div className="container ">
+        <div className="sprint-container ">
           {buttonStartVisible && (
             <ButtonStart settingsClick={this.settingsClick} fetchNewWords={this.fetchNewWords} />
           )}
