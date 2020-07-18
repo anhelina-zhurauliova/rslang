@@ -24,8 +24,8 @@ export function TeamPage() {
         <div className="person-photo">
           <img className="astronaut" src={cosmoperson} alt="person" />
         </div>
-        <div className="person-info">
-          <div className="person-name">
+        <div className="team__page-person-info">
+          <div className="team-page__person-name">
             <b>АНГЕЛИНА</b>
           </div>
           <div className="person-contribution">
@@ -67,8 +67,8 @@ export function TeamPage() {
         </div>
       </div>
       <div className="person-card">
-        <div className="person-info">
-          <div className="person-name-even">
+        <div className="team__page-person-info">
+          <div className="team-page__person-name-even">
             <b>ОЛЯ</b>
           </div>
           <div className="person-contribution-even">
@@ -108,8 +108,8 @@ export function TeamPage() {
         <div className="person-photo">
           <img className="astronaut" src={cosmoperson} alt="person" />
         </div>
-        <div className="person-info">
-          <div className="person-name">
+        <div className="team__page-person-info">
+          <div className="team-page__person-name">
             <b>ТАНЯ</b>
           </div>
           <div className="person-contribution">
@@ -135,15 +135,15 @@ export function TeamPage() {
         </div>
       </div>
       <div className="person-card">
-        <div className="person-info">
-          <div className="person-name-even">
+        <div className="team__page-person-info">
+          <div className="team-page__person-name-even">
             <b>АРСЛАН</b>
           </div>
           <div className="person-contribution-even">
             <ul className="ckeck-list">
               <li className="ckeck-point">
                 <span className="symbol-color">&#9733;</span>
-                Занимался написанием игры Audiocall
+                Занимался написанием игры Space Station
               </li>
             </ul>
           </div>
@@ -156,8 +156,8 @@ export function TeamPage() {
         <div className="person-photo">
           <img className="astronaut" src={cosmoperson} alt="person" />
         </div>
-        <div className="person-info">
-          <div className="person-name">
+        <div className="team__page-person-info">
+          <div className="team-page__person-name">
             <b>ИЛЬЯ</b>
           </div>
           <div className="person-contribution">
@@ -171,8 +171,8 @@ export function TeamPage() {
         </div>
       </div>
       <div className="person-card">
-        <div className="person-info">
-          <div className="person-name-even">
+        <div className="team__page-person-info">
+          <div className="team-page__person-name-even">
             <b>АРТЕМ</b>
           </div>
           <div className="person-contribution-even">
