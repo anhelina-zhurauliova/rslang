@@ -58,7 +58,7 @@ export const Settings = () => {
     }
   };
 
-return settings ? (
+  return settings ? (
     <form>
       <div className="settings__container">
         <h2 className="page__title">Параметры страницы</h2>
@@ -194,10 +194,8 @@ return settings ? (
               <input
                 className="settings__checkbox"
                 type="checkbox"
-
                 checked={settings.isTranslation}
                 onChange={() => onChangeCheckboxHandler('isTranslation')}
-
               />
               <p className="settings__info">Показывать перевод слова</p>
             </div>
@@ -205,7 +203,6 @@ return settings ? (
               <input
                 className="settings__checkbox"
                 type="checkbox"
-
                 checked={settings.isWordMeaning}
                 onChange={() => onChangeCheckboxHandler('isWordMeaning')}
               />
@@ -216,10 +213,8 @@ return settings ? (
               <input
                 className="settings__checkbox"
                 type="checkbox"
-
                 checked={settings.isSentenceExample}
                 onChange={() => onChangeCheckboxHandler('isSentenceExample')}
-
               />
               <p className="settings__info">
                 Показывать предложение с примером использования слова
@@ -229,10 +224,8 @@ return settings ? (
             <div className="info__card">
               <input
                 className="settings__checkbox"
-
                 checked={settings.isTranscription}
                 onChange={() => onChangeCheckboxHandler('isTranscription')}
-
               />
               <p className="settings__info">Показывать транскрипцию слова</p>
             </div>
@@ -240,10 +233,8 @@ return settings ? (
               <input
                 className="settings__checkbox"
                 type="checkbox"
-
                 checked={settings.isImage}
                 onChange={() => onChangeCheckboxHandler('isImage')}
-
               />
               <p className="settings__info">Показывать картинку-ассоциацию к слову</p>
             </div>
@@ -254,7 +245,6 @@ return settings ? (
           <h3 className="settings__secondary-title">Отображение кнопок на странице:</h3>
           <div className="settings__info__container">
             <div className="info__card">
-
               <input
                 className="settings__checkbox"
                 type="checkbox"
@@ -266,7 +256,6 @@ return settings ? (
               <span className="button__imitation">Показать ответ</span>
             </div>
             <div className="info__card">
-
               <input
                 className="settings__checkbox"
                 type="checkbox"
@@ -278,7 +267,6 @@ return settings ? (
               <span className="button__imitation">Удалить</span>
             </div>
             <div className="info__card">
-
               <input
                 className="settings__checkbox"
                 type="checkbox"

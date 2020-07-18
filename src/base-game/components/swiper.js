@@ -119,7 +119,6 @@ const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTurnOnSou
         playAudioWord(currentCard);
         // goNext();
       }
-
     }
   };
   const handleSlideChange = currentSlide => {
