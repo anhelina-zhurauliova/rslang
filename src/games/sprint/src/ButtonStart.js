@@ -1,9 +1,11 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Link, BrowserRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import gear from '../../../assets/svg/gear.svg';
-import { ReactComponent as Close } from '../../../assets/svg/exit.svg';
+import { ReactComponent as Close } from '../../../assets/svg/close.svg';
 import letterO from './letterO.png';
+import '../../audiocall/audiocall.scss';
 
 const propTypes = {
   settingsClick: PropTypes.func,
@@ -15,17 +17,17 @@ class ButtonStart extends PureComponent {
     const { settingsClick, fetchNewWords } = this.props;
     return (
       <>
-        <BrowserRouter>
-          <Link to="/games">
-            <Close className="exitButton" />
-          </Link>
-        </BrowserRouter>
+        <Link className="audiocall__close base__game__close" to="/games">
+          <Close className="audiocall__close-icon" />
+        </Link>
         <button type="button" onClick={settingsClick} onKeyDown={settingsClick}>
           <img src={gear} alt="Settings" id="settings" className="gearButton" />
         </button>
         <div className="sprint-start">
           <h1 className="sprint">
-            C<img src={letterO} class="zzz"></img>SMIC{' '}
+            C
+            <img src={letterO} className="zzz" alt="none" />
+            SMIC{' '}
           </h1>
           <h1 className="h1">VELOCITY</h1>
           <div className="sprint-info">

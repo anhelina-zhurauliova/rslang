@@ -14,11 +14,11 @@ $font-size: 20px;
   text-align: $property;
 }
 
-body {
-  background-image: $background;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+// body {
+//   background-image: $background;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+// }
 
 * {
   padding: 0;
@@ -70,6 +70,10 @@ body {
   width: 100vw;
   height: 100vh;
   margin-top: 40px;
+  background-image: $background;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
 }
 
 .wrapper2 {

@@ -7,3 +7,7 @@
 .base__game_card__container {
   position: relative;
 }
+.base__game__close {
+  z-index: 100;
+  cursor: pointer;
+}

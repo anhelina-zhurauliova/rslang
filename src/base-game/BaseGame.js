@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { SimpleSwiperWithParams } from './components/swiper';
+import { ReactComponent as Close } from '../assets/svg/close.svg';
 import './baseGame.scss';
+import '../games/audiocall/audiocall.scss';
 
 export const BaseGame = () => {
   const [words, setWords] = useState([]);
@@ -78,6 +81,9 @@ export const BaseGame = () => {
 
   return (
     <div className="base__game_wrapper">
+      <Link className="audiocall__close base__game__close" to="/games">
+        <Close className="audiocall__close-icon" />
+      </Link>
       <div className="base__game_card__container">
         <div className="button-switch">
           <p className="button-switch__text">Автовоспроизведение аудио</p>
