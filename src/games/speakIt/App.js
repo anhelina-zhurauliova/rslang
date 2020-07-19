@@ -95,7 +95,7 @@ export const Speakit = () => {
   return (
     <div style={myStyle}>
       <div className="App">
-        {!showStatistics ? (
+        {showStatistics ? (
           <Statistics
             words={words}
             setShowStatistics={setShowStatistics}
