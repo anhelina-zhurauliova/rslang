@@ -16,14 +16,16 @@
     margin-top: 50px;
     display: block;
     width: 400px;
-    height: 600px;
+    height: 100%;
+    // height: 600px;
     background: #ffffff;
     box-shadow: 0px 8px 16px rgba(96, 97, 112, 0.16), 0px 2px 4px rgba(40, 41, 61, 0.04);
     border-radius: 8px;
   }
   @media (max-width: 400px) {
     width: 300px;
-    height: 650px;
+    height: 100%;
+    // height: 650px;
   }
 }
 .base__game_card-image__container {

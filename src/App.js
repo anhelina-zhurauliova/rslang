@@ -92,7 +92,9 @@ function App() {
                 {/* <EnglishPuzzle /> */}
               </Route>
               <Route exact path="/games/main">
+                <Header />
                 <BaseGame />
+                <Footer />
               </Route>
             </div>
           </Router>

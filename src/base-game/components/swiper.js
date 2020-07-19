@@ -129,7 +129,7 @@ export const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTu
         setShowInput(true);
         setIsCorrect(prevState => ({ ...prevState, [currentCard]: false }));
       } else {
-        setCompleted(completed + 100 / settings.wordsPerDay);
+        setCompleted((completed + 100 / settings.wordsPerDay).toFixed(2));
         setShowStudiedWord(false);
         setShowInput(false);
         setIsCorrect(prevState => ({ ...prevState, [currentCard]: true }));
