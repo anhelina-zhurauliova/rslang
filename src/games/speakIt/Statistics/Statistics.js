@@ -15,7 +15,7 @@ const statistics = {
   padding: 40,
   margin: '0 auto',
   fontSize: 25,
-  backgroundColor: 'whitesmoke',
+  backgroundColor: '#484862',
   boxShadow: '0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)',
 };
 const responsiveStatistics = {

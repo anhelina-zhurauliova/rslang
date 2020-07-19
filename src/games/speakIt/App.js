@@ -80,7 +80,7 @@ export const Speakit = () => {
             </span>
             naut's speech
           </h1>
-          <p className="audiocall__text">Данная игра улучшит ваш навые разговорной речи</p>
+          <p className="audiocall__text">Данная игра улучшит ваш навык разговорной речи</p>
           <button
             className="audiocall__btn btn"
             type="button"
@@ -95,7 +95,7 @@ export const Speakit = () => {
   return (
     <div style={myStyle}>
       <div className="App">
-        {showStatistics ? (
+        {!showStatistics ? (
           <Statistics
             words={words}
             setShowStatistics={setShowStatistics}
