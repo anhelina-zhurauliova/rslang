@@ -14,6 +14,7 @@ export const Home = () => {
             screenshot={game.screenshot}
             description={game.description}
             link={game.link}
+            anotherLink={game.anotherLink}
           />
         ))}
       </div>

@@ -72,7 +72,7 @@ svg {
   letter-spacing: 4px;
   font-weight: bold;
   width: 100%;
-  color:black;
+  color: black;
   text-shadow: 2px 1px 0px #fff, 1px 4px 0px rgba(0, 0, 0, 0.15);
 }
 .team-page__person-name {
@@ -119,8 +119,8 @@ svg {
   padding-left: 40px;
 }
 .astronaut {
-  max-width:350px;
-  margin-top: -80px;
+  max-width: 350px;
+  margin-top: -60px;
   margin-left: -100px;
   position: absolute;
 }
@@ -141,7 +141,7 @@ svg {
   color: rgb(255, 0, 0);
 }
 @media (max-width: 830px) {
-  .team_page__container{
+  .team_page__container {
     width: 70%;
   }
   .astronaut {

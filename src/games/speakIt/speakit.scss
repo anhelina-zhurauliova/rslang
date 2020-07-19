@@ -1,0 +1,18 @@
+.speakit {
+  height: 100vh;
+  max-width: 100%;
+  justify-content: center;
+  display: flex;
+  background: url('../../assets/backgrounds/speakit.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: black;
+}
+.speakit__header {
+  text-transform: uppercase;
+  font-size: 56px;
+  font-weight: 900;
+  letter-spacing: 2vw;
+  text-align: center;
+  text-shadow: 2px 3px 2px #8f7575;
+  color: black;
+}

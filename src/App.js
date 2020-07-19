@@ -79,7 +79,7 @@ function App() {
               </Route>
               <Route exact path="/">
                 <Header />
-                <Home />
+                <Registration />
                 <Footer />
               </Route>
               <Route exact path="/games/speakIt">
@@ -94,7 +94,6 @@ function App() {
               <Route exact path="/games/main">
                 {/* <Header /> */}
                 <BaseGame />
-                <Footer />
               </Route>
             </div>
           </Router>

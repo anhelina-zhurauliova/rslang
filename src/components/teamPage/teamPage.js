@@ -48,7 +48,7 @@ export function TeamPage() {
               </li>
               <li className="team__page_ckeck-point">
                 <span className="symbol-color">&#9733;</span>
-                Делала ревью кода
+                Делала ревью кода и резолвила конфликты
               </li>
               <li className="team__page_ckeck-point">
                 <span className="symbol-color">&#9733;</span>
@@ -61,6 +61,10 @@ export function TeamPage() {
               <li className="team__page_ckeck-point">
                 <span className="symbol-color">&#9733;</span>
                 Сделала header и footer
+              </li>
+              <li className="team__page_ckeck-point">
+                <span className="symbol-color">&#9733;</span>
+                Добавила настройки
               </li>
             </ul>
           </div>
@@ -97,6 +101,14 @@ export function TeamPage() {
                 <span className="symbol-color">&#9733;</span>
                 Разработала игру Rocket Resque
               </li>
+              <li className="ckeck-point">
+                <span className="symbol-color">&#9733;</span>
+                Разработала игру Shuttke Docking
+              </li>
+              <li className="ckeck-point">
+                <span className="symbol-color">&#9733;</span>
+                Сделала респонсив основых страниц приложения
+              </li>
             </ul>
           </div>
         </div>
@@ -120,7 +132,7 @@ export function TeamPage() {
               </li>
               <li className="ckeck-point">
                 <span className="symbol-color">&#9733;</span>
-                Занималась написанием игры Chaos
+                Начинала написание игры Heavenly Chaos
               </li>
               <li className="ckeck-point">
                 <span className="symbol-color">&#9733;</span>

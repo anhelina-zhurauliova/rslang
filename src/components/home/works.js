@@ -4,7 +4,7 @@ import basicGame from '../../assets/baseGame.png';
 import Audiocall from '../../assets/backgrounds/audiocall.jpeg';
 import Savannah from '../../assets/savannah.jpg';
 import Sprint from '../../assets/sprint.jpeg';
-import EnglishPuzzle from '../../assets/englishpuzzle.jpeg';
+import Shuttle from '../../assets/shuttle.jpeg';
 
 export const Games = [
   {
@@ -25,11 +25,12 @@ export const Games = [
   },
   {
     id: 'g-3',
-    title: 'Heavenly  Сhaos',
-    screenshot: EnglishPuzzle,
+    title: 'Shuttle Docking',
+    screenshot: Shuttle,
     description:
-      'Остановите хаос путем верного составления предложений! В данной мини-игре вы не только сможете закрепить, как правильно строить предложения, но и познакомитесь с шедеврами классиков изобразительного искусства ',
+      'Тренировка Shuttle Docking развивает ассоциативное мышление.Заполни поля под картинками цифрами, наиболее подходящими на твой взгляд.',
     link: '/games/englishpuzzle',
+    anotherLink: 'https://rslang-team70-angelina-zhurauliova.netlify.app/',
   },
   {
     id: 'g-4',
@@ -38,6 +39,7 @@ export const Games = [
     description:
       'Наберите как можно больше правильных ответов, чтобы собрать необходимое количество топлива и запустить ракету в космос! ',
     link: '/games/savannah',
+    anotherLink: 'https://rslang-team70-anhelina-zhurauliowa.netlify.app/',
   },
   {
     id: 'g-5',

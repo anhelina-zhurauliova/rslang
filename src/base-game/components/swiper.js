@@ -56,17 +56,6 @@ export const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTu
     setStudiedWord(value);
   };
 
-  const goNext = () => {
-    if (isCorrect[currentCard]) {
-      slider.current.slickNext();
-      setShowInput(true);
-      setShowStudiedWord(false);
-    } else {
-      setShowInput(true);
-      setShowStudiedWord(true);
-    }
-  };
-
   const goPrev = () => {
     slider.current.slickPrev();
     setShowInput(false);
@@ -79,15 +68,23 @@ export const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTu
         `https://raw.githubusercontent.com/irinainina/rslang-data/master/${words[idx].audioMeaning}`,
       );
       audioWordMeaning.play();
-      audioWordMeaning.onend = () => {
-        goNext();
+      audioWordMeaning.onended = () => {
+        setTimeout(() => {
+          slider.current.slickNext();
+          setShowInput(true);
+          setShowStudiedWord(false);
+        }, 1000);
       };
-      goNext();
+    } else {
+      setTimeout(() => {
+        slider.current.slickNext();
+        setShowInput(true);
+        setShowStudiedWord(false);
+      }, 2000);
     }
   };
-
   const playAudioExample = idx => {
-    if (shouldTurnOnSound && settings.isSentenceExample === true) {
+    if (shouldTurnOnSound) {
       const audioWordExample = new Audio(
         `https://raw.githubusercontent.com/irinainina/rslang-data/master/${words[idx].audioExample}`,
       );
@@ -95,6 +92,12 @@ export const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTu
       audioWordExample.onended = () => {
         playAudioMeaning(currentCard);
       };
+    } else {
+      setTimeout(() => {
+        slider.current.slickNext();
+        setShowInput(true);
+        setShowStudiedWord(false);
+      }, 2000);
     }
   };
 
@@ -107,13 +110,18 @@ export const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTu
       audioWord.onended = () => {
         playAudioExample(currentCard);
       };
+    } else {
+      setTimeout(() => {
+        slider.current.slickNext();
+        setShowInput(true);
+        setShowStudiedWord(false);
+      }, 2000);
     }
   };
 
   const checkInput = e => {
     e.preventDefault();
     setUserMistakes([]);
-
     if (inputValue) {
       if (inputValue !== studiedWord) {
         const arr = inputValue.split('');
@@ -129,15 +137,37 @@ export const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTu
         setShowInput(true);
         setIsCorrect(prevState => ({ ...prevState, [currentCard]: false }));
       } else {
-        setCompleted((completed + 100 / settings.wordsPerDay).toFixed(2));
+        setCompleted(Math.round(completed + 1 + 100 / settings.wordsPerDay));
         setShowStudiedWord(false);
         setShowInput(false);
         setIsCorrect(prevState => ({ ...prevState, [currentCard]: true }));
         setLastStudiedCard(currentCard);
         setInputValue('');
         playAudioWord(currentCard);
-        // goNext();
+        if (!shouldTurnOnSound) {
+          setTimeout(() => {
+            slider.current.slickNext();
+            setShowInput(true);
+            setShowStudiedWord(false);
+          }, 2000);
+        }
       }
+    }
+  };
+  const goNext = () => {
+    if (inputValue.length > 0 || inputValue === studiedWord) {
+      slider.current.slickNext();
+      setShowInput(true);
+      setShowStudiedWord(false);
+    } else if (isCorrect[currentCard] === true) {
+      setShowInput(false);
+      setShowStudiedWord(false);
+      slider.current.slickNext();
+    } else {
+      setShowInput(true);
+      setShowStudiedWord(true);
+      // eslint-disable-next-line no-restricted-globals
+      checkInput(event);
     }
   };
   const handleSlideChange = currentSlide => {
@@ -152,9 +182,6 @@ export const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTu
     });
   };
 
-  const onEndHandler = () => {
-    // console.log('end!');
-  };
   // eslint-disable-next-line no-unused-vars
 
   const settingsSlider = {
@@ -166,7 +193,6 @@ export const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTu
     draggable: false,
     infinite: false,
     afterChange: handleSlideChange,
-    onEnd: onEndHandler,
   };
 
   return settings ? (
@@ -248,7 +274,7 @@ export const SimpleSwiperWithParams = ({ words, userId, createUserWord, shouldTu
           <button className="base__game_button" type="submit" onClick={checkInput}>
             Дальше
           </button>
-          <button className="base__game_button" type="submit" onClick={goNext}>
+          <button className="base__game_button" type="button" onClick={goNext}>
             Показать ответ
           </button>
         </div>

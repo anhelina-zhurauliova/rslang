@@ -16,7 +16,6 @@ export const Settings = () => {
     isImage: true,
     isTranslation: true,
     isTranscription: true,
-    isSentenceExample: true,
     isWordMeaning: true,
     showAnswer: true,
     deleteButton: true,
@@ -207,18 +206,6 @@ export const Settings = () => {
                 onChange={() => onChangeCheckboxHandler('isWordMeaning')}
               />
               <p className="settings__info">Показывать предложение с объяснением значения слова</p>
-            </div>
-
-            <div className="info__card">
-              <input
-                className="settings__checkbox"
-                type="checkbox"
-                checked={settings.isSentenceExample}
-                onChange={() => onChangeCheckboxHandler('isSentenceExample')}
-              />
-              <p className="settings__info">
-                Показывать предложение с примером использования слова
-              </p>
             </div>
 
             <div className="info__card">

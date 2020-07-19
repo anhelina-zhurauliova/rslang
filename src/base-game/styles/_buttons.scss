@@ -80,13 +80,14 @@ input:checked + .slider:before {
 }
 .base__game_button {
   font-family: 'Inter';
-  height: 32px;
   border-radius: 4px;
   margin-right: 40px;
   background-color: #d8aee58a;
   letter-spacing: 4px;
   border: 1px solid #642777;
   color: black;
+  height: 42px;
+  padding: 0px 10px;
   &:hover {
     color: white;
     background: #5c496d;
@@ -112,7 +113,7 @@ input:checked + .slider:before {
   z-index: 100;
   @media (max-width: 800px) {
     right: calc((100vw - 300px) / 2);
-    top: 10px;
+    top: 56px;
     z-index: 2;
   }
 }

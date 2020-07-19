@@ -88,7 +88,7 @@ export const Card = ({
               {isCorrectAnswer ? ifAnswered.join(' ') : ifNotAnswered.join(' ')}
             </p>
           ) : null}
-          {settings.isWordMeaning && isCorrectAnswer ? (
+          {settings.isWordMeaning === true && isCorrectAnswer ? (
             <p className="base__game_card-info sentense-meaning">
               {words[сardNumber].textMeaningTranslate}
             </p>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { StudiedWordInSpans } from './WordInSpans';
@@ -14,12 +14,11 @@ export const Task = ({
   shouldShowInput,
   inputValue,
   shouldShowStudiedWord,
-  // isCorrect,
-  // сardNumber,
 }) => {
   const [wordWithoutTags, setWordWithoutTags] = useState('');
   const [arrayFromSentence, setArrayFromSentence] = useState([]);
   const [shouldShowWordOnFocus, setshouldShowWordOnFocus] = useState(true);
+  const input = useRef();
 
   useEffect(() => {
     const array = sentence.split(' ');
@@ -40,6 +39,9 @@ export const Task = ({
       withoutTags = withoutTags.slice(0, -1);
       setWordWithoutTags(withoutTags);
     }
+    if (input.current) {
+      input.current.focus();
+    }
   }, [sentence]);
 
   const wordContainerClass = classNames({
@@ -49,7 +51,7 @@ export const Task = ({
 
   const studiedWordClass = classNames({
     'studied-word__container': true,
-    hidden: shouldShowStudiedWord === false || !shouldShowWordOnFocus,
+    hidden: !shouldShowWordOnFocus || !shouldShowStudiedWord,
   });
   const wordToShow = classNames({
     'studied-word-to-show': true,
@@ -81,8 +83,8 @@ export const Task = ({
           </span>
           {shouldShowInput ? (
             <input
+              ref={input}
               onFocus={onInputFocus}
-              // autoFocus
               key={word}
               className="input-base-game"
               dataword={wordWithoutTags}

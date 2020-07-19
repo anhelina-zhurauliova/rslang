@@ -37,33 +37,6 @@ export const Header = () => {
     burger__container: true,
     pushed: isClicked,
   });
-  // const stickClass1 = classNames({
-  //   stick: true,
-  //   'stick-1': true,
-  //   'close ': isClicked,
-  //   open: isClicked,
-  // });
-  // const stickClass2 = classNames({
-  //   stick: true,
-  //   'stick-2': true,
-  //   close: isClicked,
-  //   open: !isClicked,
-  // });
-  // const stickClass3 = classNames({
-  //   stick: true,
-  //   'stick-3': true,
-  //   close: !isClicked,
-  //   o: isClicked,
-  // });
-
-  //  const studiedWordClass = classNames({
-  //    'studied-word__container': true,
-  //    hidden: shouldShowStudiedWord === false || !shouldShowWordOnFocus,
-  //  });
-  //  const wordToShow = classNames({
-  //    'studied-word-to-show': true,
-  //    hidden: shouldShowInput,
-  //  });
 
   return (
     <div className="wrapper__header">
