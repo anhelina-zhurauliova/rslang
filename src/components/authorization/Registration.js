@@ -64,21 +64,23 @@ export const Registration = () => {
           validate={values => {
             const errors = {};
             if (!values.email) {
-              errors.email = '"email" is required; ';
+              errors.email = 'заполните это поле';
             } else if (!/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(values.email)) {
-              errors.email = 'email must be a valid email; ';
+              errors.email = 'email должен быть действительным адресом электронной почты';
             }
             if (!values.password) {
-              errors.password = '"password" is required; ';
+              errors.password = 'заполните это поле';
             } else if (
               !/^(?=^.{8,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/.test(
                 values.password,
               )
             ) {
-              errors.password = 'invalid password; ';
+              errors.password =
+                'ненадежный пароль (нужно: не менее 8 символов,' +
+                'одну прописную букву, одну заглавную букву, одну цифру и один спецсимвол)';
             }
             if (!values.rpassword || values.password !== values.rpassword) {
-              errors.rpassword = 'passwords mismatch; ';
+              errors.rpassword = 'пароли не совпадают';
             }
             return errors;
           }}
